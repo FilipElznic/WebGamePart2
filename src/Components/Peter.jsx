@@ -206,7 +206,7 @@ function Peter({
                 <img
                   src={imageSrc}
                   alt={imageAlt}
-                  className={`max-w-md w-full border-b-2 h-auto transition-all duration-1000 ease-out transform ${
+                  className={`max-w-md w-full  h-auto transition-all duration-1000 ease-out transform ${
                     showImage
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-10 scale-95"

@@ -1,12 +1,17 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useUserData } from "./UserDataProvider";
+import Peter from "./Peter.jsx";
 
 function SpaceJumpingGame() {
-  const [playerPos, setPlayerPos] = useState({ x: 50, y: 400 });
+  //lets do xp
+  const [playerPos, setPlayerPos] = useState({ x: 10, y: 400 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
   const [cameraX, setCameraX] = useState(0);
   const [wrenchCollected, setWrenchCollected] = useState(false);
+  const { addXPForTask, userXP } = useUserData();
+  const [hidePeter, setHidePeter] = useState(false);
 
   const keysRef = useRef({});
   const playerPosRef = useRef({ x: 50, y: 400 });
@@ -21,11 +26,34 @@ function SpaceJumpingGame() {
   const VIEWPORT_HEIGHT = 600;
   const MAP_WIDTH = 5000;
 
+  const handleXP = async () => {
+    try {
+      if (userXP === 200) {
+        const result = await addXPForTask(100); // Add 100 XP
+        console.log("here");
+        if (result.success) {
+          console.log("XP added successfully:", result.newXP);
+        } else {
+          console.error("Failed to add XP:", result.error);
+          if (result.error.includes("already has XP")) {
+            console.log("Chest opened! (XP already earned)");
+          } else {
+            console.log("Chest opened! (XP update failed)");
+          }
+        }
+      } else if (userXP == 300) {
+        console.log("Game finished! (XP already earned)");
+      }
+    } catch (error) {
+      console.error("Failed to copy code:", error);
+    }
+  };
+
   // Spaceship debris platforms - more challenging vertical navigation required
   const platforms = useMemo(
     () => [
       // Starting area - low platforms
-      { x: 0, y: 650, width: 5150, height: 20, type: "hull" },
+      { x: 0, y: 650, width: 150, height: 20, type: "hull" },
       { x: 200, y: 580, width: 120, height: 20, type: "wing" },
 
       // First challenge - must go up to continue
@@ -42,6 +70,7 @@ function SpaceJumpingGame() {
       // Major vertical challenge - high platforms
       { x: 1280, y: 650, width: 145, height: 20, type: "cockpit" },
       { x: 1280, y: 550, width: 85, height: 20, type: "cockpit" },
+      { x: 1280, y: 150, width: 85, height: 20, type: "cockpit" },
       { x: 1280, y: 450, width: 85, height: 20, type: "cockpit" },
       { x: 1280, y: 350, width: 85, height: 20, type: "cockpit" },
       { x: 1280, y: 250, width: 85, height: 20, type: "cockpit" },
@@ -109,6 +138,117 @@ function SpaceJumpingGame() {
         return { bg: "#ffffff", border: "#ffffff" };
       default:
         return { bg: "#4a5568", border: "#2d3748" };
+    }
+  };
+
+  // Render debris based on type
+  const renderDebrisContent = (type, width, height) => {
+    switch (type) {
+      case "hull":
+        return (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Hull plating with rivets */}
+            <div className="w-full h-full relative">
+              {/* Rivets */}
+              {Array.from({ length: Math.floor(width / 20) }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-2 h-2 bg-gray-400 rounded-full border border-gray-600"
+                  style={{
+                    left: `${10 + i * 20}px`,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                />
+              ))}
+              {/* Damage marks */}
+              <div className="absolute inset-0 opacity-60">
+                <div className="w-1/3 h-1 bg-gray-800 absolute top-1/4 left-1/4 transform rotate-12" />
+                <div className="w-1/4 h-0.5 bg-gray-800 absolute bottom-1/3 right-1/4 transform -rotate-6" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "wing":
+        return (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Wing shape with aerodynamic lines */}
+            <div className="w-full h-full relative overflow-hidden">
+              {/* Wing structure lines */}
+              <div className="absolute inset-0">
+                <div className="w-full h-0.5 bg-blue-300 absolute top-1/4 opacity-70" />
+                <div className="w-3/4 h-0.5 bg-blue-300 absolute bottom-1/4 left-1/8 opacity-70" />
+                <div className="w-1/2 h-0.5 bg-blue-300 absolute top-1/2 left-1/4 opacity-70" />
+              </div>
+              {/* Wing tip damage */}
+              <div className="absolute right-0 top-0 w-2 h-full bg-gray-800 opacity-50 transform skew-x-12" />
+            </div>
+          </div>
+        );
+
+      case "engine":
+        return (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Engine with exhaust ports and damage */}
+            <div className="w-full h-full relative">
+              {/* Exhaust ports */}
+              {Array.from({ length: Math.floor(width / 25) }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-3 h-3 bg-red-800 rounded-full border border-red-600"
+                  style={{
+                    left: `${5 + i * 25}px`,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                />
+              ))}
+              {/* Engine damage/sparks */}
+              <div className="absolute inset-0 opacity-80">
+                <div className="w-1 h-1 bg-yellow-400 absolute top-1/3 left-1/3 rounded-full animate-pulse" />
+                <div className="w-0.5 h-0.5 bg-orange-400 absolute bottom-1/3 right-1/4 rounded-full animate-pulse" />
+                <div className="w-2 h-0.5 bg-red-800 absolute top-1/2 left-1/2 transform rotate-45" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "cockpit":
+        return (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Cockpit with windows and control panels */}
+            <div className="w-full h-full relative">
+              {/* Windows/viewports */}
+              {width > 60 && (
+                <>
+                  <div className="absolute w-4 h-3 bg-cyan-200 border border-green-600 left-1/4 top-1/2 transform -translate-y-1/2 opacity-70" />
+                  <div className="absolute w-4 h-3 bg-cyan-200 border border-green-600 right-1/4 top-1/2 transform -translate-y-1/2 opacity-70" />
+                </>
+              )}
+              {width <= 60 && (
+                <div className="absolute w-3 h-2 bg-cyan-200 border border-green-600 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-70" />
+              )}
+              {/* Control panel indicators */}
+              <div className="absolute inset-0 opacity-60">
+                <div className="w-1 h-1 bg-green-400 absolute top-1/4 left-1/6 rounded-full" />
+                <div className="w-1 h-1 bg-red-400 absolute top-1/4 right-1/6 rounded-full" />
+                <div className="w-0.5 h-0.5 bg-blue-400 absolute bottom-1/4 left-1/3 rounded-full" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "wall":
+        return (
+          <div className="absolute inset-0">
+            {/* Keep walls as simple white blocks */}
+            <div className="w-full h-full bg-white" />
+          </div>
+        );
+
+      default:
+        return null;
     }
   };
 
@@ -180,7 +320,7 @@ function SpaceJumpingGame() {
         ) {
           setWrenchCollected(true);
           setGameFinished(true);
-          alert("🎉 Mission Complete! You've recovered the space wrench! 🔧");
+          handleXP();
           return true;
         }
       }
@@ -340,17 +480,33 @@ function SpaceJumpingGame() {
     Math.min(100, (playerPos.x / (MAP_WIDTH - 100)) * 100)
   );
 
+  const peterSlides = [
+    {
+      title: "Awesome job!",
+      description:
+        "You collected the space wrench! Now you can fix the engine. You have earned 100 XP! Next stage: Repair the engine. Continue at number 3.",
+    },
+  ];
+
   return (
     <div className="flex flex-col items-center p-4 bg-gray-900 min-h-screen font-mono">
       {/* Space-themed Title */}
-      <div className="bg-blue-600 p-3 border-4 border-blue-800 mb-4 rounded">
-        <h1 className="text-3xl font-bold text-white mb-2 text-center">
-          🚀 SPACE WRENCH RECOVERY 🔧
-        </h1>
-        <div className="text-blue-100 text-center text-sm">
-          Navigate through spaceship debris to recover the lost wrench!
+
+      {!hidePeter && gameFinished && (
+        <div className="">
+          <Peter
+            slides={peterSlides}
+            imageSrc="/AIHappy.png"
+            className="absolute top-50 right-1/4"
+          />
+          <button
+            onClick={() => setHidePeter(true)}
+            className="absolute top-1/2 left-1/2 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
+          >
+            X
+          </button>
         </div>
-      </div>
+      )}
 
       {/* Controls Display */}
       <div className="mb-4 text-blue-200 text-center bg-black/50 p-3 border-2 border-blue-400 rounded">
@@ -365,7 +521,7 @@ function SpaceJumpingGame() {
       {/* Reset Button */}
       <button
         onClick={resetGame}
-        className="mb-4 px-6 py-2 bg-red-600 hover:bg-red-700 border-2 border-red-800 text-white font-bold rounded transition-all duration-200 transform hover:scale-105"
+        className="mb-4 px-6 py-2 bg-red-600 hover:bg-red-700 border-2 border-red-800 text-white font-bold rounded transition-all duration-200 transform hover:scale-105 z-50"
       >
         🔄 RESTART MISSION
       </button>
@@ -416,7 +572,7 @@ function SpaceJumpingGame() {
             return (
               <div
                 key={index}
-                className="absolute border-2 shadow-lg rounded"
+                className="absolute border-2 shadow-lg rounded overflow-hidden"
                 style={{
                   left: `${platform.x}px`,
                   top: `${platform.y}px`,
@@ -427,7 +583,7 @@ function SpaceJumpingGame() {
                   boxShadow: `0 0 10px ${colors.border}`,
                 }}
               >
-                {/* Debris texture */}
+                {/* Debris texture background */}
                 <div className="absolute inset-0 opacity-30 rounded">
                   <div
                     className="h-full w-full rounded"
@@ -436,10 +592,13 @@ function SpaceJumpingGame() {
                     }}
                   />
                 </div>
-                {/* Platform type indicator */}
-                <div className="absolute inset-0 flex items-center justify-center text-xs text-white font-bold opacity-50">
-                  {platform.type.toUpperCase()}
-                </div>
+
+                {/* Render debris content */}
+                {renderDebrisContent(
+                  platform.type,
+                  platform.width,
+                  platform.height
+                )}
               </div>
             );
           })}
@@ -473,20 +632,6 @@ function SpaceJumpingGame() {
             }}
           >
             <div className="text-2xl">👨‍🚀</div>
-          </div>
-        </div>
-
-        {/* HUD */}
-        <div className="absolute top-4 left-4 right-4 bg-black/70 border-2 border-blue-400 rounded p-2">
-          <div className="flex justify-between items-center text-blue-300 text-sm font-mono">
-            <span>🚀 MISSION PROGRESS</span>
-            <span>{Math.round(progress)}%</span>
-          </div>
-          <div className="bg-gray-800 border border-blue-600 rounded-full h-3 overflow-hidden mt-1">
-            <div
-              className="h-full bg-gradient-to-r from-blue-500 to-green-400 transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
           </div>
         </div>
 

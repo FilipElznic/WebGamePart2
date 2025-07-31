@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import AIStraight from "/AIStraight.png";
 
 import JumpingGame from "../Components/JumpingGame";
+import GeoClone from "../Components/GeoClone";
 
 function Stage3Page() {
   const [displayText, setDisplayText] = useState("");
@@ -138,22 +139,7 @@ function Stage3Page() {
       </div>
       <div className="container mx-auto px-4 py-8 relative w-full h-full z-10 ">
         <div className="backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl bg-gradient-to-tr from-zinc-800  via-white/30 to-zinc-500  relative overflow-hidden flex h-screen flex-col items-center justify-center">
-          <div className="absolute inset-0  opacity-100 z-5">
-            <div className="grid grid-cols-16 h-full">
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="border-r border-purple-300"></div>
-              ))}
-            </div>
-            <div className="absolute inset-0 grid grid-rows-12">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="border-b border-purple-300 w-full"
-                ></div>
-              ))}
-            </div>
-          </div>
-          <JumpingGame className="z-30" />
+          <GeoClone />
         </div>
       </div>
 
