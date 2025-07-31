@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 function SpaceJumpingGame() {
-  const [playerPos, setPlayerPos] = useState({ x: 0, y: 600 });
+  const [playerPos, setPlayerPos] = useState({ x: 50, y: 400 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
@@ -22,60 +22,77 @@ function SpaceJumpingGame() {
   const MAP_WIDTH = 5000;
 
   // Spaceship debris platforms - more challenging vertical navigation required
-  const platforms = [
-    // Starting area - low platforms
-    { x: 0, y: 650, width: 150, height: 20, type: "hull" },
+  const platforms = useMemo(
+    () => [
+      // Starting area - low platforms
+      { x: 0, y: 650, width: 5150, height: 20, type: "hull" },
+      { x: 200, y: 580, width: 120, height: 20, type: "wing" },
 
-    { x: 200, y: 580, width: 120, height: 20, type: "wing" },
+      // First challenge - must go up to continue
+      { x: 350, y: 420, width: 100, height: 20, type: "engine" },
+      { x: 500, y: 550, width: 90, height: 20, type: "hull" },
+      { x: 650, y: 210, width: 110, height: 20, type: "cockpit" },
 
-    // First challenge - must go up to continue
-    { x: 350, y: 400, width: 100, height: 20, type: "engine" },
-    { x: 500, y: 550, width: 90, height: 20, type: "hull" },
-    { x: 650, y: 210, width: 110, height: 20, type: "cockpit" },
+      // Down and up pattern - forces vertical navigation
+      { x: 700, y: 350, width: 80, height: 20, type: "wing" },
+      { x: 1000, y: 200, width: 70, height: 20, type: "engine" },
+      { x: 1000, y: 200, width: 5, height: 400, type: "wall" },
+      { x: 1100, y: 650, width: 90, height: 20, type: "hull" },
 
-    // Down and up pattern - forces vertical navigation
-    { x: 700, y: 350, width: 80, height: 20, type: "wing" },
-    { x: 1000, y: 200, width: 70, height: 20, type: "engine" },
-    { x: 1000, y: 200, width: 5, height: 400, type: "" },
-    { x: 1100, y: 650, width: 90, height: 20, type: "hull" },
+      // Major vertical challenge - high platforms
+      { x: 1280, y: 650, width: 145, height: 20, type: "cockpit" },
+      { x: 1280, y: 550, width: 85, height: 20, type: "cockpit" },
+      { x: 1280, y: 450, width: 85, height: 20, type: "cockpit" },
+      { x: 1280, y: 350, width: 85, height: 20, type: "cockpit" },
+      { x: 1280, y: 250, width: 85, height: 20, type: "cockpit" },
+      { x: 1280, y: 100, width: 5, height: 470, type: "wall" },
+      { x: 1450, y: 50, width: 75, height: 20, type: "wing" },
 
-    // Major vertical challenge - high platforms
-    { x: 1280, y: 700, width: 85, height: 20, type: "cockpit" },
-    { x: 1280, y: 550, width: 85, height: 20, type: "cockpit" },
-    { x: 1280, y: 450, width: 85, height: 20, type: "cockpit" },
-    { x: 1280, y: 350, width: 85, height: 20, type: "cockpit" },
-    { x: 1280, y: 250, width: 85, height: 20, type: "cockpit" },
-    { x: 1280, y: 100, width: 5, height: 470, type: "" },
-    { x: 1450, y: 50, width: 75, height: 20, type: "wing" },
+      // Back down but still elevated
+      { x: 1550, y: 180, width: 80, height: 20, type: "engine" },
+      { x: 1750, y: 300, width: 70, height: 20, type: "hull" },
 
-    // Back down but still elevated
-    { x: 1600, y: 180, width: 80, height: 20, type: "engine" },
-    { x: 1750, y: 300, width: 70, height: 20, type: "hull" },
+      // Another climb sequence
+      { x: 2200, y: 0, width: 10, height: 500, type: "wall" },
+      { x: 2050, y: 650, width: 85, height: 20, type: "wing" },
+      { x: 2200, y: 650, width: 100, height: 20, type: "engine" },
 
-    // Another climb sequence
+      // Final challenging descent and climb
+      { x: 2600, y: 100, width: 200, height: 20, type: "hull" },
+      { x: 2350, y: 220, width: 90, height: 20, type: "hull" },
+      { x: 2350, y: 520, width: 90, height: 20, type: "hull" },
+      { x: 2250, y: 420, width: 90, height: 20, type: "hull" },
+      { x: 2500, y: 320, width: 120, height: 20, type: "cockpit" },
+      { x: 2800, y: 320, width: 120, height: 20, type: "cockpit" },
+      { x: 2700, y: 100, width: 5, height: 600, type: "wall" },
+      { x: 2700, y: 670, width: 120, height: 20, type: "cockpit" },
+      { x: 2900, y: 570, width: 120, height: 20, type: "cockpit" },
+      { x: 2900, y: 370, width: 120, height: 20, type: "cockpit" },
+      { x: 3000, y: 470, width: 120, height: 20, type: "cockpit" },
+      { x: 3000, y: 270, width: 120, height: 20, type: "cockpit" },
+      { x: 2920, y: 170, width: 120, height: 20, type: "cockpit" },
+      { x: 2920, y: 0, width: 5, height: 400, type: "wall" },
+      { x: 3200, y: 100, width: 5, height: 450, type: "wall" },
+      { x: 3200, y: 570, width: 50, height: 20, type: "cockpit" },
+      { x: 3500, y: 570, width: 50, height: 20, type: "cockpit" },
+      { x: 3800, y: 570, width: 50, height: 20, type: "cockpit" },
+      { x: 4100, y: 570, width: 50, height: 20, type: "cockpit" },
+      { x: 4400, y: 570, width: 50, height: 20, type: "cockpit" },
+      { x: 4600, y: 470, width: 50, height: 20, type: "cockpit" },
+      { x: 4600, y: 270, width: 50, height: 20, type: "cockpit" },
+      { x: 4800, y: 370, width: 50, height: 20, type: "cockpit" },
+      { x: 4800, y: 170, width: 50, height: 20, type: "cockpit" },
+      { x: 4900, y: 150, width: 100, height: 20, type: "cockpit" },
 
-    { x: 2200, y: 0, width: 10, height: 500, type: "" },
-    { x: 2050, y: 650, width: 85, height: 20, type: "wing" },
-    { x: 2200, y: 650, width: 100, height: 20, type: "engine" },
-
-    // Final challenging descent and climb
-    { x: 2350, y: 220, width: 90, height: 20, type: "hull" },
-    { x: 2350, y: 520, width: 90, height: 20, type: "hull" },
-    { x: 2250, y: 420, width: 90, height: 20, type: "hull" },
-    { x: 2500, y: 320, width: 120, height: 20, type: "cockpit" },
-    { x: 2800, y: 320, width: 120, height: 20, type: "cockpit" },
-    { x: 2700, y: 100, width: 5, height: 400, type: "" },
-
-    // Final platform with wrench - elevated
-    { x: 2600, y: 100, width: 200, height: 20, type: "hull" },
-  ];
+      // Final platform with wrench - elevated
+    ],
+    []
+  );
 
   // Wrench position (on the final platform)
-  const wrenchPos = { x: 2700, y: 50, width: 40, height: 40 };
+  const wrenchPos = { x: 4950, y: 100, width: 40, height: 40 };
 
   // Platform colors based on debris type
-  //need to add graphic for each platform type
-
   const getPlatformColor = (type) => {
     switch (type) {
       case "hull":
@@ -88,6 +105,8 @@ function SpaceJumpingGame() {
         return { bg: "#38a169", border: "#2f855a" };
       case "command":
         return { bg: "#d69e2e", border: "#b7791f" };
+      case "wall":
+        return { bg: "#ffffff", border: "#ffffff" };
       default:
         return { bg: "#4a5568", border: "#2d3748" };
     }
@@ -102,6 +121,7 @@ function SpaceJumpingGame() {
     setCameraX(targetCameraX);
   }, [playerPos.x]);
 
+  // Improved collision detection - checks for overlapping rectangles
   const checkCollision = useCallback(
     (newX, newY) => {
       const playerRect = {
@@ -110,6 +130,7 @@ function SpaceJumpingGame() {
         width: PLAYER_SIZE,
         height: PLAYER_SIZE,
       };
+
       for (let platform of platforms) {
         if (
           playerRect.x < platform.x + platform.width &&
@@ -123,6 +144,21 @@ function SpaceJumpingGame() {
       return null;
     },
     [platforms]
+  );
+
+  // Separate X and Y collision checking for more precise collision resolution
+  const checkXCollision = useCallback(
+    (newX, currentY) => {
+      return checkCollision(newX, currentY);
+    },
+    [checkCollision]
+  );
+
+  const checkYCollision = useCallback(
+    (currentX, newY) => {
+      return checkCollision(currentX, newY);
+    },
+    [checkCollision]
   );
 
   // Check if player collected the wrench
@@ -193,33 +229,60 @@ function SpaceJumpingGame() {
         isGroundedRef.current = false;
       }
 
+      // Calculate potential new positions
       let newX = currentPos.x + newVelX;
       let newY = currentPos.y + newVelY;
 
       // Keep player within map bounds
       newX = Math.max(0, Math.min(MAP_WIDTH - PLAYER_SIZE, newX));
 
-      const collision = checkCollision(newX, newY);
-      let onGround = false;
+      // Check horizontal collision first (X-axis movement)
+      const xCollision = checkXCollision(newX, currentPos.y);
+      if (xCollision) {
+        // Stop horizontal movement if hitting a wall
+        if (newVelX > 0) {
+          // Moving right, position player to the left of the platform
+          newX = xCollision.x - PLAYER_SIZE;
+        } else if (newVelX < 0) {
+          // Moving left, position player to the right of the platform
+          newX = xCollision.x + xCollision.width;
+        }
+        newVelX = 0; // Stop horizontal velocity
+      }
 
-      if (collision) {
-        // Landing on a platform
-        if (currentVel.y > 0 && currentPos.y + PLAYER_SIZE <= collision.y + 5) {
-          newY = collision.y - PLAYER_SIZE;
-          newVelY = 0;
-          onGround = true;
-        } else if (
-          currentVel.y < 0 &&
-          currentPos.y >= collision.y + collision.height - 5
-        ) {
-          newY = collision.y + collision.height;
-          newVelY = 0;
-        } else if (Math.abs(currentVel.x) > 0) {
-          if (currentPos.x + PLAYER_SIZE <= collision.x)
-            newX = collision.x - PLAYER_SIZE;
-          else if (currentPos.x >= collision.x + collision.width)
-            newX = collision.x + collision.width;
-          newVelX = 0;
+      // Check vertical collision (Y-axis movement)
+      let onGround = false;
+      const yCollision = checkYCollision(newX, newY);
+      if (yCollision) {
+        if (newVelY > 0) {
+          // Falling down - check if we're landing on top of a platform
+          if (currentPos.y + PLAYER_SIZE <= yCollision.y + 2) {
+            newY = yCollision.y - PLAYER_SIZE;
+            newVelY = 0;
+            onGround = true;
+          } else {
+            // Hitting platform from the side while falling
+            if (newVelX > 0) {
+              newX = yCollision.x - PLAYER_SIZE;
+            } else if (newVelX < 0) {
+              newX = yCollision.x + yCollision.width;
+            }
+            newVelX = 0;
+          }
+        } else if (newVelY < 0) {
+          // Moving up - hitting ceiling
+          if (currentPos.y >= yCollision.y + yCollision.height - 2) {
+            newY = yCollision.y + yCollision.height;
+            newVelY = 0;
+          } else {
+            // Hitting platform from the side while jumping
+            if (newVelX > 0) {
+              newX = yCollision.x - PLAYER_SIZE;
+            } else if (newVelX < 0) {
+              newX = yCollision.x + yCollision.width;
+            }
+            newVelX = 0;
+          }
         }
       }
 
@@ -240,7 +303,7 @@ function SpaceJumpingGame() {
     }, 16);
 
     return () => clearInterval(gameLoop);
-  }, [gameFinished, checkCollision, checkWrenchCollection]);
+  }, [gameFinished, checkXCollision, checkYCollision, checkWrenchCollection]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
