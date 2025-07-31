@@ -52,12 +52,12 @@ function Navbar() {
     setUser(null);
   };
   return (
-    <nav className="bg-white border-b-4 border-yellow-400 shadow-lg relative overflow-hidden">
-      {/* Retro grid background */}
+    <nav className="bg-gradient-to-br from-black via-zinc-900 to-purple-950 border-b-4 border-purple-900 shadow-lg relative overflow-hidden">
+      {/* Retro grid background - dark theme */}
       <div className="absolute inset-0 opacity-10">
         <div className="grid grid-cols-12 h-full">
           {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-r border-yellow-300"></div>
+            <div key={i} className="border-r border-purple-900"></div>
           ))}
         </div>
       </div>
@@ -70,8 +70,8 @@ function Navbar() {
               onClick={() => (window.location.href = "/")}
               className="text-2xl font-bold font-mono text-gray-800 hover:text-yellow-600 transition-all duration-300 hover:scale-110 cursor-pointer relative"
             >
-              <span className="relative z-10 bg-yellow-100 px-3 py-1 border-2 border-yellow-400">
-                &gt; PETER'S_QUEST_V1.0
+              <span className="relative z-10 bg-transparent-100 px-3 py-1 border-2 text-white border-yellow-400">
+                &gt; PETER'S_QUEST_V2.0
               </span>
               <div className="absolute inset-0 bg-yellow-300 opacity-0 hover:opacity-20 blur-lg transition-opacity duration-300"></div>
             </h1>
@@ -83,49 +83,49 @@ function Navbar() {
               <li>
                 <a
                   href="/"
-                  className="group relative font-mono text-gray-700 hover:text-gray-900 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                  className="group relative font-mono text-zinc-200 hover:text-purple-300 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                 >
-                  <span className="relative z-10 bg-yellow-50 hover:bg-yellow-200 px-2 py-1 border border-yellow-400 transition-colors duration-200">
+                  <span className="relative z-10 bg-zinc-900 hover:bg-purple-950 px-2 py-1 border border-purple-900 transition-colors duration-200">
                     [HOME]
                   </span>
-                  <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
-                  <div className="absolute -inset-1 bg-yellow-300 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
+                  <div className="absolute inset-0 bg-purple-950 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
+                  <div className="absolute -inset-1 bg-purple-900 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
                 </a>
               </li>
               <li>
                 <a
                   href="/shipwrecked"
-                  className="group relative font-mono text-gray-700 hover:text-gray-900 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                  className="group relative font-mono text-zinc-200 hover:text-purple-300 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                 >
-                  <span className="relative z-10 bg-yellow-50 hover:bg-yellow-200 px-2 py-1 border border-yellow-400 transition-colors duration-200">
+                  <span className="relative z-10 bg-zinc-900 hover:bg-purple-950 px-2 py-1 border border-purple-900 transition-colors duration-200">
                     [SHIPWRECKED]
                   </span>
-                  <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
-                  <div className="absolute -inset-1 bg-yellow-300 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
+                  <div className="absolute inset-0 bg-purple-950 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
+                  <div className="absolute -inset-1 bg-purple-900 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
                 </a>
               </li>
               <li>
                 <a
                   href="/about"
-                  className="group relative font-mono text-gray-700 hover:text-gray-900 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                  className="group relative font-mono text-zinc-200 hover:text-purple-300 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                 >
-                  <span className="relative z-10 bg-yellow-50 hover:bg-yellow-200 px-2 py-1 border border-yellow-400 transition-colors duration-200">
+                  <span className="relative z-10 bg-zinc-900 hover:bg-purple-950 px-2 py-1 border border-purple-900 transition-colors duration-200">
                     [ABOUT]
                   </span>
-                  <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
-                  <div className="absolute -inset-1 bg-yellow-300 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
+                  <div className="absolute inset-0 bg-purple-950 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
+                  <div className="absolute -inset-1 bg-purple-900 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
                 </a>
               </li>
               <li>
                 <a
                   href="/feedback"
-                  className="group relative font-mono text-gray-700 hover:text-gray-900 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                  className="group relative font-mono text-zinc-200 hover:text-purple-300 px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                 >
-                  <span className="relative z-10 bg-yellow-50 hover:bg-yellow-200 px-2 py-1 border border-yellow-400 transition-colors duration-200">
+                  <span className="relative z-10 bg-zinc-900 hover:bg-purple-950 px-2 py-1 border border-purple-900 transition-colors duration-200">
                     [FEEDBACK]
                   </span>
-                  <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
-                  <div className="absolute -inset-1 bg-yellow-300 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
+                  <div className="absolute inset-0 bg-purple-950 opacity-0 group-hover:opacity-20 transition-all duration-200"></div>
+                  <div className="absolute -inset-1 bg-purple-900 opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-200"></div>
                 </a>
               </li>
             </ul>

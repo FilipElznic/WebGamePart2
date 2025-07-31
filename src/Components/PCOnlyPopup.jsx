@@ -56,18 +56,18 @@ function PCOnlyPopup() {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-white/90 backdrop-blur-sm border-4 border-yellow-400 shadow-2xl relative max-w-2xl w-full mx-4 p-8">
-        {/* Retro border decorations */}
-        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-yellow-500"></div>
-        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-yellow-500"></div>
-        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-yellow-500"></div>
-        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-yellow-500"></div>
+    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-black via-zinc-900 to-purple-950 backdrop-blur-sm border-4 border-purple-900 shadow-2xl relative max-w-2xl w-full mx-4 p-8 text-zinc-200">
+        {/* Retro border decorations - dark theme */}
+        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-900"></div>
+        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-900"></div>
+        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-900"></div>
+        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-900"></div>
 
         {/* Close button - retro style */}
         <button
           onClick={closePopup}
-          className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white font-mono text-lg px-3 py-1 border-2 border-red-700 transition-colors duration-200"
+          className="absolute top-4 right-4 bg-purple-900 hover:bg-purple-800 text-zinc-200 font-mono text-lg px-3 py-1 border-2 border-purple-950 transition-colors duration-200"
           aria-label="Close popup"
         >
           ✕
@@ -75,47 +75,47 @@ function PCOnlyPopup() {
 
         {/* PC Icon - retro style */}
         <div className="text-center mb-6">
-          <div className="mx-auto w-20 h-20 bg-yellow-100 border-4 border-yellow-400 flex items-center justify-center mb-4">
-            <div className="font-mono text-3xl">🖥️</div>
+          <div className="mx-auto w-20 h-20 bg-purple-950 border-4 border-purple-900 flex items-center justify-center mb-4">
+            <div className="font-mono text-3xl text-purple-400">🖥️</div>
           </div>
         </div>
 
         {/* Title - retro style */}
-        <h2 className="text-4xl font-mono font-bold text-gray-800 text-center mb-6 relative">
-          <span className="bg-yellow-100 px-4 py-2 border-2 border-yellow-400 inline-block">
+        <h2 className="text-4xl font-mono font-bold text-purple-300 text-center mb-6 relative">
+          <span className="bg-zinc-900 px-4 py-2 border-2 border-purple-900 inline-block">
             [PC REQUIRED]
           </span>
         </h2>
 
         {/* Message - retro info box style */}
-        <div className="bg-yellow-50 border-2 border-yellow-400 p-6 mb-8 relative">
-          <div className="absolute top-2 left-2 w-3 h-3 bg-yellow-400 rotate-45"></div>
-          <div className="absolute top-2 right-2 w-3 h-3 bg-yellow-400 rotate-45"></div>
+        <div className="bg-zinc-900 border-2 border-purple-900 p-6 mb-8 relative">
+          <div className="absolute top-2 left-2 w-3 h-3 bg-purple-900 rotate-45"></div>
+          <div className="absolute top-2 right-2 w-3 h-3 bg-purple-900 rotate-45"></div>
 
-          <div className="font-mono text-gray-800 space-y-4">
+          <div className="font-mono text-zinc-200 space-y-4">
             <p className="text-lg">
-              <span className="text-yellow-700 font-bold">
+              <span className="text-purple-400 font-bold">
                 &gt; SYSTEM ALERT:
               </span>
               <br />
               This retro gaming experience requires:
             </p>
 
-            <div className="bg-white border-2 border-yellow-300 p-4 space-y-2">
+            <div className="bg-purple-950 border-2 border-purple-900 p-4 space-y-2">
               <div className="flex items-center">
-                <span className="text-green-600 mr-3 font-bold">✓</span>
+                <span className="text-purple-400 mr-3 font-bold">✓</span>
                 <span>Desktop or laptop computer</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-600 mr-3 font-bold">✓</span>
+                <span className="text-purple-400 mr-3 font-bold">✓</span>
                 <span>Keyboard and mouse controls</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-600 mr-3 font-bold">✓</span>
+                <span className="text-purple-400 mr-3 font-bold">✓</span>
                 <span>Larger screen for optimal gameplay</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-600 mr-3 font-bold">✓</span>
+                <span className="text-purple-400 mr-3 font-bold">✓</span>
                 <span>True retro gaming experience</span>
               </div>
             </div>

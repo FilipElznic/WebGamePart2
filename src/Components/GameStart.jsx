@@ -160,42 +160,42 @@ function GameStart() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       {/* Retro grid background */}
       <div className="absolute inset-0 opacity-5">
         <div className="grid grid-cols-16 h-full">
           {Array.from({ length: 16 }).map((_, i) => (
-            <div key={i} className="border-r border-yellow-300"></div>
+            <div key={i} className="border-r border-purple-900"></div>
           ))}
         </div>
         <div className="absolute inset-0 grid grid-rows-12">
           {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-b border-yellow-300 w-full"></div>
+            <div key={i} className="border-b border-purple-300 w-full"></div>
           ))}
         </div>
       </div>
 
       {/* Floating retro elements */}
-      <div className="absolute top-20 left-10 text-4xl text-yellow-400 opacity-20 animate-bounce font-mono">
+      <div className="absolute top-20 left-10 text-4xl text-purple-400 opacity-20 animate-bounce font-mono">
         ◆
       </div>
-      <div className="absolute top-32 right-20 text-3xl text-yellow-500 opacity-30 animate-pulse font-mono">
+      <div className="absolute top-32 right-20 text-3xl text-purple-500 opacity-30 animate-pulse font-mono">
         ★
       </div>
-      <div className="absolute bottom-32 left-16 text-5xl text-yellow-400 opacity-25 animate-pulse font-mono">
+      <div className="absolute bottom-32 left-16 text-5xl text-purple-400 opacity-25 animate-pulse font-mono">
         ◇
       </div>
-      <div className="absolute bottom-20 right-16 text-4xl text-yellow-500 opacity-20 animate-bounce font-mono">
+      <div className="absolute bottom-20 right-16 text-4xl text-purple-500 opacity-20 animate-bounce font-mono">
         ♦
       </div>
 
       <div className="min-h-screen flex items-center justify-center px-4 relative z-10">
-        <div className="w-full max-w-6xl bg-white/90 backdrop-blur-sm border-4 border-yellow-400 shadow-2xl relative">
+        <div className="w-full max-w-6xl bg-gradient-to-br from-black via-zinc-900 to-purple-950 backdrop-blur-sm border-4 border-purple-400 shadow-2xl relative">
           {/* Retro border decorations */}
-          <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-yellow-500"></div>
-          <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-yellow-500"></div>
-          <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-yellow-500"></div>
-          <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-yellow-500"></div>
+          <div className="absolute -top-4 -left-4 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -top-4 -right-4 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+          <div className="absolute -bottom-4 -left-4 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -bottom-4 -right-4 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
 
           <div className="flex flex-col md:flex-row items-center p-8 min-h-[60vh]">
             {/* Image section */}
@@ -222,24 +222,24 @@ function GameStart() {
               {/* Title with typing effect */}
               <div className="mb-6">
                 <h1 className="text-4xl md:text-5xl font-mono font-bold text-gray-800 text-left">
-                  <span className="bg-yellow-100 px-3 py-2 border-2 border-yellow-400 inline-block">
+                  <span className="bg-purple-100 px-3 py-2 border-2 border-purple-400 inline-block">
                     {titleText}
                     {isTypingTitle && (
-                      <span className="animate-pulse text-yellow-600">|</span>
+                      <span className="animate-pulse text-purple-600">|</span>
                     )}
                   </span>
                 </h1>
               </div>
 
               {/* Description with typing effect */}
-              <div className="bg-yellow-50 border-2 border-yellow-400 p-4 mb-6">
-                <div className="font-mono text-sm mb-2 text-yellow-600">
+              <div className="bg-purple-50 border-2 border-purple-400 p-4 mb-6">
+                <div className="font-mono text-sm mb-2 text-purple-600">
                   &gt; MISSION_BRIEFING:
                 </div>
                 <p className="text-gray-800 font-mono text-sm leading-relaxed">
                   {descriptionText}
                   {isTypingDescription && (
-                    <span className="animate-pulse text-yellow-600">|</span>
+                    <span className="animate-pulse text-purple-400">|</span>
                   )}
                 </p>
               </div>
@@ -249,7 +249,7 @@ function GameStart() {
                 <button
                   onClick={prevSlide}
                   disabled={currentSlide === 0}
-                  className="bg-blue-400 hover:bg-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed border-4 border-gray-800 px-4 py-2 font-mono font-bold text-gray-800 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
+                  className="bg-purple-950 hover:bg-purple-900 disabled:bg-zinc-800 disabled:cursor-not-allowed border-4 border-purple-900 px-4 py-2 font-mono font-bold text-purple-200 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
                 >
                   [ &lt; PREV ]
                 </button>
@@ -259,8 +259,8 @@ function GameStart() {
                   {slides.map((_, index) => (
                     <div
                       key={index}
-                      className={`w-3 h-3 border-2 border-gray-800 transition-colors duration-200 ${
-                        index === currentSlide ? "bg-yellow-400" : "bg-white"
+                      className={`w-3 h-3 border-2 border-purple-900 transition-colors duration-200 ${
+                        index === currentSlide ? "bg-purple-950" : "bg-zinc-900"
                       }`}
                     ></div>
                   ))}
@@ -269,7 +269,7 @@ function GameStart() {
                 <button
                   onClick={nextSlide}
                   disabled={currentSlide === slides.length - 1}
-                  className="bg-green-400 hover:bg-green-500 disabled:bg-gray-300 disabled:cursor-not-allowed border-4 border-gray-800 px-4 py-2 font-mono font-bold text-gray-800 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
+                  className="bg-purple-950 hover:bg-purple-900 disabled:bg-zinc-800 disabled:cursor-not-allowed border-4 border-purple-900 px-4 py-2 font-mono font-bold text-purple-200 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
                 >
                   [ NEXT &gt; ]
                 </button>
@@ -282,13 +282,13 @@ function GameStart() {
                   <div className="mt-6 text-center">
                     <Link
                       to="/main-menu"
-                      className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 border-4 border-gray-800 px-8 py-4 font-mono font-bold text-gray-800 text-xl uppercase tracking-wider transition-all duration-200 hover:scale-110 transform shadow-lg relative overflow-hidden"
+                      className="inline-block bg-gradient-to-r from-purple-950 to-purple-900 hover:from-purple-900 hover:to-black border-4 border-purple-900 px-8 py-4 font-mono font-bold text-purple-200 text-xl uppercase tracking-wider transition-all duration-200 hover:scale-110 transform shadow-lg relative overflow-hidden"
                     >
                       <span className="relative z-10">[ START ADVENTURE ]</span>
-                      <div className="absolute inset-0 bg-white opacity-0 hover:opacity-20 transition-opacity duration-200"></div>
+                      <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-200"></div>
 
                       {/* Animated glow effect */}
-                      <div className="absolute -inset-1 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-30 blur animate-pulse"></div>
+                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-900 to-purple-950 opacity-30 blur animate-pulse"></div>
                     </Link>
                   </div>
                 )}
@@ -296,7 +296,7 @@ function GameStart() {
           </div>
 
           {/* Header decoration */}
-          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-3 py-1 border-2 border-gray-800 font-mono text-sm font-bold text-gray-800">
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-950 px-3 py-1 border-2 border-purple-900 font-mono text-sm font-bold text-purple-200">
             GAME_INTRO
           </div>
         </div>
@@ -308,7 +308,7 @@ function GameStart() {
           className="h-full w-full opacity-5"
           style={{
             background:
-              "repeating-linear-gradient(0deg, transparent, transparent 3px, #fbbf24 3px, #fbbf24 6px)",
+              "repeating-linear-gradient(0deg, transparent, transparent 3px, #2e1065 3px, #2e1065 6px)",
           }}
         ></div>
       </div>

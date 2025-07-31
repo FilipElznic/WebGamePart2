@@ -35,7 +35,7 @@ function GamePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex items-center justify-center">
         <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-yellow-400 shadow-2xl">
           <div className="text-center font-mono">
             <div className="text-yellow-600 text-xl mb-4">
@@ -50,32 +50,32 @@ function GamePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-100 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
         {/* Retro grid background */}
         <div className="absolute inset-0 opacity-10">
           <div className="grid grid-cols-16 h-full">
             {Array.from({ length: 16 }).map((_, i) => (
-              <div key={i} className="border-r border-yellow-300"></div>
+              <div key={i} className="border-r border-purple-900"></div>
             ))}
           </div>
           <div className="absolute inset-0 grid grid-rows-12">
             {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="border-b border-yellow-300 w-full"></div>
+              <div key={i} className="border-b border-purple-900 w-full"></div>
             ))}
           </div>
         </div>
 
         {/* Floating retro elements */}
-        <div className="absolute top-20 left-10 text-4xl text-yellow-400 opacity-20 animate-bounce font-mono">
+        <div className="absolute top-20 left-10 text-4xl text-purple-900 opacity-20 animate-bounce font-mono">
           ◆
         </div>
-        <div className="absolute top-32 right-20 text-3xl text-yellow-500 opacity-30 animate-pulse font-mono">
+        <div className="absolute top-32 right-20 text-3xl text-purple-900 opacity-30 animate-pulse font-mono">
           ★
         </div>
-        <div className="absolute bottom-32 left-16 text-5xl text-yellow-400 opacity-25 animate-pulse font-mono">
+        <div className="absolute bottom-32 left-16 text-5xl text-purple-900 opacity-25 animate-pulse font-mono">
           ◇
         </div>
-        <div className="absolute bottom-20 right-16 text-4xl text-yellow-500 opacity-20 animate-bounce font-mono">
+        <div className="absolute bottom-20 right-16 text-4xl text-purple-900 opacity-20 animate-bounce font-mono">
           ♦
         </div>
 
@@ -86,20 +86,20 @@ function GamePage() {
               onClick={() => {
                 window.location.href = "/";
               }}
-              className="bg-yellow-400 px-4 py-2 cursor-pointer border-2 border-gray-800 font-mono text-gray-800 text-sm font-bold uppercase tracking-wider"
+              className="bg-purple-950 px-4 py-2 cursor-pointer border-2 border-purple-900 font-mono text-purple-200 text-sm font-bold uppercase tracking-wider"
             >
               PETER'S_QUEST_V1.0
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-white/90 px-3 py-2 border-2 border-yellow-400 font-mono text-sm">
-                <span className="text-yellow-600">&gt;</span> Welcome,{" "}
-                <span className="font-bold text-gray-800">
+              <div className="bg-zinc-900 px-3 py-2 border-2 border-purple-900 font-mono text-sm text-white">
+                <span className="text-purple-400">&gt;</span> Welcome,{" "}
+                <span className="font-bold text-purple-200">
                   {user?.displayName || "Player"}
                 </span>
               </div>
               <button
                 onClick={handleLogout}
-                className="bg-red-400 hover:bg-red-500 border-2 border-gray-800 px-4 py-2 font-mono font-bold text-gray-800 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                className="bg-red-950 hover:bg-red-900 border-2 border-purple-900 px-4 py-2 font-mono font-bold text-purple-200 text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105"
               >
                 [LOGOUT]
               </button>
@@ -109,77 +109,77 @@ function GamePage() {
 
         {/* Game Content */}
         <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-          <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-yellow-400 shadow-2xl max-w-4xl w-full relative">
+          <div className="bg-gradient-to-br from-purple-950 via-zinc-900 to-black backdrop-blur-sm p-8 border-4 border-purple-900 shadow-2xl max-w-4xl w-full relative">
             {/* Retro border decorations */}
-            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-yellow-500"></div>
-            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-yellow-500"></div>
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-yellow-500"></div>
-            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-yellow-500"></div>
+            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-950"></div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-950"></div>
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-950"></div>
+            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-950"></div>
 
             {/* Game Header */}
             <div className="text-center mb-8">
-              <div className="bg-yellow-400 px-4 py-2 border-2 border-gray-800 font-mono text-gray-800 text-sm font-bold uppercase tracking-wider inline-block mb-4">
+              <div className="bg-purple-950 px-4 py-2 border-2 border-purple-900 font-mono text-purple-200 text-sm font-bold uppercase tracking-wider inline-block mb-4">
                 GAME_SYSTEM_ACTIVE
               </div>
-              <h1 className="text-4xl font-mono font-bold text-gray-800 relative">
+              <h1 className="text-4xl font-mono font-bold text-purple-200 relative">
                 <span className="relative z-10">
-                  <span className="text-yellow-600 bg-yellow-100 px-4 py-3 border-2 border-yellow-400 inline-block">
+                  <span className="text-purple-200 bg-purple-900 px-4 py-3 border-2 border-purple-950 inline-block">
                     &gt; PETER'S QUEST
                   </span>
                 </span>
               </h1>
-              <span className="text-yellow-600 mt-2">INITIALIZED</span>
+              <span className="text-purple-400 mt-2">INITIALIZED</span>
             </div>
 
             {/* Game Status */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-yellow-50 border-2 border-yellow-400 p-4">
-                <h3 className="font-mono font-bold text-gray-800 mb-3 border-b border-yellow-400 pb-2">
-                  <span className="text-yellow-600">&gt;</span> PLAYER_STATUS
+              <div className="bg-zinc-900 border-2 border-purple-900 p-4 text-white">
+                <h3 className="font-mono font-bold text-purple-200 mb-3 border-b border-purple-900 pb-2">
+                  <span className="text-purple-400">&gt;</span> PLAYER_STATUS
                 </h3>
                 <div className="space-y-2 font-mono text-sm">
                   <p>
-                    <span className="text-yellow-600">NAME:</span>{" "}
+                    <span className="text-purple-400">NAME:</span>{" "}
                     {user?.displayName || "Unknown"}
                   </p>
                   <p>
-                    <span className="text-yellow-600">EMAIL:</span>{" "}
+                    <span className="text-purple-400">EMAIL:</span>{" "}
                     {user?.email || "Unknown"}
                   </p>
                   <p>
-                    <span className="text-yellow-600">STATUS:</span>{" "}
-                    <span className="text-green-600">ONLINE</span>
+                    <span className="text-purple-400">STATUS:</span>{" "}
+                    <span className="text-green-400">ONLINE</span>
                   </p>
                   <p>
-                    <span className="text-yellow-600">LEVEL:</span>{" "}
+                    <span className="text-purple-400">LEVEL:</span>{" "}
                     {user?.level || 1}
                   </p>
                   <p>
-                    <span className="text-yellow-600">XP:</span> {user?.xp || 0}
+                    <span className="text-purple-400">XP:</span> {user?.xp || 0}
                     /100
                   </p>
                 </div>
               </div>
 
-              <div className="bg-yellow-50 border-2 border-yellow-400 p-4">
-                <h3 className="font-mono font-bold text-gray-800 mb-3 border-b border-yellow-400 pb-2">
-                  <span className="text-yellow-600">&gt;</span> GAME_STATUS
+              <div className="bg-zinc-900 border-2 border-purple-900 p-4 text-white">
+                <h3 className="font-mono font-bold text-purple-200 mb-3 border-b border-purple-900 pb-2">
+                  <span className="text-purple-400">&gt;</span> GAME_STATUS
                 </h3>
                 <div className="space-y-2 font-mono text-sm">
                   <p>
-                    <span className="text-yellow-600">WORLD:</span> Peter's home
+                    <span className="text-purple-400">WORLD:</span> Peter's home
                   </p>
                   <p>
-                    <span className="text-yellow-600">QUEST:</span> Help Peter
+                    <span className="text-purple-400">QUEST:</span> Help Peter
                   </p>
                   <p>
-                    <span className="text-yellow-600">PROGRESS:</span> Unknown
+                    <span className="text-purple-400">PROGRESS:</span> Unknown
                   </p>
                   <p>
-                    <span className="text-yellow-600">DIFFICULTY:</span> Normal
+                    <span className="text-purple-400">DIFFICULTY:</span> Normal
                   </p>
                   <p>
-                    <span className="text-yellow-600">TIME:</span> Won't be
+                    <span className="text-purple-400">TIME:</span> Won't be
                     calculated
                   </p>
                 </div>
@@ -187,11 +187,11 @@ function GamePage() {
             </div>
 
             {/* Game Message */}
-            <div className="bg-gray-800 text-green-400 p-6 font-mono text-sm border-2 border-yellow-400 mb-6">
+            <div className="bg-zinc-900 text-green-400 p-6 font-mono text-sm border-2 border-purple-900 mb-6">
               <div className="mb-4">
-                <span className="text-yellow-400">&gt;</span> SYSTEM MESSAGE:
+                <span className="text-purple-400">&gt;</span> SYSTEM MESSAGE:
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 text-white">
                 <p>&gt; Welcome to Peter's Quest, {user?.displayName}!</p>
                 <p>
                   &gt; You have successfully authenticated and entered the game
@@ -210,15 +210,15 @@ function GamePage() {
             <div className="grid md:grid-cols-1 gap-4">
               <button
                 onClick={handleStartQuest}
-                className="bg-yellow-400 hover:bg-yellow-500 border-4 border-gray-800 px-6 py-4 font-mono font-bold text-gray-800 text-lg uppercase tracking-wider transition-all duration-200 hover:scale-105 relative overflow-hidden"
+                className="bg-purple-950 hover:bg-purple-900 border-4 border-purple-900 px-6 py-4 font-mono font-bold text-purple-200 text-lg uppercase tracking-wider transition-all duration-200 hover:scale-105 relative overflow-hidden"
               >
                 <span className="relative z-10">[START QUEST]</span>
-                <div className="absolute inset-0 bg-white opacity-0 hover:opacity-20 transition-opacity duration-200"></div>
+                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-200"></div>
               </button>
             </div>
 
             {/* Header decoration */}
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-3 py-1 border-2 border-gray-800 font-mono text-sm font-bold text-gray-800">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-950 px-3 py-1 border-2 border-purple-900 font-mono text-sm font-bold text-purple-200">
               GAME_INTERFACE
             </div>
           </div>
@@ -230,7 +230,7 @@ function GamePage() {
             className="h-full w-full opacity-5"
             style={{
               background:
-                "repeating-linear-gradient(0deg, transparent, transparent 3px, #fbbf24 3px, #fbbf24 6px)",
+                "repeating-linear-gradient(0deg, transparent, transparent 3px, #2e1065 3px, #2e1065 6px)",
             }}
           ></div>
         </div>
