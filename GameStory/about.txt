@@ -25,3 +25,11 @@ Ending
 1. game user will have terminal, will need to do sudo, but for that he need to find a password 
 with command cat password.txt it will echo the password then user will do sudo
 
+
+3. I need to add more tiles to jump on and then I need to add the textures so it will look better, t
+then I need to think about game 3. the engine checking ing mabye sometthing like <!-- Button trigger modal -->
+
+
+Ending something like mission impossible, or matrix it was just a simulation
+
+

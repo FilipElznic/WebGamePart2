@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 function SpaceJumpingGame() {
-  const [playerPos, setPlayerPos] = useState({ x: 50, y: 400 });
+  const [playerPos, setPlayerPos] = useState({ x: 0, y: 600 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
@@ -19,26 +19,33 @@ function SpaceJumpingGame() {
   const PLAYER_SIZE = 40;
   const VIEWPORT_WIDTH = 800;
   const VIEWPORT_HEIGHT = 600;
-  const MAP_WIDTH = 3000;
+  const MAP_WIDTH = 5000;
 
   // Spaceship debris platforms - more challenging vertical navigation required
   const platforms = [
     // Starting area - low platforms
-    { x: 0, y: 500, width: 150, height: 20, type: "hull" },
-    { x: 200, y: 480, width: 120, height: 20, type: "wing" },
+    { x: 0, y: 650, width: 150, height: 20, type: "hull" },
+
+    { x: 200, y: 580, width: 120, height: 20, type: "wing" },
 
     // First challenge - must go up to continue
     { x: 350, y: 400, width: 100, height: 20, type: "engine" },
-    { x: 500, y: 350, width: 90, height: 20, type: "hull" },
-    { x: 650, y: 280, width: 110, height: 20, type: "cockpit" },
+    { x: 500, y: 550, width: 90, height: 20, type: "hull" },
+    { x: 650, y: 210, width: 110, height: 20, type: "cockpit" },
 
     // Down and up pattern - forces vertical navigation
-    { x: 800, y: 400, width: 80, height: 20, type: "wing" },
-    { x: 950, y: 200, width: 70, height: 20, type: "engine" },
-    { x: 1100, y: 150, width: 90, height: 20, type: "hull" },
+    { x: 700, y: 350, width: 80, height: 20, type: "wing" },
+    { x: 1000, y: 200, width: 70, height: 20, type: "engine" },
+    { x: 1000, y: 200, width: 5, height: 400, type: "" },
+    { x: 1100, y: 650, width: 90, height: 20, type: "hull" },
 
     // Major vertical challenge - high platforms
-    { x: 1280, y: 100, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 700, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 550, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 450, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 350, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 250, width: 85, height: 20, type: "cockpit" },
+    { x: 1280, y: 100, width: 5, height: 470, type: "" },
     { x: 1450, y: 50, width: 75, height: 20, type: "wing" },
 
     // Back down but still elevated
@@ -46,20 +53,25 @@ function SpaceJumpingGame() {
     { x: 1750, y: 300, width: 70, height: 20, type: "hull" },
 
     // Another climb sequence
-    { x: 1900, y: 250, width: 90, height: 20, type: "cockpit" },
-    { x: 2050, y: 150, width: 85, height: 20, type: "wing" },
-    { x: 2200, y: 80, width: 100, height: 20, type: "engine" },
+
+    { x: 2200, y: 0, width: 10, height: 500, type: "" },
+    { x: 2050, y: 650, width: 85, height: 20, type: "wing" },
+    { x: 2200, y: 650, width: 100, height: 20, type: "engine" },
 
     // Final challenging descent and climb
     { x: 2350, y: 220, width: 90, height: 20, type: "hull" },
-    { x: 2500, y: 120, width: 120, height: 20, type: "cockpit" },
+    { x: 2350, y: 520, width: 90, height: 20, type: "hull" },
+    { x: 2250, y: 420, width: 90, height: 20, type: "hull" },
+    { x: 2500, y: 320, width: 120, height: 20, type: "cockpit" },
+    { x: 2800, y: 320, width: 120, height: 20, type: "cockpit" },
+    { x: 2700, y: 100, width: 5, height: 400, type: "" },
 
     // Final platform with wrench - elevated
-    { x: 2700, y: 200, width: 200, height: 20, type: "command" },
+    { x: 2600, y: 100, width: 200, height: 20, type: "hull" },
   ];
 
   // Wrench position (on the final platform)
-  const wrenchPos = { x: 2800, y: 150, width: 40, height: 40 };
+  const wrenchPos = { x: 2700, y: 50, width: 40, height: 40 };
 
   // Platform colors based on debris type
   //need to add graphic for each platform type

@@ -139,9 +139,9 @@ function Navbar() {
               ) : user ? (
                 // User is logged in
                 <div className="flex items-center space-x-3">
-                  <div className="bg-green-100 border-2 border-green-400 px-3 py-1 font-mono text-sm">
-                    <span className="text-green-600">&gt;</span> Welcome,{" "}
-                    <span className="font-bold text-gray-800">
+                  <div className="bg-zinc-800 border-2 border-green-400 px-3 py-1 font-mono text-sm">
+                    <span className="text-white">&gt;</span> Welcome,{" "}
+                    <span className="font-bold text-white">
                       {user.displayName}
                     </span>
                   </div>
@@ -236,7 +236,7 @@ function Navbar() {
             ) : user ? (
               // User is logged in
               <div>
-                <div className="px-3 py-2 bg-black border-l-4 border-green-400 font-mono text-sm mb-2">
+                <div className="px-3 py-2 bg-zinc-800 border-l-4 border-green-400 font-mono text-sm mb-2">
                   <span className="text-green-600">&gt;</span> Welcome,{" "}
                   <span className="font-bold text-gray-800">
                     {user.displayName}
