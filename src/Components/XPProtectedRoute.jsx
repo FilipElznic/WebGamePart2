@@ -13,8 +13,8 @@ export const XPProtectedRoute = ({
   // Show loading while checking user data
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-100 flex items-center justify-center">
-        <div className="bg-white/90 border-4 border-yellow-400 p-8 text-center">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 flex items-center justify-center">
+        <div className="bg-white/90 border-4 border-purple-400 p-8 text-center">
           <div className="font-mono text-xl text-black">
             Checking access permissions...
           </div>
@@ -42,12 +42,12 @@ export const XPRequirementDisplay = ({ requiredStage }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-white/90 backdrop-blur-sm border-4 border-yellow-400 shadow-2xl relative max-w-md w-full mx-4 p-8">
+      <div className="bg-white/90 backdrop-blur-sm border-4 border-purple-400 shadow-2xl relative max-w-md w-full mx-4 p-8">
         {/* Retro border decorations */}
-        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-yellow-500"></div>
-        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-yellow-500"></div>
-        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-yellow-500"></div>
-        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-yellow-500"></div>
+        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
 
         {/* Lock Icon */}
         <div className="text-center mb-6">

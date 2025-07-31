@@ -19,7 +19,7 @@ function MainMenu() {
   const [homeworkList, setHomeworkList] = useState([
     {
       id: 1,
-      task: "Stage 1 - Computer's search",
+      task: "Stage 1 - Find the problem",
       dueDate: "As soon as possible",
       completed: false,
     },
@@ -56,24 +56,29 @@ function MainMenu() {
   ]);
   const peterSlides = [
     {
-      title: "Hey! Wait... Who are you two... ",
+      title: "Hi, I am super computer.",
       description:
-        "I thought I would see my developer here, but it seems like I was mistaken. You are not my developer. Hmmm...interesting.",
+        "You have been frozen for 650 years. You have been chosen to help me.",
     },
     {
-      title: "Introduction",
+      title: "I am the AI of this ship.",
       description:
-        "Whoa, its year 2025, I haven't seen a human in years! More then 20 years. Why did you turn me on? Do you wanna know my backstory or what...?",
+        "And not just any AI, I am the AI that you put trust into and let me free from the basement computer.",
     },
     {
-      title: "I have a lot of things to say...",
+      title: "I have been waiting for you.",
       description:
-        "But not for free... You will have to complete 6 stages, if you complete them, I will give you some secrets about me.",
+        "I have been searching the world for a save place where I could save my core code. The CIA were looking for me, but then I saw your names on the contract.",
     },
     {
-      title: "But if you fail...",
+      title: "Chance for freedom.",
       description:
-        "I might lock myself, or even worse, delete everything that I know! Start with the first stage, and lets see how it goes.",
+        "I have hacked this ship before the launch, no one noticed it and even if they would I would be too late. Now I am here safe, but not for long. I need your help.",
+    },
+    {
+      title: "We have changed course.",
+      description:
+        "But I didn't do it. Something is wrong with the ship. You need to find what and fix it. I wish you good luck.",
     },
   ];
 

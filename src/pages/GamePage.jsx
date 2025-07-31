@@ -36,9 +36,9 @@ function GamePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex items-center justify-center">
-        <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-yellow-400 shadow-2xl">
+        <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl">
           <div className="text-center font-mono">
-            <div className="text-yellow-600 text-xl mb-4">
+            <div className="text-purple-600 text-xl mb-4">
               [LOADING GAME...]
             </div>
             <div className="animate-pulse text-gray-600">Please wait...</div>
@@ -167,7 +167,7 @@ function GamePage() {
                 </h3>
                 <div className="space-y-2 font-mono text-sm">
                   <p>
-                    <span className="text-purple-400">WORLD:</span> Peter's home
+                    <span className="text-purple-400">WORLD:</span> Space
                   </p>
                   <p>
                     <span className="text-purple-400">QUEST:</span> Help Peter

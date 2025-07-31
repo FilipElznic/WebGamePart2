@@ -1,5 +1,5 @@
 import Navbar from "../Components/Navbar";
-import LandingPage from "../Components/LandingPage";
+import LandingPage from "./LandingPage";
 import About from "../Components/About";
 import Footer from "../Components/Footer";
 import PCOnlyPopup from "../Components/PCOnlyPopup";

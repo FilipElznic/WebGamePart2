@@ -133,7 +133,7 @@ const DesktopMinigames = () => {
         <div className="bg-gradient-to-r from-green-900 to-green-800 text-green-100 px-2 py-1 flex justify-between items-center border-b border-green-400">
           <span className="text-sm font-bold font-mono">{title}</span>
           <div className="flex gap-1">
-            <button className="w-4 h-4 bg-yellow-500 rounded-sm border border-yellow-600 hover:bg-yellow-400"></button>
+            <button className="w-4 h-4 bg-purple-500 rounded-sm border border-purple-600 hover:bg-purple-400"></button>
             <button className="w-4 h-4 bg-blue-500 rounded-sm border border-blue-600 hover:bg-blue-400"></button>
             <button
               onClick={onClose}

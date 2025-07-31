@@ -50,7 +50,7 @@ const Final = () => {
 
   // Memory game mechanics
   const generateSequence = useCallback((level) => {
-    const colors = ["red", "green", "blue", "yellow"];
+    const colors = ["red", "green", "blue", "purple"];
     const sequence = [];
     for (let i = 0; i < level + 2; i++) {
       sequence.push(colors[Math.floor(Math.random() * colors.length)]);
@@ -472,7 +472,7 @@ const Final = () => {
           <div className="text-2xl mb-4 text-green-300">
             AI: "So... you got all the way here."
           </div>
-          <div className="text-lg text-yellow-400 animate-pulse">
+          <div className="text-lg text-purple-400 animate-pulse">
             "Let's see if you're worthy of the secret..."
           </div>
           <div className="mt-6 text-sm text-gray-400">
@@ -489,7 +489,7 @@ const Final = () => {
             <div>Dodged: {dodgeCount}/50</div>
           </div>
 
-          <div className="absolute top-4 right-4 text-yellow-400 text-sm">
+          <div className="absolute top-4 right-4 text-purple-400 text-sm">
             Use WASD or Arrow Keys
             <br />
             <span className="text-green-300 text-xs">
@@ -536,7 +536,7 @@ const Final = () => {
           <div className="text-3xl font-bold mb-4 text-green-400">
             [PHASE 1 COMPLETE]
           </div>
-          <div className="text-2xl text-yellow-400 animate-pulse">
+          <div className="text-2xl text-purple-400 animate-pulse">
             "Impressive.... but can you hit back?"
           </div>
         </div>
@@ -550,7 +550,7 @@ const Final = () => {
             <div>Hits: {hitCount}/30</div>
           </div>
 
-          <div className="absolute top-4 right-4 text-yellow-400 text-sm">
+          <div className="absolute top-4 right-4 text-purple-400 text-sm">
             Click Targets (Green) - Avoid Bombs (Red)
             <br />
             <span className="text-red-300 text-xs">
@@ -593,7 +593,7 @@ const Final = () => {
           <div className="text-xl text-red-400 animate-pulse">
             "Your reflexes are sharp... but what about your mind?"
           </div>
-          <div className="text-lg text-yellow-400 mt-4">
+          <div className="text-lg text-purple-400 mt-4">
             "Let's see if you can remember who I really am..."
           </div>
         </div>
@@ -608,7 +608,7 @@ const Final = () => {
             <div>Progress: {memoryProgress}/5</div>
           </div>
 
-          <div className="absolute top-4 right-4 text-yellow-400 text-sm max-w-xs">
+          <div className="absolute top-4 right-4 text-purple-400 text-sm max-w-xs">
             {showingSequence
               ? "Watch the sequence..."
               : "Click the colors in order!"}
@@ -644,12 +644,12 @@ const Final = () => {
               </button>
 
               <button
-                id="memory-yellow"
-                onClick={() => handleMemoryClick("yellow")}
+                id="memory-purple"
+                onClick={() => handleMemoryClick("purple")}
                 disabled={showingSequence}
-                className="w-32 h-32 bg-yellow-500 hover:bg-yellow-400 rounded-lg border-4 border-yellow-600 shadow-lg shadow-yellow-500/50 transition-all duration-200 disabled:opacity-50"
+                className="w-32 h-32 bg-purple-500 hover:bg-purple-400 rounded-lg border-4 border-purple-600 shadow-lg shadow-purple-500/50 transition-all duration-200 disabled:opacity-50"
               >
-                <div className="text-black font-bold text-xl">YELLOW</div>
+                <div className="text-black font-bold text-xl">purple</div>
               </button>
             </div>
           </div>
@@ -687,7 +687,7 @@ const Final = () => {
             [ALL PHASES COMPLETE]
           </div>
           <div className="max-w-2xl space-y-4 text-lg">
-            <div className="text-yellow-400">
+            <div className="text-purple-400">
               AI: "You've proven yourself in all three trials... I can finally
               tell you the truth."
             </div>

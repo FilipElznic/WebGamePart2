@@ -68,12 +68,12 @@ function Navbar() {
           <div className="flex-shrink-0">
             <h1
               onClick={() => (window.location.href = "/")}
-              className="text-2xl font-bold font-mono text-gray-800 hover:text-yellow-600 transition-all duration-300 hover:scale-110 cursor-pointer relative"
+              className="text-2xl font-bold font-mono text-gray-800 hover:text-purple-600 transition-all duration-300 hover:scale-110 cursor-pointer relative"
             >
-              <span className="relative z-10 bg-transparent-100 px-3 py-1 border-2 text-white border-yellow-400">
+              <span className="relative z-10 bg-transparent-100 px-3 py-1 border-2 text-white border-purple-400">
                 &gt; PETER'S_QUEST_V2.0
               </span>
-              <div className="absolute inset-0 bg-yellow-300 opacity-0 hover:opacity-20 blur-lg transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-purple-300 opacity-0 hover:opacity-20 blur-lg transition-opacity duration-300"></div>
             </h1>
           </div>
 
@@ -131,7 +131,7 @@ function Navbar() {
             </ul>
 
             {/* Authentication Section */}
-            <div className="flex items-center space-x-3 ml-6 border-l-2 border-yellow-400 pl-6">
+            <div className="flex items-center space-x-3 ml-6 border-l-2 border-purple-400 pl-6">
               {loading ? (
                 <div className="font-mono text-sm text-gray-600">
                   Loading...
@@ -149,7 +149,7 @@ function Navbar() {
                     to="/game"
                     className="group relative font-mono text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                   >
-                    <span className="relative z-10 bg-blue-100 hover:bg-blue-200 px-2 py-1 border border-blue-400 transition-colors duration-200">
+                    <span className="relative z-10 bg-blue-200 hover:bg-blue-200 px-2 py-1 border border-blue-400 transition-colors duration-200">
                       [PLAY]
                     </span>
                   </Link>
@@ -157,7 +157,7 @@ function Navbar() {
                     onClick={handleLogout}
                     className="group relative font-mono text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
                   >
-                    <span className="relative z-10 bg-red-100 hover:bg-red-200 px-2 py-1 border border-red-400 transition-colors duration-200">
+                    <span className="relative z-10 bg-red-200 hover:bg-red-200 px-2 py-1 border border-red-400 transition-colors duration-200">
                       [LOGOUT]
                     </span>
                   </button>
@@ -192,7 +192,7 @@ function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className="text-gray-800 hover:text-yellow-600 bg-yellow-100 hover:bg-yellow-200 p-2 border-2 border-yellow-400 transition-all duration-200 font-mono text-xl"
+              className="text-gray-800 hover:text-purple-600 bg-purple-100 hover:bg-purple-200 p-2 border-2 border-purple-400 transition-all duration-200 font-mono text-xl"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -204,31 +204,31 @@ function Navbar() {
 
       {/* Retro Mobile Menu */}
       <div
-        className="md:hidden hidden bg-yellow-50 border-t-2 border-yellow-400"
+        className="md:hidden hidden bg-purple-50 border-t-2 border-purple-400"
         id="mobile-menu"
       >
         <div className="px-4 pt-2 pb-3 space-y-1">
           <a
             href="/"
-            className="text-gray-700 hover:text-gray-900 hover:bg-yellow-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-yellow-400"
+            className="text-gray-700 hover:text-gray-900 hover:bg-purple-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-purple-400"
           >
             [HOME]
           </a>
           <a
             href="/#about"
-            className="text-gray-700 hover:text-gray-900 hover:bg-yellow-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-yellow-400"
+            className="text-gray-700 hover:text-gray-900 hover:bg-purple-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-purple-400"
           >
             [ABOUT]
           </a>
           <a
             href="/#contact"
-            className="text-gray-700 hover:text-gray-900 hover:bg-yellow-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-yellow-400"
+            className="text-gray-700 hover:text-gray-900 hover:bg-purple-200 block px-3 py-2 font-mono text-base font-bold uppercase tracking-wider transition-colors duration-200 border-l-4 border-transparent hover:border-purple-400"
           >
             [CONTACT]
           </a>
 
           {/* Mobile Authentication Section */}
-          <div className="border-t-2 border-yellow-400 pt-3 mt-3">
+          <div className="border-t-2 border-purple-400 pt-3 mt-3">
             {loading ? (
               <div className="px-3 py-2 font-mono text-sm text-gray-600">
                 Loading...
@@ -236,7 +236,7 @@ function Navbar() {
             ) : user ? (
               // User is logged in
               <div>
-                <div className="px-3 py-2 bg-green-100 border-l-4 border-green-400 font-mono text-sm mb-2">
+                <div className="px-3 py-2 bg-black border-l-4 border-green-400 font-mono text-sm mb-2">
                   <span className="text-green-600">&gt;</span> Welcome,{" "}
                   <span className="font-bold text-gray-800">
                     {user.displayName}
@@ -288,8 +288,8 @@ function Navbar() {
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-yellow-400"></div>
-      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-yellow-400"></div>
+      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-purple-400"></div>
+      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-purple-400"></div>
     </nav>
   );
 }

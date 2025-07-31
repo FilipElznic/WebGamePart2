@@ -17,23 +17,23 @@ function GameStart() {
 
   const slides = [
     {
-      title: "Welcome to Peter's Quest",
-      description: "Hi my name is Peter, and I have a small problem.",
+      title: "Welcome to Peter's Quest Part 2",
+      description: "Hi my name is Peter, and We have problem. Really big one.",
     },
     {
-      title: "What's the Problem?",
+      title: "Let me give you backstory.",
       description:
-        "I have found an old computer in the basement that seems a little bit forgotten. I have turned it on, and it seems to have a weird OS on it.",
+        "We got our bodies frozen to habitat new platet that is 1050 years from Earth.",
     },
     {
-      title: "Will you help me?",
+      title: "Why do we have problem?",
       description:
-        "I am too scared to explore the OS by myself, it seems like it can see me too, but there is no web camera, which is scary!",
+        "Well it looks like we woke up early then everyone else, and that's the problem. Because we got 400 years to go!",
     },
     {
-      title: "Ready to Play?",
+      title: "Well, we need to fix it.?",
       description:
-        "Lets explore this pc and see what we can find! Mabye some background story, or some hidden secrets. (starting the pc noises...)",
+        "We need to find a way to put ourselves back into frozen sleep and wait for the end of this trip.",
     },
   ];
 
@@ -284,7 +284,7 @@ function GameStart() {
                       to="/main-menu"
                       className="inline-block bg-gradient-to-r from-purple-950 to-purple-900 hover:from-purple-900 hover:to-black border-4 border-purple-900 px-8 py-4 font-mono font-bold text-purple-200 text-xl uppercase tracking-wider transition-all duration-200 hover:scale-110 transform shadow-lg relative overflow-hidden"
                     >
-                      <span className="relative z-10">[ START ADVENTURE ]</span>
+                      <span className="relative z-10">[ START SURVIVAL ]</span>
                       <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-200"></div>
 
                       {/* Animated glow effect */}

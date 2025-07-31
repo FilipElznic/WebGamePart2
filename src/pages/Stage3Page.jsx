@@ -41,7 +41,7 @@ function Stage3Page() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-500  via-white to-zinc-300 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       {showDialogue && (
         <div className="">
           <img
@@ -52,24 +52,24 @@ function Stage3Page() {
 
           {/* Speech bubble */}
           <div className="absolute bottom-80 left-96 z-40 max-w-md">
-            <div className="bg-white border-4 border-yellow-400 rounded-lg p-4 relative shadow-xl">
+            <div className="bg-white border-4 border-purple-400 rounded-lg p-4 relative shadow-xl">
               {/* Speech bubble tail */}
               <div className="absolute -bottom-3 left-8 w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
-              <div className="absolute -bottom-4 left-7 w-0 h-0 border-l-6 border-r-6 border-t-10 border-l-transparent border-r-transparent border-t-yellow-400"></div>
+              <div className="absolute -bottom-4 left-7 w-0 h-0 border-l-6 border-r-6 border-t-10 border-l-transparent border-r-transparent border-t-purple-400"></div>
 
               {/* Corner decorations */}
-              <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-yellow-600"></div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-yellow-600"></div>
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-yellow-600"></div>
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-yellow-600"></div>
+              <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-purple-600"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-600"></div>
+              <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-purple-600"></div>
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-600"></div>
 
               {/* Dialogue text */}
               <div className="text-black font-mono">
-                <p className="text-lg font-bold text-yellow-700 mb-2">AI:</p>
+                <p className="text-lg font-bold text-purple-700 mb-2">AI:</p>
                 <p className="text-sm leading-relaxed">
                   "{displayText}
                   {!isTypingComplete && (
-                    <span className="inline-block w-2 h-4 bg-yellow-600 ml-1 animate-pulse">
+                    <span className="inline-block w-2 h-4 bg-purple-600 ml-1 animate-pulse">
                       |
                     </span>
                   )}
@@ -78,16 +78,16 @@ function Stage3Page() {
 
                 {/* Typing indicator - only show while typing */}
                 {!isTypingComplete && (
-                  <div className="flex items-center mt-3 text-yellow-600">
+                  <div className="flex items-center mt-3 text-purple-600">
                     <span className="text-xs">💭</span>
                     <div className="ml-2 flex space-x-1">
-                      <div className="w-1 h-1 bg-yellow-400 rounded-full animate-bounce"></div>
+                      <div className="w-1 h-1 bg-purple-400 rounded-full animate-bounce"></div>
                       <div
-                        className="w-1 h-1 bg-yellow-400 rounded-full animate-bounce"
+                        className="w-1 h-1 bg-purple-400 rounded-full animate-bounce"
                         style={{ animationDelay: "0.1s" }}
                       ></div>
                       <div
-                        className="w-1 h-1 bg-yellow-400 rounded-full animate-bounce"
+                        className="w-1 h-1 bg-purple-400 rounded-full animate-bounce"
                         style={{ animationDelay: "0.2s" }}
                       ></div>
                     </div>
@@ -98,13 +98,13 @@ function Stage3Page() {
                   <div className="mt-4 flex justify-center">
                     <button
                       onClick={handleStartTask}
-                      className="bg-yellow-400 hover:bg-yellow-500 border-2 border-yellow-600 text-black font-bold py-2 px-6 font-mono text-sm transition-all duration-200 transform hover:scale-105 relative group"
+                      className="bg-purple-400 hover:bg-purple-500 border-2 border-purple-600 text-black font-bold py-2 px-6 font-mono text-sm transition-all duration-200 transform hover:scale-105 relative group"
                     >
                       {/* Button corner decorations */}
-                      <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-yellow-700"></div>
-                      <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-yellow-700"></div>
-                      <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-yellow-700"></div>
-                      <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-yellow-700"></div>
+                      <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-purple-700"></div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-purple-700"></div>
+                      <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-purple-700"></div>
+                      <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-purple-700"></div>
                       [HIDE AI] ▶
                     </button>
                   </div>
@@ -119,7 +119,7 @@ function Stage3Page() {
         onClick={() => (window.location.href = "/main-menu")}
         className="z-50 relative"
       >
-        <span className="bg-yellow-500 hover:bg-yellow-500 border-2 border-yellow-600 text-black font-bold py-2 px-6 font-mono text-sm transition-all duration-200 transform hover:scale-105 relative group">
+        <span className="bg-purple-500 hover:bg-purple-500 border-2 border-purple-600 text-black font-bold py-2 px-6 font-mono text-sm transition-all duration-200 transform hover:scale-105 relative group">
           HOME ▶
         </span>
       </button>
@@ -127,28 +127,28 @@ function Stage3Page() {
       <div className="absolute inset-0 opacity-10">
         <div className="grid grid-cols-16 h-full">
           {Array.from({ length: 16 }).map((_, i) => (
-            <div key={i} className="border-r border-yellow-300"></div>
+            <div key={i} className="border-r border-purple-300"></div>
           ))}
         </div>
         <div className="absolute inset-0 grid grid-rows-12">
           {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-b border-yellow-300 w-full"></div>
+            <div key={i} className="border-b border-purple-300 w-full"></div>
           ))}
         </div>
       </div>
-      <div className="container mx-auto px-4 py-8 relative w-full h-full z-10">
-        <div className="backdrop-blur-sm p-8 border-4 border-yellow-400 shadow-2xl bg-gradient-to-tr from-zinc-500  via-white/65 to-zinc-300  relative overflow-hidden flex h-screen flex-col items-center justify-center">
+      <div className="container mx-auto px-4 py-8 relative w-full h-full z-10 ">
+        <div className="backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl bg-gradient-to-tr from-zinc-800  via-white/30 to-zinc-500  relative overflow-hidden flex h-screen flex-col items-center justify-center">
           <div className="absolute inset-0  opacity-100 z-5">
             <div className="grid grid-cols-16 h-full">
               {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="border-r border-yellow-300"></div>
+                <div key={i} className="border-r border-purple-300"></div>
               ))}
             </div>
             <div className="absolute inset-0 grid grid-rows-12">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="border-b border-yellow-300 w-full"
+                  className="border-b border-purple-300 w-full"
                 ></div>
               ))}
             </div>
@@ -159,22 +159,22 @@ function Stage3Page() {
 
       {/* Floating retro symbols */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 text-4xl text-yellow-400 opacity-20 animate-pulse font-mono">
+        <div className="absolute top-10 left-10 text-4xl text-purple-400 opacity-20 animate-pulse font-mono">
           ◆
         </div>
-        <div className="absolute top-20 right-20 text-3xl text-yellow-500 opacity-30 animate-bounce font-mono">
+        <div className="absolute top-20 right-20 text-3xl text-purple-500 opacity-30 animate-bounce font-mono">
           ★
         </div>
-        <div className="absolute bottom-32 left-20 text-4xl text-yellow-400 opacity-25 animate-pulse font-mono">
+        <div className="absolute bottom-32 left-20 text-4xl text-purple-400 opacity-25 animate-pulse font-mono">
           ◇
         </div>
-        <div className="absolute bottom-20 right-32 text-3xl text-yellow-500 opacity-20 animate-bounce font-mono">
+        <div className="absolute bottom-20 right-32 text-3xl text-purple-500 opacity-20 animate-bounce font-mono">
           ♦
         </div>
-        <div className="absolute top-1/3 left-1/4 text-2xl text-yellow-400 opacity-20 animate-bounce font-mono">
+        <div className="absolute top-1/3 left-1/4 text-2xl text-purple-400 opacity-20 animate-bounce font-mono">
           ▲
         </div>
-        <div className="absolute top-2/3 right-1/4 text-3xl text-yellow-500 opacity-30 animate-pulse font-mono">
+        <div className="absolute top-2/3 right-1/4 text-3xl text-purple-500 opacity-30 animate-pulse font-mono">
           ●
         </div>
 

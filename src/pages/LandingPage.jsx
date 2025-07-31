@@ -4,7 +4,7 @@ import PeterImg from "/peter.png"; // Adjust the path as necessary
 
 function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col items-start justify-center w-full h-full p-4 relative bg-gradient-to-br from-black via-zinc-900 to-purple-950">
+    <div className="min-h-screen flex flex-col items-start justify-center w-full h-full p-4 relative ">
       <div className="absolute h-[70vh] bg-zinc-900 top-1/3 right-12  border-2 border-purple-900">
         <img
           src={PeterImg}
@@ -32,7 +32,7 @@ function LandingPage() {
             <span className="relative z-10">
               Welcome to the <br />
               <span className="text-purple-400 bg-zinc-900 px-4 py-2 border-2 border-purple-900 inline-block transform -rotate-1 shadow-lg">
-                PETER'S QUEST
+                PETER'S QUEST PART 2
               </span>
             </span>
             <div className="absolute inset-0 bg-purple-950 opacity-20 blur-sm"></div>
@@ -57,11 +57,11 @@ function LandingPage() {
             {/* System status */}
             <div className="bg-purple-950 border border-purple-900 p-3 mb-4 font-mono text-sm">
               <p className="text-purple-400 mb-1">
-                <span className="text-yellow-600">&gt;</span> STATUS:
+                <span className="text-purple-600">&gt;</span> STATUS:
                 READY_TO_PLAY
               </p>
               <p className="text-green-600">
-                <span className="text-yellow-600">&gt;</span> DIFFICULTY:
+                <span className="text-purple-600">&gt;</span> DIFFICULTY:
                 TO_DO_HERO
               </p>
             </div>
@@ -70,17 +70,17 @@ function LandingPage() {
           {/* Retro start button */}
           <Link to="/game">
             <div className="group relative inline-block">
-              <div className="bg-yellow-400 hover:bg-yellow-500 border-4 border-gray-800 px-8 py-4 font-mono font-bold text-gray-800 text-xl uppercase tracking-wider transition-all duration-200 hover:scale-105 cursor-pointer relative overflow-hidden">
+              <div className="bg-purple-400 hover:bg-purple-500 border-4 border-gray-800 px-8 py-4 font-mono font-bold text-gray-800 text-xl uppercase tracking-wider transition-all duration-200 hover:scale-105 cursor-pointer relative overflow-hidden">
                 <span className="relative z-10">[ START THE GAME ]</span>
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-200"></div>
               </div>
               <div className="absolute top-2 left-2 w-full h-full bg-gray-800 -z-10"></div>
-              <div className="absolute -inset-1 bg-yellow-300 opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-300"></div>
+              <div className="absolute -inset-1 bg-purple-300 opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-300"></div>
             </div>
           </Link>
 
           {/* Additional retro elements */}
-          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-3 py-1 border-2 border-gray-800 font-mono text-sm font-bold text-gray-800">
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-400 px-3 py-1 border-2 border-gray-800 font-mono text-sm font-bold text-gray-800">
             GAME START
           </div>
         </div>

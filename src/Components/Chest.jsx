@@ -90,7 +90,7 @@ const PixelChest = () => {
   };
 
   return (
-    <div className="flex items-end justify-center h-[90vh] w-full bg-gradient-to-b from-sky-300 via-sky-200 to-yellow-100 relative overflow-hidden">
+    <div className="flex items-end justify-center h-[90vh] w-full bg-gradient-to-b from-sky-300 via-sky-200 to-purple-100 relative overflow-hidden">
       {/* Sea with waves */}
 
       {keyFound && peterHide && (
@@ -127,7 +127,7 @@ const PixelChest = () => {
       </div>
 
       {/* Beach with curved edge */}
-      <div className="absolute bottom-0 w-full h-1/3 bg-yellow-200">
+      <div className="absolute bottom-0 w-full h-1/3 bg-purple-200">
         <svg
           className="absolute w-full h-full"
           viewBox="0 0 1440 320"
@@ -145,7 +145,7 @@ const PixelChest = () => {
       <div className="absolute right-16 bottom-1/3 flex flex-col items-center z-10">
         {/* Trunk */}
         <div
-          className="w-5 h-60 bg-yellow-800 shadow-md"
+          className="w-5 h-60 bg-purple-800 shadow-md"
           style={{ transform: "rotate(2deg)" }}
         ></div>
         {/* Leaves */}
@@ -184,12 +184,12 @@ const PixelChest = () => {
         )}
 
         {/* Chest Base */}
-        <div className="w-40 h-24 bg-yellow-900 border-4 border-yellow-700 rounded-b-md relative z-10">
+        <div className="w-40 h-24 bg-purple-900 border-4 border-purple-700 rounded-b-md relative z-10">
           {/* Wooden planks */}
           {[...Array(4)].map((_, i) => (
             <div
               key={i}
-              className="absolute left-0 w-full h-1 border-b border-yellow-700"
+              className="absolute left-0 w-full h-1 border-b border-purple-700"
               style={{ top: `${(i + 1) * 6}px` }}
             ></div>
           ))}
@@ -197,8 +197,8 @@ const PixelChest = () => {
           {/* Keyhole */}
           {!chestOpen && (
             <div className="absolute left-1/2 top-1/2 w-4 h-6 bg-black rounded-sm -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-start">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full mt-1"></div>
-              <div className="w-1 h-2 bg-yellow-400 mt-0.5"></div>
+              <div className="w-2 h-2 bg-purple-400 rounded-full mt-1"></div>
+              <div className="w-1 h-2 bg-purple-400 mt-0.5"></div>
             </div>
           )}
         </div>
@@ -206,15 +206,15 @@ const PixelChest = () => {
         {/* Chest Lid (clickable if key found) */}
         {!chestOpen ? (
           <div
-            className={`absolute w-40 h-12 bg-yellow-800 border-4 border-yellow-700 rounded-t-md top-[-48px] left-0 z-20 ${
-              keyFound ? "cursor-pointer hover:bg-yellow-700" : ""
+            className={`absolute w-40 h-12 bg-purple-800 border-4 border-purple-700 rounded-t-md top-[-48px] left-0 z-20 ${
+              keyFound ? "cursor-pointer hover:bg-purple-700" : ""
             }`}
             onClick={keyFound ? onChestLidClick : undefined}
             title={keyFound ? "Click to open" : "Locked"}
             style={keyFound ? { transition: "background 0.2s" } : {}}
           ></div>
         ) : (
-          <div className="absolute w-40 h-12 bg-yellow-800 border-4 border-yellow-700 rounded-t-md top-[-80px] left-0 z-20 rotate-[-45deg] transition-all duration-500"></div>
+          <div className="absolute w-40 h-12 bg-purple-800 border-4 border-purple-700 rounded-t-md top-[-80px] left-0 z-20 rotate-[-45deg] transition-all duration-500"></div>
         )}
 
         {/* Treasure Reveal */}
@@ -224,15 +224,15 @@ const PixelChest = () => {
               <>
                 <div className="absolute bottom-0 -left-[26vw] w-[60vw] h-[60vh] z-50">
                   {/* Retro container with CRT monitor styling */}
-                  <div className="relative w-full h-full bg-black border-8 border-yellow-400 shadow-2xl">
+                  <div className="relative w-full h-full bg-black border-8 border-purple-400 shadow-2xl">
                     {/* CRT monitor frame decorations */}
-                    <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-yellow-300"></div>
-                    <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-yellow-300"></div>
-                    <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-yellow-300"></div>
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-yellow-300"></div>
+                    <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-300"></div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-300"></div>
+                    <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-300"></div>
+                    <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-300"></div>
 
                     {/* Retro monitor screen bezel */}
-                    <div className="absolute inset-4 border-4 border-yellow-500 bg-gradient-to-br from-yellow-100 to-yellow-200">
+                    <div className="absolute inset-4 border-4 border-purple-500 bg-gradient-to-br from-purple-100 to-purple-200">
                       {/* Screen scanlines overlay */}
                       <div
                         className="absolute inset-0 opacity-10 pointer-events-none "
@@ -243,7 +243,7 @@ const PixelChest = () => {
                       ></div>
 
                       {/* Inner screen glow */}
-                      <div className="absolute inset-2 bg-gradient-to-br from-zinc-800 via-zinc-400 to-zinc-800 border-2 border-yellow-300 shadow-inner">
+                      <div className="absolute inset-2 bg-gradient-to-br from-zinc-800 via-zinc-400 to-zinc-800 border-2 border-purple-300 shadow-inner">
                         <Peter
                           slides={peterSlides2}
                           imageSrc="/peterNote.png"
@@ -255,7 +255,7 @@ const PixelChest = () => {
                     {/* Retro-styled close button */}
                     <button
                       onClick={() => setPeterHide2(false)}
-                      className="absolute -top-4 -right-4 bg-red-600 hover:bg-red-700 text-yellow-100 font-mono font-bold py-2 px-3 border-4 border-red-800 shadow-lg z-50 transition-all duration-200 transform hover:scale-110 group"
+                      className="absolute -top-4 -right-4 bg-red-600 hover:bg-red-700 text-purple-100 font-mono font-bold py-2 px-3 border-4 border-red-800 shadow-lg z-50 transition-all duration-200 transform hover:scale-110 group"
                     >
                       {/* Button corner decorations */}
                       <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-red-400"></div>
@@ -266,11 +266,11 @@ const PixelChest = () => {
                     </button>
 
                     {/* Monitor stand/base */}
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-yellow-600 border-4 border-yellow-700 shadow-lg"></div>
-                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-48 h-4 bg-yellow-700 border-2 border-yellow-800 shadow-lg"></div>
+                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-purple-600 border-4 border-purple-700 shadow-lg"></div>
+                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-48 h-4 bg-purple-700 border-2 border-purple-800 shadow-lg"></div>
 
                     {/* Retro monitor label */}
-                    <div className="absolute -bottom-6 left-4 bg-black text-yellow-400 font-mono text-xs px-2 py-1 border border-yellow-500">
+                    <div className="absolute -bottom-6 left-4 bg-black text-purple-400 font-mono text-xs px-2 py-1 border border-purple-500">
                       PETER_TERMINAL_v1.0
                     </div>
 
@@ -279,24 +279,24 @@ const PixelChest = () => {
                   </div>
 
                   {/* Retro floating elements around the monitor */}
-                  <div className="absolute -top-8 -left-4 text-2xl text-yellow-400 opacity-30 font-mono">
+                  <div className="absolute -top-8 -left-4 text-2xl text-purple-400 opacity-30 font-mono">
                     ◆
                   </div>
-                  <div className="absolute -top-6 -right-8 text-xl text-yellow-500 opacity-40 font-mono">
+                  <div className="absolute -top-6 -right-8 text-xl text-purple-500 opacity-40 font-mono">
                     ★
                   </div>
-                  <div className="absolute -bottom-4 -left-6 text-xl text-yellow-400 opacity-35 font-mono">
+                  <div className="absolute -bottom-4 -left-6 text-xl text-purple-400 opacity-35 font-mono">
                     ▲
                   </div>
                 </div>
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-16 bg-yellow-200 border-2 border-yellow-500 rounded shadow-lg flex flex-col items-center justify-center z-30 animate-pulse">
-                  <div className="text-2xl text-yellow-700 font-bold mb-1">
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-16 bg-purple-200 border-2 border-purple-500 rounded shadow-lg flex flex-col items-center justify-center z-30 animate-pulse">
+                  <div className="text-2xl text-purple-700 font-bold mb-1">
                     💎
                   </div>
-                  <div className="text-sm text-yellow-800 font-mono">
+                  <div className="text-sm text-purple-800 font-mono">
                     Treasure Found!
                   </div>
-                  <div className="text-xs text-yellow-600 mt-1">
+                  <div className="text-xs text-purple-600 mt-1">
                     Congratulations!
                   </div>
                 </div>
@@ -322,12 +322,12 @@ const PixelChest = () => {
             onClick={onKeyClick}
             title="Click the key"
             style={{ imageRendering: "pixelated" }}
-            className="w-8 h-12 bg-yellow-400 border-2 border-yellow-600 rounded-sm relative"
+            className="w-8 h-12 bg-purple-400 border-2 border-purple-600 rounded-sm relative"
           >
             {/* Key bit */}
-            <div className="absolute bottom-0 left-1/2 w-4 h-2 bg-yellow-600 -translate-x-1/2 rounded-sm"></div>
+            <div className="absolute bottom-0 left-1/2 w-4 h-2 bg-purple-600 -translate-x-1/2 rounded-sm"></div>
             {/* Key handle */}
-            <div className="absolute top-1 left-1/2 w-6 h-6 border-2 border-yellow-600 rounded-full -translate-x-1/2"></div>
+            <div className="absolute top-1 left-1/2 w-6 h-6 border-2 border-purple-600 rounded-full -translate-x-1/2"></div>
           </div>
         ) : null}
       </div>
@@ -474,20 +474,20 @@ function Castle() {
       <div className="absolute bottom-1/4 right-1/4 z-20 flex flex-col items-center animate-pulse-slow">
         {/* Base */}
         <div
-          className="w-12 h-8 bg-yellow-300 border border-yellow-500 relative"
+          className="w-12 h-8 bg-purple-300 border border-purple-500 relative"
           style={{ animation: pulseSlowAnimation }}
         >
           {/* Door */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-yellow-500 rounded-t-md"></div>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-t-md"></div>
         </div>
         {/* Towers */}
         <div
           className="flex gap-1 mt-1"
           style={{ animation: pulseSlowAnimation }}
         >
-          <div className="w-3 h-4 bg-yellow-300 border border-yellow-500 rounded-t-md"></div>
-          <div className="w-3 h-5 bg-yellow-300 border border-yellow-500 rounded-t-md"></div>
-          <div className="w-3 h-4 bg-yellow-300 border border-yellow-500 rounded-t-md"></div>
+          <div className="w-3 h-4 bg-purple-300 border border-purple-500 rounded-t-md"></div>
+          <div className="w-3 h-5 bg-purple-300 border border-purple-500 rounded-t-md"></div>
+          <div className="w-3 h-4 bg-purple-300 border border-purple-500 rounded-t-md"></div>
         </div>
       </div>
     </>

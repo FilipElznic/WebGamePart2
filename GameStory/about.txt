@@ -4,4 +4,24 @@ This will be part 2 of the peter's quest web game
 
 It will be contining to the ending of the 1 part. (They let the ai free). 
 
-It's year, 2150. You and Peter went to freeze your body to be sent into the other planet and will wake in the future
+It's year, 2150. Peter and you have signed contract. You were taken to a special underground center, where they froze 
+your body. Before they froze you they, told you that You will wake up after 125 year to habitate new planet.
+
+But there has been an miscalculation. One asteroid was in the way and damaged the ship. Only you two got awaken
+and It's your mission to save this space ship
+
+Total six stages
+
+games. Run ship diagnosis, what happened, try sending message to the earth. get to know about the ship damaged.
+Try to wake up others - second game, wont be successfull, 
+3. game, going into the space and fixing It
+4. running diagnosis again. now you need to find a key hidden somewhere on the ship
+5. find that the ship did it intianlly, asteroid wouldn't hid the ship, but the program redirected itself 
+6. find a loop hole in the code, and take hand control of the ship - ship driving through the asteroids
+
+
+Ending 
+
+1. game user will have terminal, will need to do sudo, but for that he need to find a password 
+with command cat password.txt it will echo the password then user will do sudo
+

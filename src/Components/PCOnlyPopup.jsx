@@ -121,7 +121,7 @@ function PCOnlyPopup() {
             </div>
 
             <p className="text-sm text-gray-600">
-              <span className="text-yellow-700 font-bold">&gt; NOTE:</span>
+              <span className="text-purple-700 font-bold">&gt; NOTE:</span>
               For the authentic Peter's Quest experience, please access from a
               PC.
             </p>
@@ -152,7 +152,7 @@ function PCOnlyPopup() {
         </div>
 
         {/* Bottom retro accent */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-yellow-400"></div>
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-purple-400"></div>
       </div>
     </div>
   );

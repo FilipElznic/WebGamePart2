@@ -124,10 +124,10 @@ const EndShutdown = () => {
       {showSubtitlesButton && (
         <div className="absolute z-10 bottom-32 left-1/2 transform -translate-x-1/2 text-white font-mono">
           <div className="relative bg-gray-900 rounded-lg  shadow-2xl ">
-            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-yellow-600"></div>
-            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-yellow-600"></div>
-            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-yellow-600"></div>
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-yellow-600"></div>
+            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-purple-600"></div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-600"></div>
+            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-purple-600"></div>
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-600"></div>
             <button
               onClick={() => {
                 window.location.href = "/subtitles";
@@ -164,7 +164,7 @@ const EndShutdown = () => {
                 </p>
                 <p className="text-green-300 font-mono text-xl">Y / N</p>
                 <div className="mt-4">
-                  <span className="text-yellow-400 font-mono text-lg animate-blink">
+                  <span className="text-purple-400 font-mono text-lg animate-blink">
                     Y
                   </span>
                 </div>

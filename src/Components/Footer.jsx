@@ -178,12 +178,12 @@ function Footer() {
                   copyright {new Date().getFullYear()}
                 </p>
                 <p>
-                  <span className="text-yellow-500 font-bold">[INFO]</span> All
+                  <span className="text-purple-500 font-bold">[INFO]</span> All
                   rights reserved. Built for PC Gaming Excellence.
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-yellow-600 text-xs font-bold">◆ GAME_ON ◆</p>
+                <p className="text-purple-600 text-xs font-bold">◆ GAME_ON ◆</p>
                 <p className="text-gray-700 text-xs">
                   Made with <span className="text-red-500">♥</span> for
                   shipwrecked hackathon
@@ -206,16 +206,16 @@ function Footer() {
       </div>
 
       {/* Animated corner brackets */}
-      <div className="absolute top-4 left-4 text-yellow-400 font-mono text-2xl animate-pulse">
+      <div className="absolute top-4 left-4 text-purple-400 font-mono text-2xl animate-pulse">
         ◤
       </div>
-      <div className="absolute top-4 right-4 text-yellow-400 font-mono text-2xl animate-pulse">
+      <div className="absolute top-4 right-4 text-purple-400 font-mono text-2xl animate-pulse">
         ◥
       </div>
-      <div className="absolute bottom-4 left-4 text-yellow-400 font-mono text-2xl animate-pulse">
+      <div className="absolute bottom-4 left-4 text-purple-400 font-mono text-2xl animate-pulse">
         ◣
       </div>
-      <div className="absolute bottom-4 right-4 text-yellow-400 font-mono text-2xl animate-pulse">
+      <div className="absolute bottom-4 right-4 text-purple-400 font-mono text-2xl animate-pulse">
         ◢
       </div>
     </footer>

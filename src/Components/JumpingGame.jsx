@@ -1,103 +1,94 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useUserData } from "./UserDataProvider";
-import Peter from "./Peter";
 
-function JumpingGame() {
-  const [playerPos, setPlayerPos] = useState({ x: 400, y: 2000 });
+function SpaceJumpingGame() {
+  const [playerPos, setPlayerPos] = useState({ x: 50, y: 400 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
-  const [cameraY, setCameraY] = useState(1700);
-  const [xpAwarded, setXpAwarded] = useState(false);
-
-  const [peterHide, setPeterHide] = useState(false);
-
-  const { addXPForTask, userXP } = useUserData();
+  const [cameraX, setCameraX] = useState(0);
+  const [wrenchCollected, setWrenchCollected] = useState(false);
 
   const keysRef = useRef({});
-  const playerPosRef = useRef({ x: 400, y: 2000 });
+  const playerPosRef = useRef({ x: 50, y: 400 });
   const velocityRef = useRef({ x: 0, y: 0 });
   const isGroundedRef = useRef(false);
 
   const GRAVITY = 0.8;
   const JUMP_FORCE = -15;
-  const MOVE_SPEED = 10;
-  const PLAYER_SIZE = 30;
+  const MOVE_SPEED = 8;
+  const PLAYER_SIZE = 40;
+  const VIEWPORT_WIDTH = 800;
   const VIEWPORT_HEIGHT = 600;
-  const MAP_HEIGHT = 3600;
+  const MAP_WIDTH = 3000;
 
-  const peterSlides = [
-    {
-      title: "Great job!",
-      description:
-        "You have successfully completed the Jumping Game! Now, we have the key needed for to the next stage, we need to find out what  secret it is hiding!",
-    },
-    {
-      title: "The key ",
-      description:
-        "I have stored the key in my pocket and let's go continue our journey.",
-    },
+  // Spaceship debris platforms - more challenging vertical navigation required
+  const platforms = [
+    // Starting area - low platforms
+    { x: 0, y: 500, width: 150, height: 20, type: "hull" },
+    { x: 200, y: 480, width: 120, height: 20, type: "wing" },
+
+    // First challenge - must go up to continue
+    { x: 350, y: 400, width: 100, height: 20, type: "engine" },
+    { x: 500, y: 350, width: 90, height: 20, type: "hull" },
+    { x: 650, y: 280, width: 110, height: 20, type: "cockpit" },
+
+    // Down and up pattern - forces vertical navigation
+    { x: 800, y: 400, width: 80, height: 20, type: "wing" },
+    { x: 950, y: 200, width: 70, height: 20, type: "engine" },
+    { x: 1100, y: 150, width: 90, height: 20, type: "hull" },
+
+    // Major vertical challenge - high platforms
+    { x: 1280, y: 100, width: 85, height: 20, type: "cockpit" },
+    { x: 1450, y: 50, width: 75, height: 20, type: "wing" },
+
+    // Back down but still elevated
+    { x: 1600, y: 180, width: 80, height: 20, type: "engine" },
+    { x: 1750, y: 300, width: 70, height: 20, type: "hull" },
+
+    // Another climb sequence
+    { x: 1900, y: 250, width: 90, height: 20, type: "cockpit" },
+    { x: 2050, y: 150, width: 85, height: 20, type: "wing" },
+    { x: 2200, y: 80, width: 100, height: 20, type: "engine" },
+
+    // Final challenging descent and climb
+    { x: 2350, y: 220, width: 90, height: 20, type: "hull" },
+    { x: 2500, y: 120, width: 120, height: 20, type: "cockpit" },
+
+    // Final platform with wrench - elevated
+    { x: 2700, y: 200, width: 200, height: 20, type: "command" },
   ];
 
-  const handleXP = async () => {
-    console.log("Attempting to add XP");
-    try {
-      if (userXP === 200) {
-        const result = await addXPForTask(100);
-        console.log("XP added:", result);
-      }
-    } catch (error) {
-      console.error("Failed to add XP:", error);
+  // Wrench position (on the final platform)
+  const wrenchPos = { x: 2800, y: 150, width: 40, height: 40 };
+
+  // Platform colors based on debris type
+  //need to add graphic for each platform type
+
+  const getPlatformColor = (type) => {
+    switch (type) {
+      case "hull":
+        return { bg: "#4a5568", border: "#2d3748" };
+      case "wing":
+        return { bg: "#2b6cb0", border: "#2c5282" };
+      case "engine":
+        return { bg: "#e53e3e", border: "#c53030" };
+      case "cockpit":
+        return { bg: "#38a169", border: "#2f855a" };
+      case "command":
+        return { bg: "#d69e2e", border: "#b7791f" };
+      default:
+        return { bg: "#4a5568", border: "#2d3748" };
     }
   };
 
+  // Camera follows player horizontally
   useEffect(() => {
-    if (gameFinished && !xpAwarded) {
-      const awardXP = async () => {
-        await handleXP();
-        setXpAwarded(true);
-      };
-      awardXP();
-    }
-  }, [gameFinished, xpAwarded, handleXP]);
-
-  const platforms = [
-    { x: 0, y: 2080, width: 800, height: 15 },
-    { x: 300, y: 2000, width: 200, height: 15 },
-    { x: 100, y: 1920, width: 120, height: 15 },
-    { x: 350, y: 1840, width: 140, height: 15 },
-    { x: 250, y: 1740, width: 80, height: 15 },
-    { x: 500, y: 1640, width: 90, height: 15 },
-    { x: 350, y: 1540, width: 100, height: 15 },
-    { x: 450, y: 1420, width: 70, height: 15 },
-    { x: 300, y: 1320, width: 60, height: 15 },
-    { x: 200, y: 1220, width: 80, height: 15 },
-    { x: 100, y: 1100, width: 70, height: 15 },
-    { x: 300, y: 1050, width: 80, height: 15 },
-    { x: 500, y: 980, width: 80, height: 15 },
-    { x: 300, y: 860, width: 60, height: 15 },
-    { x: 400, y: 740, width: 70, height: 15 },
-    { x: 250, y: 620, width: 50, height: 15 },
-    { x: 450, y: 500, width: 60, height: 15 },
-    { x: 250, y: 380, width: 50, height: 15 },
-    { x: 350, y: 280, width: 40, height: 15 },
-    { x: 300, y: 180, width: 60, height: 15 },
-    { x: 200, y: 80, width: 50, height: 15 },
-    { x: 400, y: 40, width: 200, height: 15 }, // This is now the final platform
-  ];
-
-  // **NEW:** Get a reference to the very last platform to use as the win condition.
-  const finalPlatform = platforms[platforms.length - 1];
-
-  // --- Core Game Logic (with modifications) ---
-
-  useEffect(() => {
-    const targetCameraY = Math.max(
+    const targetCameraX = Math.max(
       0,
-      Math.min(MAP_HEIGHT - VIEWPORT_HEIGHT, playerPos.y - VIEWPORT_HEIGHT / 2)
+      Math.min(MAP_WIDTH - VIEWPORT_WIDTH, playerPos.x - VIEWPORT_WIDTH / 2)
     );
-    setCameraY(targetCameraY);
-  }, [playerPos.y]);
+    setCameraX(targetCameraX);
+  }, [playerPos.x]);
 
   const checkCollision = useCallback(
     (newX, newY) => {
@@ -120,9 +111,35 @@ function JumpingGame() {
       return null;
     },
     [platforms]
-  ); // Added platforms to dependency array
+  );
 
-  // **REMOVED:** The old checkFinish function is no longer needed.
+  // Check if player collected the wrench
+  const checkWrenchCollection = useCallback(
+    (playerX, playerY) => {
+      if (!wrenchCollected) {
+        const playerRect = {
+          x: playerX,
+          y: playerY,
+          width: PLAYER_SIZE,
+          height: PLAYER_SIZE,
+        };
+
+        if (
+          playerRect.x < wrenchPos.x + wrenchPos.width &&
+          playerRect.x + playerRect.width > wrenchPos.x &&
+          playerRect.y < wrenchPos.y + wrenchPos.height &&
+          playerRect.y + playerRect.height > wrenchPos.y
+        ) {
+          setWrenchCollected(true);
+          setGameFinished(true);
+          alert("🎉 Mission Complete! You've recovered the space wrench! 🔧");
+          return true;
+        }
+      }
+      return false;
+    },
+    [wrenchCollected]
+  );
 
   useEffect(() => {
     playerPosRef.current = playerPos;
@@ -137,14 +154,20 @@ function JumpingGame() {
   useEffect(() => {
     const gameLoop = setInterval(() => {
       if (gameFinished) return;
+
       const currentPos = playerPosRef.current;
       const currentVel = velocityRef.current;
       const currentGrounded = isGroundedRef.current;
       const keys = keysRef.current;
-      let newVelX = currentVel.x * 0.8;
+
+      let newVelX = currentVel.x * 0.85; // Air resistance
       let newVelY = currentVel.y + GRAVITY;
+
+      // Horizontal movement
       if (keys["a"] || keys["A"] || keys["ArrowLeft"]) newVelX = -MOVE_SPEED;
       if (keys["d"] || keys["D"] || keys["ArrowRight"]) newVelX = MOVE_SPEED;
+
+      // Jumping
       if (
         (keys[" "] ||
           keys["Spacebar"] ||
@@ -157,9 +180,13 @@ function JumpingGame() {
         setIsGrounded(false);
         isGroundedRef.current = false;
       }
+
       let newX = currentPos.x + newVelX;
       let newY = currentPos.y + newVelY;
-      newX = Math.max(0, Math.min(800 - PLAYER_SIZE, newX));
+
+      // Keep player within map bounds
+      newX = Math.max(0, Math.min(MAP_WIDTH - PLAYER_SIZE, newX));
+
       const collision = checkCollision(newX, newY);
       let onGround = false;
 
@@ -169,14 +196,6 @@ function JumpingGame() {
           newY = collision.y - PLAYER_SIZE;
           newVelY = 0;
           onGround = true;
-
-          // Check for final platform
-          if (
-            collision.y === finalPlatform.y &&
-            collision.x === finalPlatform.x
-          ) {
-            setGameFinished(true); // Only set game finished here
-          }
         } else if (
           currentVel.y < 0 &&
           currentPos.y >= collision.y + collision.height - 5
@@ -192,22 +211,24 @@ function JumpingGame() {
         }
       }
 
-      // Reset if player falls
-      if (newY > MAP_HEIGHT + 50) {
-        setPlayerPos({ x: 400, y: 2000 });
+      // Reset if player falls off the bottom
+      if (newY > VIEWPORT_HEIGHT + 100) {
+        setPlayerPos({ x: 50, y: 400 });
         setVelocity({ x: 0, y: 0 });
         setIsGrounded(false);
         return;
       }
 
-      // **REMOVED:** The old checkFinish() call is no longer here.
+      // Check wrench collection
+      checkWrenchCollection(newX, newY);
 
       setPlayerPos({ x: newX, y: newY });
       setVelocity({ x: newVelX, y: newVelY });
       setIsGrounded(onGround);
     }, 16);
+
     return () => clearInterval(gameLoop);
-  }, [gameFinished, checkCollision, finalPlatform]); // Added finalPlatform to dependency array
+  }, [gameFinished, checkCollision, checkWrenchCollection]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -218,9 +239,11 @@ function JumpingGame() {
     const handleKeyUp = (e) => {
       keysRef.current[e.key] = false;
     };
+
     window.focus();
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
@@ -228,214 +251,186 @@ function JumpingGame() {
   }, []);
 
   const resetGame = () => {
-    setPlayerPos({ x: 400, y: 2000 });
+    setPlayerPos({ x: 50, y: 400 });
     setVelocity({ x: 0, y: 0 });
     setGameFinished(false);
     setIsGrounded(false);
-    setXpAwarded(false); // Reset this too
+    setWrenchCollected(false);
     keysRef.current = {};
   };
 
-  // **UPDATED:** Progress calculation now based on reaching the final platform's height
+  // Progress calculation based on horizontal distance
   const progress = Math.max(
     0,
-    Math.min(100, ((2000 - playerPos.y) / (2000 - finalPlatform.y)) * 100)
+    Math.min(100, (playerPos.x / (MAP_WIDTH - 100)) * 100)
   );
 
   return (
-    <div className="flex flex-col items-center p-4 bg-yellow-900 min-h-screen font-mono z-30">
-      {/* Retro CRT-style Title */}
-      <div className="bg-yellow-400 p-2 border-4 border-yellow-600 mb-4">
-        <h1 className="text-3xl font-bold text-black mb-2 text-center">
-          ◆ TOWER QUEST ◆
+    <div className="flex flex-col items-center p-4 bg-gray-900 min-h-screen font-mono">
+      {/* Space-themed Title */}
+      <div className="bg-blue-600 p-3 border-4 border-blue-800 mb-4 rounded">
+        <h1 className="text-3xl font-bold text-white mb-2 text-center">
+          🚀 SPACE WRENCH RECOVERY 🔧
         </h1>
-        <div className="text-black text-center text-sm">
-          █ REACH THE TOP PLATFORM █
+        <div className="text-blue-100 text-center text-sm">
+          Navigate through spaceship debris to recover the lost wrench!
         </div>
       </div>
 
-      {/* Retro Controls Display */}
-      <div className="mb-4 text-yellow-200 text-center bg-black/30 p-3 border-2 border-yellow-400">
-        <p className="font-bold text-yellow-400">▶ CONTROLS:</p>
+      {/* Controls Display */}
+      <div className="mb-4 text-blue-200 text-center bg-black/50 p-3 border-2 border-blue-400 rounded">
+        <p className="font-bold text-blue-300">🎮 CONTROLS:</p>
         <p>A/D (or Arrow Keys) to move • SPACEBAR/W/UP to jump</p>
-        <p className="text-yellow-300">
-          █ PROGRESS: {Math.round(progress)}% █ HEIGHT:{" "}
-          {Math.max(0, Math.round(2000 - playerPos.y))}m
+        <p className="text-blue-300">
+          🌟 PROGRESS: {Math.round(progress)}% • DISTANCE:{" "}
+          {Math.round(playerPos.x)}m
         </p>
       </div>
 
-      {/* Retro Reset Button */}
+      {/* Reset Button */}
       <button
         onClick={resetGame}
-        className="mb-4 px-6 py-2 bg-yellow-400 hover:bg-yellow-500 border-4 border-yellow-600 text-black font-bold font-mono text-sm transition-all duration-200 transform hover:scale-105 relative"
+        className="mb-4 px-6 py-2 bg-red-600 hover:bg-red-700 border-2 border-red-800 text-white font-bold rounded transition-all duration-200 transform hover:scale-105"
       >
-        <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-yellow-800"></div>
-        <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-yellow-800"></div>
-        <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-yellow-800"></div>
-        <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-yellow-800"></div>
-        ◄ RESET GAME ►
+        🔄 RESTART MISSION
       </button>
 
       {/* Game Canvas */}
       <div
-        className="relative border-8 border-yellow-600 bg-black overflow-hidden focus:outline-none shadow-2xl"
+        className="relative border-4 border-gray-600 bg-gradient-to-b from-indigo-900 via-purple-900 to-black overflow-hidden focus:outline-none shadow-2xl rounded"
         style={{
-          width: "800px",
-          height: "600px",
-          boxShadow:
-            "inset 0 0 20px rgba(251, 191, 36, 0.3), 0 0 30px rgba(251, 191, 36, 0.2)",
+          width: "70vw",
+          height: "80vh",
         }}
         tabIndex={0}
       >
-        <div className="absolute inset-0 pointer-events-none opacity-10 z-10">
-          <div
-            className="h-full w-full"
-            style={{
-              background:
-                "repeating-linear-gradient(0deg, transparent, transparent 2px, #fbbf24 2px, #fbbf24 4px)",
-            }}
-          ></div>
+        {/* Stars background - static positions */}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 50 }).map((_, i) => {
+            // Create deterministic star positions based on index
+            const x = (i * 137.508) % 100; // Golden angle for distribution
+            const y = (i * 73.205) % 100;
+            const size = i % 3 === 0 ? 2 : 1; // Some bigger stars
+            return (
+              <div
+                key={i}
+                className="absolute bg-white rounded-full"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  opacity: 0.3 + (i % 7) * 0.1, // Varying brightness
+                }}
+              />
+            );
+          })}
         </div>
 
         {/* Game world container */}
         <div
-          className="absolute w-full"
+          className="absolute w-full h-full"
           style={{
-            height: `${MAP_HEIGHT}px`,
-            transform: `translateY(-${cameraY}px)`,
+            transform: `translateX(-${cameraX}px)`,
             transition: "transform 0.1s ease-out",
-            background:
-              "linear-gradient(to bottom, #1a1a2e 0%, #16213e 30%, #0f3460 100%)",
           }}
         >
-          <div className="absolute inset-0 opacity-5">
-            <div className="grid grid-cols-16 h-full">
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="border-r border-yellow-400"></div>
-              ))}
-            </div>
-            <div className="absolute inset-0 grid grid-rows-32">
-              {Array.from({ length: 32 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="border-b border-yellow-400 w-full"
-                ></div>
-              ))}
-            </div>
-          </div>
+          {/* Platforms (spaceship debris) */}
+          {platforms.map((platform, index) => {
+            const colors = getPlatformColor(platform.type);
+            return (
+              <div
+                key={index}
+                className="absolute border-2 shadow-lg rounded"
+                style={{
+                  left: `${platform.x}px`,
+                  top: `${platform.y}px`,
+                  width: `${platform.width}px`,
+                  height: `${platform.height}px`,
+                  backgroundColor: colors.bg,
+                  borderColor: colors.border,
+                  boxShadow: `0 0 10px ${colors.border}`,
+                }}
+              >
+                {/* Debris texture */}
+                <div className="absolute inset-0 opacity-30 rounded">
+                  <div
+                    className="h-full w-full rounded"
+                    style={{
+                      background: `repeating-linear-gradient(45deg, transparent, transparent 4px, ${colors.border} 4px, ${colors.border} 6px)`,
+                    }}
+                  />
+                </div>
+                {/* Platform type indicator */}
+                <div className="absolute inset-0 flex items-center justify-center text-xs text-white font-bold opacity-50">
+                  {platform.type.toUpperCase()}
+                </div>
+              </div>
+            );
+          })}
 
-          {platforms.map((platform, index) => (
+          {/* Wrench (goal item) */}
+          {!wrenchCollected && (
             <div
-              key={index}
-              className="absolute border-2 shadow-lg"
+              className="absolute flex items-center justify-center animate-bounce"
               style={{
-                left: `${platform.x}px`,
-                top: `${platform.y}px`,
-                width: `${platform.width}px`,
-                height: `${platform.height}px`,
-                backgroundColor: "#fbbf24",
-                borderColor: "#d97706",
-                boxShadow: "0 0 10px rgba(251, 191, 36, 0.3)",
+                left: `${wrenchPos.x}px`,
+                top: `${wrenchPos.y}px`,
+                width: `${wrenchPos.width}px`,
+                height: `${wrenchPos.height}px`,
               }}
             >
-              <div className="absolute inset-0 opacity-30">
-                <div
-                  className="h-full w-full"
-                  style={{
-                    background:
-                      "repeating-linear-gradient(90deg, transparent, transparent 8px, #d97706 8px, #d97706 10px)",
-                  }}
-                ></div>
-              </div>
+              <div className="text-4xl animate-pulse">🔧</div>
+              <div className="absolute inset-0 bg-yellow-400 opacity-20 rounded-full animate-ping" />
             </div>
-          ))}
+          )}
 
-          {/* **REMOVED:** The old finish line div is gone. */}
-
+          {/* Player (astronaut) */}
           <div
-            className="absolute border-2 border-yellow-400 flex items-center justify-center z-50"
+            className="absolute border-2 border-blue-300 flex items-center justify-center rounded-full shadow-lg"
             style={{
               left: `${playerPos.x}px`,
               top: `${playerPos.y}px`,
               width: `${PLAYER_SIZE}px`,
               height: `${PLAYER_SIZE}px`,
-              backgroundColor: "#fbbf24",
-              boxShadow:
-                "0 0 15px rgba(251, 191, 36, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.3)",
+              backgroundColor: "#f7fafc",
+              boxShadow: "0 0 15px rgba(59, 130, 246, 0.8)",
             }}
           >
-            <div className="text-black text-lg font-bold z-30">●</div>
-            <div className="absolute inset-0 bg-yellow-300 opacity-40 animate-pulse rounded"></div>
-          </div>
-
-          <div className="absolute top-200 left-100 text-2xl text-yellow-400 opacity-20 animate-pulse font-mono">
-            ◆
-          </div>
-          <div className="absolute top-1000 left-200 text-2xl text-yellow-400 opacity-25 animate-pulse font-mono">
-            ◇
+            <div className="text-2xl">👨‍🚀</div>
           </div>
         </div>
 
-        {/* Retro HUD */}
-        <div className="absolute top-4 left-4 right-4 bg-black/70 border-2 border-yellow-400 rounded p-2 z-20">
-          <div className="flex justify-between items-center text-yellow-400 text-sm font-mono">
-            <span>█ PROGRESS █</span>
+        {/* HUD */}
+        <div className="absolute top-4 left-4 right-4 bg-black/70 border-2 border-blue-400 rounded p-2">
+          <div className="flex justify-between items-center text-blue-300 text-sm font-mono">
+            <span>🚀 MISSION PROGRESS</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="bg-yellow-900 border border-yellow-600 rounded-full h-3 overflow-hidden mt-1">
+          <div className="bg-gray-800 border border-blue-600 rounded-full h-3 overflow-hidden mt-1">
             <div
-              className="h-full bg-gradient-to-r from-yellow-400 to-yellow-300 transition-all duration-300 relative"
+              className="h-full bg-gradient-to-r from-blue-500 to-green-400 transition-all duration-300"
               style={{ width: `${progress}%` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-200 to-transparent animate-pulse"></div>
-            </div>
+            />
           </div>
         </div>
 
-        <div className="absolute top-2 left-2 text-yellow-400 text-xs font-mono z-20">
-          ◤
-        </div>
-        <div className="absolute top-2 right-2 text-yellow-400 text-xs font-mono z-20">
-          ◥
-        </div>
-        <div className="absolute bottom-2 left-2 text-yellow-400 text-xs font-mono z-20">
-          ◣
-        </div>
-        <div className="absolute bottom-2 right-2 text-yellow-400 text-xs font-mono z-20">
-          ◢
+        {/* Distance indicator */}
+        <div className="absolute bottom-4 left-4 bg-black/70 border border-blue-400 rounded p-2 text-blue-300 text-sm">
+          📍 Distance: {Math.round(playerPos.x)}m / {MAP_WIDTH}m
         </div>
       </div>
 
       {/* Victory Message */}
-      {gameFinished && (
-        <>
-          {!peterHide && (
-            <div className="absolute bottom-0 left-0 w-full h-full z-50">
-              <Peter
-                slides={peterSlides}
-                imageSrc="/peterHi.png"
-                className="bg-white/20 absolute  w-full h-full z-50"
-              />
-              <button
-                onClick={() => setPeterHide(true)}
-                className="absolute top-1/4 right-1/6 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
-              >
-                X
-              </button>
-            </div>
-          )}
-          <div className="mt-4 p-6 bg-yellow-400 border-4 border-yellow-600 text-black rounded font-bold text-center relative">
-            <div className="absolute -top-1 -left-1 w-4 h-4 border-t-4 border-l-4 border-yellow-800"></div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 border-t-4 border-r-4 border-yellow-800"></div>
-            <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-4 border-l-4 border-yellow-800"></div>
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-4 border-r-4 border-yellow-800"></div>
-            <div className="text-2xl mb-2">🎉 █ TOWER CONQUERED █ 🎉</div>
-            <div className="text-lg">You have reached the top!</div>
-          </div>
-        </>
+      {gameFinished && wrenchCollected && (
+        <div className="mt-4 p-6 bg-green-600 border-4 border-green-800 text-white rounded font-bold text-center shadow-2xl">
+          <div className="text-3xl mb-2">🎉 MISSION ACCOMPLISHED! 🎉</div>
+          <div className="text-xl mb-2">🔧 Space Wrench Recovered! 🔧</div>
+          <div className="text-lg">The space station can now be repaired!</div>
+        </div>
       )}
     </div>
   );
 }
 
-export default JumpingGame;
+export default SpaceJumpingGame;
