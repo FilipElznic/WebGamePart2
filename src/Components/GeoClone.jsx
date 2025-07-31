@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 function SpaceGeometryDash() {
-  const [playerPos, setPlayerPos] = useState({ x: -30, y: 350 });
+  const [playerPos, setPlayerPos] = useState({ x: 100, y: 300 });
   const [velocity, setVelocity] = useState({ x: 6, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
   const [gameRunning, setGameRunning] = useState(false);
@@ -11,7 +11,7 @@ function SpaceGeometryDash() {
   const [attempts, setAttempts] = useState(0);
 
   const keysRef = useRef({});
-  const playerPosRef = useRef({ x: 0, y: 350 });
+  const playerPosRef = useRef({ x: 100, y: 300 });
   const velocityRef = useRef({ x: 6, y: 0 });
   const isGroundedRef = useRef(false);
   const gameRunningRef = useRef(false);
@@ -25,47 +25,77 @@ function SpaceGeometryDash() {
   const GROUND_HEIGHT = 400;
 
   // Level geometry - platforms, spikes, and obstacles
-  const levelGeometry = [
-    // Starting area
-    { x: 0, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
+  const levelGeometry = useMemo(
+    () => [
+      // Starting area
+      { x: 0, y: GROUND_HEIGHT, width: 1300, height: 50, type: "ground" },
 
-    // First spike section
-    { x: 300, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
+      // First spike section
+      { x: 1300, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
+      { x: 1320, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 1360, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
-    // Platform section
-    { x: 500, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
-    { x: 650, y: 350, width: 100, height: 20, type: "platform" },
-    { x: 800, y: 300, width: 100, height: 20, type: "platform" },
-    { x: 950, y: 250, width: 100, height: 20, type: "platform" },
+      // Platform section
+      { x: 1500, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
+      { x: 1650, y: 350, width: 100, height: 20, type: "platform" },
+      { x: 1800, y: 300, width: 100, height: 20, type: "platform" },
+      { x: 1950, y: 350, width: 100, height: 20, type: "platform" },
 
-    // More spikes
-    { x: 1100, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
-    { x: 1120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-    { x: 1160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-    { x: 1220, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      // More spikes
+      { x: 2100, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
+      { x: 2120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
-    // Ceiling spikes section
-    { x: 1400, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
+      { x: 2280, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2340, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
-    // Complex platform jumps
-    { x: 1600, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
-    { x: 1750, y: 330, width: 80, height: 20, type: "platform" },
-    { x: 1750, y: 320, width: 10, height: 10, type: "spike" },
-    { x: 1900, y: 280, width: 80, height: 20, type: "platform" },
-    { x: 1900, y: 270, width: 10, height: 10, type: "spike" },
-    { x: 2050, y: 300, width: 80, height: 20, type: "platform" },
+      // Ceiling spikes section
+      { x: 2400, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
 
-    // Final section
-    { x: 2200, y: GROUND_HEIGHT, width: 400, height: 50, type: "ground" },
-    { x: 2220, y: GROUND_HEIGHT - 20, width: 20, height: 20, type: "spike" },
-    { x: 2280, y: GROUND_HEIGHT - 20, width: 20, height: 20, type: "spike" },
+      // Complex platform jumps
+      { x: 2600, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
+      { x: 2750, y: 330, width: 80, height: 20, type: "platform" },
+      { x: 2820, y: 320, width: 10, height: 10, type: "spike" },
+      { x: 2900, y: 270, width: 80, height: 20, type: "platform" },
+      { x: 2970, y: 260, width: 10, height: 10, type: "spike" },
+      { x: 3100, y: 300, width: 80, height: 20, type: "platform" },
 
-    { x: 2400, y: GROUND_HEIGHT - 10, width: 80, height: 10, type: "spike" },
+      // Final section
+      { x: 3200, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
+      { x: 4000, y: 350, width: 80, height: 20, type: "platform" },
+      { x: 4000, y: 340, width: 10, height: 10, type: "spike" },
+      { x: 4200, y: 350, width: 80, height: 20, type: "platform" },
+      { x: 4400, y: 350, width: 80, height: 20, type: "platform" },
+      {
+        x: 4500,
+        y: GROUND_HEIGHT - 80,
+        width: 2000,
+        height: 250,
+        type: "ground",
+      },
 
-    // Victory platform
-    { x: 2600, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
-    { x: 5000, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
-  ];
+      { x: 4800, y: 310, width: 100, height: 10, type: "spike" },
+      { x: 5400, y: 310, width: 100, height: 10, type: "spike" },
+
+      {
+        x: 6500,
+        y: GROUND_HEIGHT - 680,
+        width: 2000,
+        height: 450,
+        type: "ground",
+      },
+      {
+        x: 6500,
+        y: GROUND_HEIGHT - 80,
+        width: 2000,
+        height: 450,
+        type: "ground",
+      },
+      // Victory platform
+      { x: 2600, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
+    ],
+    []
+  );
 
   // Camera follows player
   useEffect(() => {
@@ -430,7 +460,7 @@ function SpaceGeometryDash() {
 
           {/* Player cube */}
           <div
-            className="absolute border-2 border-cyan-300 flex items-center justify-center shadow-lg transition-transform duration-100"
+            className="absolute rounded-full border-2 border-cyan-300 flex items-center justify-center shadow-lg transition-transform duration-100"
             style={{
               left: `${playerPos.x}px`,
               top: `${playerPos.y}px`,
@@ -452,17 +482,17 @@ function SpaceGeometryDash() {
           <div className="w-full bg-gray-700 rounded-full h-2">
             <div
               className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(100, (distance / 2700) * 100)}%` }}
+              style={{ width: `${Math.min(100, (distance / 10000) * 100)}%` }}
             />
           </div>
           <div className="text-blue-300 text-sm text-center mt-1">
-            Progress: {Math.round((distance / 2700) * 100)}%
+            Progress: {Math.round((distance / 10000) * 100)}%
           </div>
         </div>
       </div>
 
       {/* Victory message */}
-      {distance > 2700 && (
+      {distance > 10000 && (
         <div className="mt-4 p-6 bg-green-600 border-4 border-green-800 text-white rounded font-bold text-center shadow-2xl">
           <div className="text-3xl mb-2">🎉 LEVEL COMPLETED! 🎉</div>
           <div className="text-xl">

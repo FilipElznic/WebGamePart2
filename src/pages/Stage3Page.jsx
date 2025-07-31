@@ -48,7 +48,7 @@ function Stage3Page() {
           <img
             src={AIStraight}
             alt="Peter's Idea"
-            className="absolute max-w-2xl bottom-0 z-40"
+            className="absolute   max-w-2xl bottom-0 z-40"
           />
 
           {/* Speech bubble */}
