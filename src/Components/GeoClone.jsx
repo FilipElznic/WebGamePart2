@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useUserData } from "./UserDataProvider";
+import Peter from "./Peter.jsx";
 
 function SpaceGeometryDash() {
   const [gameState, setGameState] = useState({
@@ -7,6 +9,42 @@ function SpaceGeometryDash() {
     distance: 0,
     attempts: 0,
   });
+
+  const [hidePeter2, setHidePeter2] = useState(false);
+
+  // Get user data first, before using it in other functions
+  const { addXPForTask, userXP } = useUserData();
+
+  const peterSlides = [
+    {
+      title: "Awesome job!",
+      description:
+        "By completing this game, you have collected eletrics wires! We will need them for the final stage of the game. You have also earned xp. Stage 4 got unlocked. Continue there.",
+    },
+  ];
+
+  const handleXP = useCallback(async () => {
+    try {
+      if (userXP === 300) {
+        const result = await addXPForTask(100); // Add 100 XP
+        console.log("here");
+        if (result.success) {
+          console.log("XP added successfully:", result.newXP);
+        } else {
+          console.error("Failed to add XP:", result.error);
+          if (result.error.includes("already has XP")) {
+            console.log("Chest opened! (XP already earned)");
+          } else {
+            console.log("Chest opened! (XP update failed)");
+          }
+        }
+      } else if (userXP == 400) {
+        console.log("Game finished! (XP already earned)");
+      }
+    } catch (error) {
+      console.error("Failed to copy code:", error);
+    }
+  }, [userXP, addXPForTask]);
 
   // Single ref for all game state that changes frequently
   const gameRef = useRef({
@@ -27,17 +65,17 @@ function SpaceGeometryDash() {
   const BASE_SPEED = 6;
   const PLAYER_SIZE = 30;
   const GROUND_HEIGHT = 400;
-  const UPDATE_INTERVAL = 16; // ~60fps
+  const UPDATE_INTERVAL = 20; // ~60fps
 
   // Simplified level geometry with spatial indexing
   const levelGeometry = useMemo(() => {
     const obstacles = [
       // Starting area
-      { x: 0, y: GROUND_HEIGHT, width: 1600, height: 50, type: "ground" },
+      { x: 0, y: GROUND_HEIGHT, width: 1400, height: 50, type: "ground" },
 
       // First spike section
-      { x: 1400, y: GROUND_HEIGHT, width: 500, height: 50, type: "ground" },
-      { x: 1300, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 1400, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
+
       { x: 1360, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
       // Platform section with challenges
@@ -49,141 +87,66 @@ function SpaceGeometryDash() {
 
       // More ground spikes
       { x: 2100, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
+
       { x: 2120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 2200, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2100, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
       { x: 2280, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 2340, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
       // Ceiling section with top and bottom spikes
       { x: 2400, y: GROUND_HEIGHT, width: 600, height: 50, type: "ground" },
       { x: 2400, y: 200, width: 600, height: 50, type: "ground" }, // Ceiling - moved down
-      { x: 2450, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+
       { x: 2520, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2590, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2450, y: 250, width: 20, height: 30, type: "spike" }, // Ceiling spikes - moved down
-      { x: 2520, y: 250, width: 20, height: 30, type: "spike" },
-      { x: 2590, y: 250, width: 20, height: 30, type: "spike" },
-      { x: 2660, y: 250, width: 20, height: 30, type: "spike" },
-      { x: 2730, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2500, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2600, y: GROUND_HEIGHT, width: 400, height: 50, type: "ground" },
       { x: 2800, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2830, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
 
       // Complex platform jumps with alternating spikes
-      { x: 3000, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
-      { x: 3150, y: 330, width: 80, height: 20, type: "platform" },
-      { x: 3180, y: 320, width: 15, height: 10, type: "spike" },
-      { x: 3280, y: 280, width: 80, height: 20, type: "platform" },
-      { x: 3310, y: 270, width: 15, height: 10, type: "spike" },
-      { x: 3410, y: 320, width: 80, height: 20, type: "platform" },
-      { x: 3440, y: 310, width: 15, height: 10, type: "spike" },
+
+      { x: 3150, y: 350, width: 80, height: 20, type: "platform" },
+      { x: 3200, y: 340, width: 15, height: 10, type: "spike" },
+      { x: 3280, y: 330, width: 80, height: 20, type: "platform" },
+
+      { x: 3380, y: 340, width: 80, height: 20, type: "platform" },
+
       { x: 3540, y: 300, width: 80, height: 20, type: "platform" },
 
       // Narrow platforms section
       { x: 3700, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
       { x: 3850, y: 360, width: 40, height: 15, type: "platform" },
-      { x: 3950, y: 340, width: 40, height: 15, type: "platform" },
-      { x: 4050, y: 320, width: 40, height: 15, type: "platform" },
+      { x: 3950, y: 360, width: 40, height: 15, type: "platform" },
+      { x: 4080, y: 320, width: 40, height: 15, type: "platform" },
       { x: 4150, y: 350, width: 40, height: 15, type: "platform" },
       { x: 4250, y: 330, width: 40, height: 15, type: "platform" },
 
       // Dense spike forest
-      { x: 4400, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
+      { x: 4400, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
       { x: 4420, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4460, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4500, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4540, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4400, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
       { x: 4580, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 4620, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4660, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4700, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4620, y: GROUND_HEIGHT, width: 400, height: 50, type: "ground" },
       { x: 4740, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 4780, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4820, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4860, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4900, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4940, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 4980, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 5020, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 5060, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 5100, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 5140, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4720, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
 
       // Elevated platform with escape route
       {
-        x: 5200,
+        x: 5000,
         y: GROUND_HEIGHT - 80,
         width: 600,
         height: 20,
         type: "platform",
       },
-      { x: 5250, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5300, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5350, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5400, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5450, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5500, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5550, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5600, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5650, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
-      { x: 5700, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
 
       // Multi-level platforms section
-      { x: 5850, y: GROUND_HEIGHT, width: 150, height: 50, type: "ground" },
-      { x: 6050, y: 370, width: 60, height: 15, type: "platform" },
-      { x: 6150, y: 340, width: 60, height: 15, type: "platform" },
-      { x: 6250, y: 310, width: 60, height: 15, type: "platform" },
-      { x: 6350, y: 280, width: 60, height: 15, type: "platform" },
-      { x: 6450, y: 250, width: 60, height: 15, type: "platform" },
-      { x: 6550, y: 220, width: 60, height: 15, type: "platform" },
-      { x: 6650, y: 190, width: 60, height: 15, type: "platform" },
-
-      // Staircase with spikes
-      { x: 6750, y: 160, width: 80, height: 15, type: "platform" },
-      { x: 6780, y: 150, width: 15, height: 10, type: "spike" },
-      { x: 6850, y: 130, width: 80, height: 15, type: "platform" },
-      { x: 6880, y: 120, width: 15, height: 10, type: "spike" },
-      { x: 6950, y: 100, width: 80, height: 15, type: "platform" },
-      { x: 6980, y: 90, width: 15, height: 10, type: "spike" },
-
-      // Maze-like section
-      { x: 7100, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
-      { x: 7100, y: 200, width: 800, height: 50, type: "ground" }, // Upper ceiling
-      { x: 7150, y: 350, width: 80, height: 50, type: "platform" },
-      { x: 7180, y: 340, width: 15, height: 10, type: "spike" },
-      { x: 7280, y: 320, width: 80, height: 50, type: "platform" },
-      { x: 7310, y: 310, width: 15, height: 10, type: "spike" },
-      { x: 7410, y: 290, width: 80, height: 50, type: "platform" },
-      { x: 7440, y: 280, width: 15, height: 10, type: "spike" },
-      { x: 7540, y: 270, width: 80, height: 50, type: "platform" },
-      { x: 7570, y: 260, width: 15, height: 10, type: "spike" },
-      { x: 7670, y: 250, width: 80, height: 50, type: "platform" },
-      { x: 7700, y: 240, width: 15, height: 10, type: "spike" },
+      { x: 5750, y: GROUND_HEIGHT, width: 2050, height: 50, type: "ground" },
 
       // Final gauntlet
-      { x: 7900, y: GROUND_HEIGHT, width: 1000, height: 50, type: "ground" },
-      { x: 7920, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 7960, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8000, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8040, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8080, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8200, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8240, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8280, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8320, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8360, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8400, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8440, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8480, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8520, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8560, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8600, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8640, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8680, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8720, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8760, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-      { x: 8800, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
       // Victory platform
       {
@@ -351,7 +314,6 @@ function SpaceGeometryDash() {
 
     if (collision) {
       if (collision.type === "spike") {
-        // Game over
         game.running = false;
         setGameState((prev) => ({ ...prev, running: false, over: true }));
         return;
@@ -507,6 +469,13 @@ function SpaceGeometryDash() {
     }));
   };
 
+  // Handle XP when game ends with victory
+  useEffect(() => {
+    if (gameState.distance > 6000 && !gameState.running && !gameState.over) {
+      handleXP();
+    }
+  }, [gameState.distance, gameState.running, gameState.over, handleXP]);
+
   // Canvas resize effect
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -540,7 +509,6 @@ function SpaceGeometryDash() {
       <div className="mb-4 flex gap-6 text-blue-200 bg-black/50 p-3 border-2 border-blue-400 rounded">
         <div>📊 Distance: {Math.round(gameState.distance)}m</div>
         <div>🎯 Attempts: {gameState.attempts}</div>
-        <div>💨 Speed: {BASE_SPEED}m/s</div>
       </div>
 
       {/* Instructions */}
@@ -606,18 +574,23 @@ function SpaceGeometryDash() {
 
       {/* Victory message */}
       {gameState.distance > 6000 && !gameState.running && (
-        <div className="mt-4 p-6 bg-green-600 border-4 border-green-800 text-white rounded font-bold text-center shadow-2xl">
-          <div className="text-3xl mb-2">🎉 LEVEL COMPLETED! 🎉</div>
-          <div className="text-xl">
-            You navigated through the entire debris field!
-          </div>
-          <button
-            onClick={resetGame}
-            className="mt-2 px-4 py-2 bg-green-700 hover:bg-green-800 text-white font-bold rounded"
-          >
-            🎮 Play Again
-          </button>
-        </div>
+        <>
+          {!hidePeter2 && (
+            <div className="">
+              <Peter
+                slides={peterSlides}
+                imageSrc="/AIHappy.png"
+                className="absolute top-50 right-0"
+              />
+              <button
+                onClick={() => setHidePeter2(true)}
+                className="absolute top-1/2 right-1/6 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
+              >
+                X
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
