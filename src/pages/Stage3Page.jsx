@@ -12,7 +12,7 @@ function Stage3Page() {
   const [showDialogue, setShowDialogue] = useState(true);
 
   const fullText =
-    "The game was kindy easy, but now You need to do the 3. stage, which is more serious. On top of this level is key that you need for the end. To get into the 4th stage, Try your luck and see what you two got!";
+    "Now in this challenge, we need to get the wires for the engine. They will be used to power the system properly!";
 
   useEffect(() => {
     let currentIndex = 0;
