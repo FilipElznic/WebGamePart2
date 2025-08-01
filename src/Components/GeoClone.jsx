@@ -34,88 +34,165 @@ function SpaceGeometryDash() {
     const obstacles = [
       // Starting area
       { x: 0, y: GROUND_HEIGHT, width: 1600, height: 50, type: "ground" },
+
       // First spike section
+      { x: 1400, y: GROUND_HEIGHT, width: 500, height: 50, type: "ground" },
+      { x: 1300, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 1360, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
-      // Platform section
-
+      // Platform section with challenges
       { x: 1650, y: 350, width: 100, height: 20, type: "platform" },
+      { x: 1720, y: 340, width: 15, height: 10, type: "spike" },
       { x: 1800, y: 300, width: 100, height: 20, type: "platform" },
+      { x: 1870, y: 290, width: 15, height: 10, type: "spike" },
       { x: 1950, y: 350, width: 100, height: 20, type: "platform" },
 
-      // More spikes
+      // More ground spikes
       { x: 2100, y: GROUND_HEIGHT, width: 300, height: 50, type: "ground" },
       { x: 2120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
-
+      { x: 2200, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2280, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
       { x: 2340, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
-      // Ceiling spikes section
-      { x: 2400, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
+      // Ceiling section with top and bottom spikes
+      { x: 2400, y: GROUND_HEIGHT, width: 600, height: 50, type: "ground" },
+      { x: 2400, y: 200, width: 600, height: 50, type: "ground" }, // Ceiling - moved down
+      { x: 2450, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2520, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2590, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 2450, y: 250, width: 20, height: 30, type: "spike" }, // Ceiling spikes - moved down
+      { x: 2520, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2590, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2660, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2730, y: 250, width: 20, height: 30, type: "spike" },
+      { x: 2800, y: 250, width: 20, height: 30, type: "spike" },
 
-      // Complex platform jumps
-      { x: 2600, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
-      { x: 2750, y: 330, width: 80, height: 20, type: "platform" },
-      { x: 2820, y: 320, width: 10, height: 10, type: "spike" },
-      { x: 2900, y: 270, width: 80, height: 20, type: "platform" },
-      { x: 2970, y: 260, width: 10, height: 10, type: "spike" },
-      { x: 3100, y: 300, width: 80, height: 20, type: "platform" },
+      // Complex platform jumps with alternating spikes
+      { x: 3000, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
+      { x: 3150, y: 330, width: 80, height: 20, type: "platform" },
+      { x: 3180, y: 320, width: 15, height: 10, type: "spike" },
+      { x: 3280, y: 280, width: 80, height: 20, type: "platform" },
+      { x: 3310, y: 270, width: 15, height: 10, type: "spike" },
+      { x: 3410, y: 320, width: 80, height: 20, type: "platform" },
+      { x: 3440, y: 310, width: 15, height: 10, type: "spike" },
+      { x: 3540, y: 300, width: 80, height: 20, type: "platform" },
 
-      // Final section
-      { x: 3200, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
-      { x: 4000, y: 350, width: 80, height: 20, type: "platform" },
-      { x: 4000, y: 340, width: 10, height: 10, type: "spike" },
-      { x: 4200, y: 350, width: 80, height: 20, type: "platform" },
-      { x: 4400, y: 350, width: 80, height: 20, type: "platform" },
-      {
-        x: 4500,
-        y: GROUND_HEIGHT - 80,
-        width: 2000,
-        height: 250,
-        type: "ground",
-      },
+      // Narrow platforms section
+      { x: 3700, y: GROUND_HEIGHT, width: 100, height: 50, type: "ground" },
+      { x: 3850, y: 360, width: 40, height: 15, type: "platform" },
+      { x: 3950, y: 340, width: 40, height: 15, type: "platform" },
+      { x: 4050, y: 320, width: 40, height: 15, type: "platform" },
+      { x: 4150, y: 350, width: 40, height: 15, type: "platform" },
+      { x: 4250, y: 330, width: 40, height: 15, type: "platform" },
 
-      { x: 4800, y: 310, width: 100, height: 10, type: "spike" },
-      { x: 5400, y: 310, width: 100, height: 10, type: "spike" },
-      {
-        x: 4800,
-        y: GROUND_HEIGHT - 80,
-        width: 500,
-        height: 250,
-        type: "ground",
-      },
-      {
-        x: 5400,
-        y: GROUND_HEIGHT - 80,
-        width: 800,
-        height: 250,
-        type: "ground",
-      },
+      // Dense spike forest
+      { x: 4400, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
+      { x: 4420, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4460, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4500, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4540, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4580, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4620, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4660, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4700, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4740, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4780, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4820, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4860, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4900, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4940, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 4980, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 5020, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 5060, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 5100, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 5140, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
 
+      // Elevated platform with escape route
       {
-        x: 6500,
-        y: GROUND_HEIGHT - 640,
-        width: 2000,
-        height: 450,
-        type: "ground",
-      },
-      {
-        x: 6500,
+        x: 5200,
         y: GROUND_HEIGHT - 80,
-        width: 2000,
-        height: 450,
-        type: "ground",
+        width: 600,
+        height: 20,
+        type: "platform",
       },
-      { x: 6600, y: 310, width: 100, height: 10, type: "spike" },
-      { x: 6900, y: 210, width: 200, height: 10, type: "spike" },
-      { x: 7200, y: 310, width: 70, height: 10, type: "spike" },
-      { x: 7400, y: 210, width: 200, height: 10, type: "spike" },
-      { x: 7670, y: 310, width: 70, height: 10, type: "spike" },
-      { x: 7850, y: 210, width: 200, height: 10, type: "spike" },
+      { x: 5250, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5300, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5350, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5400, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5450, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5500, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5550, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5600, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5650, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+      { x: 5700, y: GROUND_HEIGHT - 110, width: 15, height: 30, type: "spike" },
+
+      // Multi-level platforms section
+      { x: 5850, y: GROUND_HEIGHT, width: 150, height: 50, type: "ground" },
+      { x: 6050, y: 370, width: 60, height: 15, type: "platform" },
+      { x: 6150, y: 340, width: 60, height: 15, type: "platform" },
+      { x: 6250, y: 310, width: 60, height: 15, type: "platform" },
+      { x: 6350, y: 280, width: 60, height: 15, type: "platform" },
+      { x: 6450, y: 250, width: 60, height: 15, type: "platform" },
+      { x: 6550, y: 220, width: 60, height: 15, type: "platform" },
+      { x: 6650, y: 190, width: 60, height: 15, type: "platform" },
+
+      // Staircase with spikes
+      { x: 6750, y: 160, width: 80, height: 15, type: "platform" },
+      { x: 6780, y: 150, width: 15, height: 10, type: "spike" },
+      { x: 6850, y: 130, width: 80, height: 15, type: "platform" },
+      { x: 6880, y: 120, width: 15, height: 10, type: "spike" },
+      { x: 6950, y: 100, width: 80, height: 15, type: "platform" },
+      { x: 6980, y: 90, width: 15, height: 10, type: "spike" },
+
+      // Maze-like section
+      { x: 7100, y: GROUND_HEIGHT, width: 800, height: 50, type: "ground" },
+      { x: 7100, y: 200, width: 800, height: 50, type: "ground" }, // Upper ceiling
+      { x: 7150, y: 350, width: 80, height: 50, type: "platform" },
+      { x: 7180, y: 340, width: 15, height: 10, type: "spike" },
+      { x: 7280, y: 320, width: 80, height: 50, type: "platform" },
+      { x: 7310, y: 310, width: 15, height: 10, type: "spike" },
+      { x: 7410, y: 290, width: 80, height: 50, type: "platform" },
+      { x: 7440, y: 280, width: 15, height: 10, type: "spike" },
+      { x: 7540, y: 270, width: 80, height: 50, type: "platform" },
+      { x: 7570, y: 260, width: 15, height: 10, type: "spike" },
+      { x: 7670, y: 250, width: 80, height: 50, type: "platform" },
+      { x: 7700, y: 240, width: 15, height: 10, type: "spike" },
+
+      // Final gauntlet
+      { x: 7900, y: GROUND_HEIGHT, width: 1000, height: 50, type: "ground" },
+      { x: 7920, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 7960, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8000, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8040, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8080, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8120, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8160, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8200, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8240, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8280, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8320, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8360, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8400, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8440, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8480, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8520, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8560, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8600, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8640, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8680, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8720, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8760, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+      { x: 8800, y: GROUND_HEIGHT - 30, width: 20, height: 30, type: "spike" },
+
       // Victory platform
-      { x: 2600, y: GROUND_HEIGHT, width: 200, height: 50, type: "ground" },
-
-      // Victory platform
+      {
+        x: 8900,
+        y: GROUND_HEIGHT - 80,
+        width: 200,
+        height: 50,
+        type: "ground",
+      },
     ];
 
     // Sort by x position for efficient collision detection
@@ -340,7 +417,7 @@ function SpaceGeometryDash() {
     }
 
     animationRef.current = requestAnimationFrame(gameLoop);
-  }, [checkCollision, renderGame]);
+  }, [checkCollision, renderGame, JUMP_FORCE]);
 
   // Input handling
   useEffect(() => {
