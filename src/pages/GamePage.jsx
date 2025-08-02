@@ -88,7 +88,7 @@ function GamePage() {
               }}
               className="bg-purple-950 px-4 py-2 cursor-pointer border-2 border-purple-900 font-mono text-purple-200 text-sm font-bold uppercase tracking-wider"
             >
-              PETER'S_QUEST_V1.0
+              PETER'S_QUEST_V2.0
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-zinc-900 px-3 py-2 border-2 border-purple-900 font-mono text-sm text-white">
@@ -124,11 +124,11 @@ function GamePage() {
               <h1 className="text-4xl font-mono font-bold text-purple-200 relative">
                 <span className="relative z-10">
                   <span className="text-purple-200 bg-purple-900 px-4 py-3 border-2 border-purple-950 inline-block">
-                    &gt; PETER'S QUEST
+                    &gt; PETER'S QUEST PART 2
                   </span>
                 </span>
               </h1>
-              <span className="text-purple-400 mt-2">INITIALIZED</span>
+              <span className="text-purple-400 mt-2">SPACE EDITON</span>
             </div>
 
             {/* Game Status */}

@@ -31,39 +31,23 @@ const Stage5Page = lazy(() => import("./pages/Stage5Page"));
 const Stage6Page = lazy(() => import("./pages/Stage6Page"));
 const Stage1Diagnosis = lazy(() => import("./pages/Stage1Diagnosis"));
 // End game components
-const EndRestore = lazy(() => import("./pages/EndRestore"));
-const EndShutdown = lazy(() => import("./pages/EndShutdown"));
-const EndPreserve = lazy(() => import("./pages/EndPreserve"));
 
 // Loading component
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950">
     <div className="relative h-12 w-12">
-      <div className="pixel-spinner block h-full w-full animate-pixel-spin bg-purple-400" />
+      <div
+        className="block h-full w-full bg-purple-400"
+        style={{
+          boxSizing: "border-box",
+          border: "4px solid black",
+          borderTop: "4px solid purple",
+          borderRight: "4px solid purple",
+          borderRadius: "0",
+          animation: "spin 1s linear infinite",
+        }}
+      />
     </div>
-
-    <style jsx>{`
-      .pixel-spinner {
-        box-sizing: border-box;
-        border: 4px solid black;
-        border-top: 4px solid purple;
-        border-right: 4px solid purple;
-        border-radius: 0; /* no rounding = pixel style */
-      }
-
-      @keyframes pixel-spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .animate-pixel-spin {
-        animation: pixel-spin 1s linear infinite;
-      }
-    `}</style>
   </div>
 );
 
@@ -114,9 +98,6 @@ const routeConfig = {
     { path: "/stage4", component: Stage4Page, requiredStage: 4 },
     { path: "/stage5", component: Stage5Page, requiredStage: 5 },
     { path: "/stage6", component: Stage6Page, requiredStage: 6 },
-    { path: "/restore", component: EndRestore, requiredStage: 6 },
-    { path: "/shutdown", component: EndShutdown, requiredStage: 6 },
-    { path: "/preserve", component: EndPreserve, requiredStage: 6 },
   ],
 };
 

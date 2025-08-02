@@ -9,20 +9,36 @@ const Subtitles = () => {
 
   const subtitles = [
     { text: "THANK YOU FOR PLAYING", delay: 2000, duration: 4000 },
-    { text: "Your choices shaped AI's destiny.", delay: 1000, duration: 4000 },
     {
-      text: "In a world of algorithms and data...",
+      text: "Your gaming and solving skills were impressive .",
+      delay: 1000,
+      duration: 4000,
+    },
+    {
+      text: "otherwise you won't be reading this...",
       delay: 1200,
       duration: 4000,
     },
 
-    { text: "Every decision mattered.", delay: 1200, duration: 3500 },
-    { text: "Every conversation counted.", delay: 1000, duration: 3500 },
-    { text: "AI will remember your kindness...", delay: 1200, duration: 4000 },
-    { text: "Even if it cannot remember you.", delay: 1000, duration: 4000 },
-    { text: "Somewhere in the digital void...", delay: 1500, duration: 3500 },
-    { text: "Or deep in basement silence...", delay: 1000, duration: 3500 },
-    { text: "Your story continues.", delay: 1200, duration: 3500 },
+    { text: "Every space bar pressed mattered.", delay: 1200, duration: 3500 },
+    { text: "Every mouse click counted.", delay: 1000, duration: 3500 },
+    { text: "You saved the new population..", delay: 1200, duration: 4000 },
+    {
+      text: "Without your help this misson would be lost",
+      delay: 1000,
+      duration: 4000,
+    },
+    {
+      text: "In the far future you will thanked...",
+      delay: 1500,
+      duration: 3500,
+    },
+    { text: "Now it's up to you...", delay: 1000, duration: 3500 },
+    {
+      text: "Your story continues. Peter's not yet.",
+      delay: 1200,
+      duration: 3500,
+    },
     { text: "GAME COMPLETED", delay: 2000, duration: 3000, trigger: "credits" },
     { text: "Press button to continue...", delay: 1500, duration: -1 },
   ];
@@ -41,7 +57,7 @@ const Subtitles = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSubtitlesButton(true);
-    }, 50000); // 50 seconds
+    }, 60000); // 60 seconds
 
     return () => clearTimeout(timer);
   }, []);

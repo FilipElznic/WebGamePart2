@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-
 import peterIdea from "/peterIdea.png";
-
-import RetroPc from "../Components/RetroPc";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 
@@ -12,41 +9,56 @@ function HelpPage() {
   const [showButton, setShowButton] = useState(false);
   const [showDialogue, setShowDialogue] = useState(true);
 
-  // New states for the bike challenge
-
   const fullText =
     "Welcome to the Help Page! You can find most of your questions answered here. But if you need more help, you can always contact me through the social media links.";
 
   useEffect(() => {
+    let animationId;
+    let startTime;
     let currentIndex = 0;
     const typingSpeed = 50; // milliseconds per character
 
-    const typeText = () => {
-      if (currentIndex < fullText.length) {
-        setDisplayText(fullText.slice(0, currentIndex + 1));
-        currentIndex++;
-        setTimeout(typeText, typingSpeed);
-      } else {
-        setIsTypingComplete(true);
-        setTimeout(() => setShowButton(true), 500); // Show button after 500ms delay
+    const typeText = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+
+      const elapsed = timestamp - startTime;
+      const targetIndex = Math.floor(elapsed / typingSpeed);
+
+      if (targetIndex > currentIndex && currentIndex < fullText.length) {
+        currentIndex = Math.min(targetIndex, fullText.length);
+        setDisplayText(fullText.slice(0, currentIndex));
+
+        if (currentIndex < fullText.length) {
+          animationId = requestAnimationFrame(typeText);
+        } else {
+          setIsTypingComplete(true);
+          setTimeout(() => setShowButton(true), 500);
+        }
+      } else if (currentIndex < fullText.length) {
+        animationId = requestAnimationFrame(typeText);
       }
     };
 
     // Start typing after 1 second
-    const startDelay = setTimeout(typeText, 1000);
+    const startDelay = setTimeout(() => {
+      animationId = requestAnimationFrame(typeText);
+    }, 1000);
 
-    return () => clearTimeout(startDelay);
+    return () => {
+      clearTimeout(startDelay);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
   }, []);
 
   const handleStartTask = () => {
     // Hide the image and text div
     setShowDialogue(false);
-    // Start the challenge
-    setShowChallenge(true);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       <Navbar />
       {showDialogue && (
         <div className="">
@@ -120,12 +132,12 @@ function HelpPage() {
           </div>
         </div>
       )}
-      <div className="container mx-auto px-4 py-8 relative w-full h-full z-10 flex items-center justify-center">
+      <div className="container  mx-auto px-4 py-8 relative w-full h-full z-10 flex items-center justify-center">
         <div className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
         <div className="absolute -top-0 -right-0 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
         <div className="absolute -bottom-0 -left-0 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
         <div className="absolute -bottom-0 -right-0 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
-        <div className="bg-white/90 backdrop-blur-sm p-8 border-4 w-1/2 flex items-center justify-center border-purple-400 shadow-2xl relative overflow-hidden  h-[90vh] flex-col ">
+        <div className="bg-gradient-to-br from-black via-zinc-900 to-purple-950 backdrop-blur-sm p-8 border-4 w-1/2 flex items-center justify-center border-purple-400 shadow-2xl relative overflow-hidden  h-[90vh] flex-col ">
           {/* Retro border decorations */}
 
           <div className="text-center  mb-8">

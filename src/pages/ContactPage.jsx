@@ -6,7 +6,10 @@ function ContactPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen relative py-16" id="about">
+      <div
+        className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative py-16"
+        id="about"
+      >
         <div className="absolute inset-0 opacity-10">
           <div className="grid grid-cols-16 h-full">
             {Array.from({ length: 16 }).map((_, i) => (
@@ -54,7 +57,7 @@ function ContactPage() {
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Main About Section */}
-          <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl mb-8">
+          <div className="bg-gradient-to-br from-black via-zinc-900 to-purple-950 backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl mb-8">
             {/* Retro border decorations */}
             <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
             <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>

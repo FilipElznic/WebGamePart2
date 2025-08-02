@@ -25,7 +25,7 @@ function Peter({
   // Default slides if none provided
   const defaultSlides = [
     {
-      title: "Welcome to Peter's Quest",
+      title: "Welcome to Peter's Quest part 2",
       description: "Hi my name is Peter, and I have a small problem.",
     },
     {

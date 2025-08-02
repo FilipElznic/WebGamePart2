@@ -237,8 +237,8 @@ function Navbar() {
               // User is logged in
               <div>
                 <div className="px-3 py-2 bg-zinc-800 border-l-4 border-green-400 font-mono text-sm mb-2">
-                  <span className="text-green-600">&gt;</span> Welcome,{" "}
-                  <span className="font-bold text-gray-800">
+                  <span className="text-white">&gt;</span> Welcome,{" "}
+                  <span className="font-bold text-white">
                     {user.displayName}
                   </span>
                 </div>

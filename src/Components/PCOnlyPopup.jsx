@@ -122,8 +122,8 @@ function PCOnlyPopup() {
 
             <p className="text-sm text-gray-600">
               <span className="text-purple-700 font-bold">&gt; NOTE:</span>
-              For the authentic Peter's Quest experience, please access from a
-              PC.
+              For the authentic Peter's Quest PART 2 experience, please access
+              from a PC.
             </p>
           </div>
         </div>

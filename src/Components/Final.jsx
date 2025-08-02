@@ -885,28 +885,7 @@ function Final() {
         <div className="flex justify-center gap-4">
           <button
             onClick={() => {
-              setGameStarted(false);
-              setCurrentStage(0);
-              setStagesCompleted([]);
-              // Reset all game states
-              setPlayerInput(["", "", "", ""]);
-              setWireConnections({});
-              setRhythmInput([]);
-              setFinalInput([]);
-            }}
-            className="bg-blue-600 hover:bg-blue-700 border-2 border-blue-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
-          >
-            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-blue-300"></div>
-            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-blue-300"></div>
-            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-blue-300"></div>
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-blue-300"></div>
-            [PLAY AGAIN]
-          </button>
-
-          <button
-            onClick={() => {
-              // This could navigate to main menu or next stage
-              window.history.back();
+              window.location.href = "/subtitles";
             }}
             className="bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
           >
@@ -914,7 +893,7 @@ function Final() {
             <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-300"></div>
             <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-purple-300"></div>
             <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-300"></div>
-            [CONTINUE JOURNEY]
+            [FINAL SUBTITLES]
           </button>
         </div>
       </div>
