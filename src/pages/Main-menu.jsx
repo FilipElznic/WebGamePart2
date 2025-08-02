@@ -25,19 +25,19 @@ function MainMenu() {
     },
     {
       id: 2,
-      task: "Stage 2 - Snake Game",
+      task: "Stage 2 - Jumping",
       dueDate: "As soon as possible",
       completed: true,
     },
     {
       id: 3,
-      task: "Stage 3 - Jumping Game",
+      task: "Stage 3 - Nerves testing",
       dueDate: "As soon as possible",
       completed: false,
     },
     {
       id: 4,
-      task: "Stage 4 - Misterious Chest",
+      task: "Stage 4 - ",
       dueDate: "As soon as possible",
       completed: false,
     },

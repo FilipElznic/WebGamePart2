@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useUserData } from "./UserDataProvider";
 import Peter from "./Peter.jsx";
 
@@ -20,7 +20,7 @@ function Game() {
 
   const handleXP = useCallback(async () => {
     try {
-      if (userXP === 400) {
+      if (userXP === 500) {
         const result = await addXPForTask(100); // Add 100 XP
         console.log("Gravity Magnet Maze completed!");
         if (result.success) {
@@ -33,7 +33,7 @@ function Game() {
             console.log("Maze completed! (XP update failed)");
           }
         }
-      } else if (userXP === 500) {
+      } else if (userXP === 600) {
         console.log("Game finished! (XP already earned)");
       }
     } catch (error) {
@@ -52,191 +52,118 @@ function Game() {
     {
       title: "Excellent work!",
       description:
-        "You've successfully retrieved the Flux Stabilizer! That's the last critical component we needed. Let's plug it in and get this engine running again. We're almost ready to return to frozen sleep!",
+        "You've completed all the levels! Let's get this engine running again. So we can complete the mission. You have earned 100xp, and you can now access the final stage.",
     },
   ];
 
   // Level configurations
-  const levels = {
-    1: {
-      name: "Tutorial Maze",
-      grid: [
-        ["W", "W", "W", "W", "W", "W", "W"],
-        ["W", "S", ".", ".", ".", "G", "W"],
-        ["W", ".", ".", ".", ".", ".", "W"],
-        ["W", ".", ".", "W", ".", ".", "W"],
-        ["W", ".", ".", ".", ".", ".", "W"],
-        ["W", "W", "W", "W", "W", "W", "W"],
-      ],
-      description:
-        "Learn to control the magnetic fields. Guide the tool to the glowing terminal!",
-    },
-    2: {
-      name: "Blocked Maze",
-      grid: [
-        ["W", "W", "W", "W", "W", "W", "W", "W"],
-        ["W", "S", ".", "W", ".", ".", "G", "W"],
-        ["W", ".", ".", "W", ".", "W", ".", "W"],
-        ["W", ".", "W", "W", ".", "W", ".", "W"],
-        ["W", ".", ".", ".", ".", ".", ".", "W"],
-        ["W", "W", "W", "W", "W", "W", "W", "W"],
-      ],
-      description:
-        "Navigate around walls. Think ahead - the tool slides until it hits something!",
-    },
-    3: {
-      name: "Hazard Maze",
-      grid: [
-        ["W", "W", "W", "W", "W", "W", "W", "W"],
-        ["W", "S", ".", "E", ".", ".", "G", "W"],
-        ["W", ".", ".", "E", ".", "E", ".", "W"],
-        ["W", ".", "E", "E", "E", "E", ".", "W"],
-        ["W", ".", ".", ".", ".", ".", ".", "W"],
-        ["W", "W", "W", "W", "W", "W", "W", "W"],
-      ],
-      description:
-        "Avoid electric zones (red tiles)! They'll destroy the tool on contact.",
-    },
-    4: {
-      name: "Switch Puzzle",
-      grid: [
-        ["W", "W", "W", "W", "W", "W", "W", "W", "W"],
-        ["W", "S", ".", ".", "D", ".", ".", "G", "W"],
-        ["W", ".", ".", "W", "D", "W", ".", ".", "W"],
-        ["W", ".", "W", "W", "D", "W", "W", ".", "W"],
-        ["W", ".", ".", ".", "T", ".", ".", ".", "W"],
-        ["W", "W", "W", "W", "W", "W", "W", "W", "W"],
-      ],
-      description:
-        "Hit the switch (yellow) to open the doors blocking your path!",
-    },
-  };
+  const levels = useMemo(
+    () => ({
+      1: {
+        name: "Tutorial Maze",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", "W", "W", "G", "W"],
+          ["W", ".", ".", "W", "W", ".", "W"],
+          ["W", "W", ".", "W", ".", ".", "W"],
+          ["W", ".", ".", ".", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Learn to control the magnetic fields. Guide the tool to the glowing terminal!",
+      },
+      2: {
+        name: "Blocked Maze",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", "W", "E", ".", ".", "W"],
+          ["W", ".", ".", ".", ".", "W", ".", "W"],
+          ["W", "W", "W", "W", ".", "W", ".", "W"],
+          ["W", "T", ".", ".", ".", "W", "G", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Navigate around walls. Think ahead - the tool slides until it hits something!",
+      },
+      3: {
+        name: "Electric Fields",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", "W", ".", ".", ".", "W"],
+          ["W", ".", ".", "E", "G", "E", ".", "W"],
+          ["W", ".", "E", "E", "E", "E", ".", "W"],
+          ["W", ".", ".", ".", ".", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Avoid electric zones (red tiles)! They'll destroy the tool on contact.",
+      },
+      4: {
+        name: "Switch Control",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", ".", "W", "W", ".", ".", "W"],
+          ["W", "W", "T", ".", ".", "W", "G", ".", "W"],
+          ["W", "W", "W", "W", "E", "W", "W", ".", "W"],
+          ["W", ".", ".", ".", "E", ".", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Hit the switch to disable the electric field and reach the goal!",
+      },
+      5: {
+        name: "Electric Maze",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", "W", "E", "W", ".", ".", ".", "W"],
+          ["W", "E", ".", "W", ".", "E", ".", "W", ".", "W"],
+          ["W", ".", ".", "E", "W", "E", "W", "W", ".", "W"],
+          ["W", ".", "W", ".", ".", ".", "W", "G", ".", "W"],
+          ["W", ".", "E", ".", "W", ".", "W", ".", ".", "W"],
+          ["W", "T", "W", ".", ".", ".", "W", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Complex electric field maze! Use the switch to clear a safe path.",
+      },
+      6: {
+        name: "Double Switch",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", "W", "E", ".", ".", "E", "W", ".", "G", "W"],
+          ["W", ".", ".", "E", ".", ".", "E", "W", ".", ".", "W"],
+          ["W", ".", "E", "E", "E", "T", "E", "E", "E", ".", "W"],
+          ["W", ".", ".", ".", ".", ".", ".", "W", ".", ".", "W"],
+          ["W", "W", "E", "E", ".", "T", ".", ".", "E", "W", "W"],
+          ["W", ".", "W", "W", "W", ".", ".", ".", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Two switches control different electric zones. Plan your route carefully!",
+      },
+      7: {
+        name: "Electric Gauntlet",
+        grid: [
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+          ["W", "S", ".", ".", "W", "E", "E", "W", ".", ".", ".", "W"],
+          ["W", "W", "E", ".", "E", ".", ".", "E", "G", "W", ".", "W"],
+          ["W", ".", ".", ".", ".", ".", "W", "E", "W", "W", ".", "W"],
+          ["W", ".", "E", ".", ".", ".", "T", ".", ".", "W", ".", "W"],
+          ["W", ".", "E", ".", "E", ".", ".", "E", "E", "E", ".", "W"],
+          ["W", ".", ".", ".", "W", ".", ".", "W", ".", ".", ".", "W"],
+          ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+        ],
+        description:
+          "Navigate through the electric gauntlet! One switch controls everything.",
+      },
+    }),
+    []
+  );
 
   const currentLevel = levels[gameState.level];
 
-  // Get tile type at position
-  const getTileAt = (x, y) => {
-    if (
-      y < 0 ||
-      y >= currentLevel.grid.length ||
-      x < 0 ||
-      x >= currentLevel.grid[0].length
-    ) {
-      return "W"; // Wall
-    }
-    let tile = currentLevel.grid[y][x];
-
-    // Check if door should be open
-    if (
-      tile === "D" &&
-      gameState.switchesActivated.includes(`${gameState.level}-switch`)
-    ) {
-      return "."; // Open door
-    }
-
-    return tile;
-  };
-
-  // Move tool in direction
-  const moveTool = useCallback(
-    (direction) => {
-      if (gameState.isMoving || gameState.gameOver || gameState.gameWon) return;
-
-      setGameState((prev) => ({ ...prev, isMoving: true }));
-
-      const directions = {
-        up: { x: 0, y: -1 },
-        down: { x: 0, y: 1 },
-        left: { x: -1, y: 0 },
-        right: { x: 1, y: 0 },
-      };
-
-      const delta = directions[direction];
-      let newX = gameState.toolPosition.x;
-      let newY = gameState.toolPosition.y;
-
-      // Slide until hitting obstacle
-      while (true) {
-        const nextX = newX + delta.x;
-        const nextY = newY + delta.y;
-        const nextTile = getTileAt(nextX, nextY);
-
-        if (nextTile === "W") break; // Hit wall
-
-        newX = nextX;
-        newY = nextY;
-
-        const currentTile = getTileAt(newX, newY);
-
-        // Check for hazards
-        if (currentTile === "E") {
-          setGameState((prev) => ({
-            ...prev,
-            toolPosition: { x: newX, y: newY },
-            gameOver: true,
-            isMoving: false,
-          }));
-          return;
-        }
-
-        // Check for goal
-        if (currentTile === "G") {
-          setTimeout(() => {
-            if (gameState.level < Object.keys(levels).length) {
-              setGameState((prev) => ({
-                ...prev,
-                level: prev.level + 1,
-                toolPosition: findStartPosition(levels[prev.level + 1]),
-                switchesActivated: [],
-                moves: 0,
-                isMoving: false,
-              }));
-            } else {
-              setGameState((prev) => ({
-                ...prev,
-                gameWon: true,
-                isMoving: false,
-              }));
-            }
-          }, 300);
-          break;
-        }
-
-        // Check for switch
-        if (currentTile === "T") {
-          setGameState((prev) => ({
-            ...prev,
-            switchesActivated: [
-              ...prev.switchesActivated,
-              `${prev.level}-switch`,
-            ],
-          }));
-        }
-      }
-
-      setTimeout(() => {
-        setGameState((prev) => ({
-          ...prev,
-          toolPosition: { x: newX, y: newY },
-          moves: prev.moves + 1,
-          isMoving: false,
-        }));
-      }, 300);
-    },
-    [
-      gameState.toolPosition,
-      gameState.isMoving,
-      gameState.gameOver,
-      gameState.gameWon,
-      gameState.level,
-      gameState.switchesActivated,
-      getTileAt,
-      levels,
-    ]
-  );
-
   // Find start position in level
-  const findStartPosition = (level) => {
+  const findStartPosition = useCallback((level) => {
     for (let y = 0; y < level.grid.length; y++) {
       for (let x = 0; x < level.grid[y].length; x++) {
         if (level.grid[y][x] === "S") {
@@ -245,7 +172,127 @@ function Game() {
       }
     }
     return { x: 1, y: 1 };
-  };
+  }, []);
+
+  // Move tool in direction
+  const moveTool = useCallback(
+    (direction) => {
+      setGameState((currentState) => {
+        if (
+          currentState.isMoving ||
+          currentState.gameOver ||
+          currentState.gameWon
+        ) {
+          return currentState;
+        }
+
+        const directions = {
+          up: { x: 0, y: -1 },
+          down: { x: 0, y: 1 },
+          left: { x: -1, y: 0 },
+          right: { x: 1, y: 0 },
+        };
+
+        const delta = directions[direction];
+        let newX = currentState.toolPosition.x;
+        let newY = currentState.toolPosition.y;
+        let newSwitchesActivated = [...currentState.switchesActivated];
+
+        const currentLevel = levels[currentState.level];
+
+        const getTileAtPosition = (x, y) => {
+          if (
+            y < 0 ||
+            y >= currentLevel.grid.length ||
+            x < 0 ||
+            x >= currentLevel.grid[0].length
+          ) {
+            return "W"; // Wall
+          }
+          let tile = currentLevel.grid[y][x];
+
+          // Check if electric field should be disabled by switch
+          if (
+            tile === "E" &&
+            newSwitchesActivated.includes(`${currentState.level}-switch`)
+          ) {
+            return "."; // Disabled electric field becomes empty space
+          }
+
+          return tile;
+        };
+
+        // Set moving state first
+        const movingState = { ...currentState, isMoving: true };
+
+        // Slide until hitting obstacle
+        while (true) {
+          const nextX = newX + delta.x;
+          const nextY = newY + delta.y;
+          const nextTile = getTileAtPosition(nextX, nextY);
+
+          if (nextTile === "W") break; // Hit wall
+
+          newX = nextX;
+          newY = nextY;
+
+          const currentTile = getTileAtPosition(newX, newY);
+
+          // Check for hazards
+          if (currentTile === "E") {
+            return {
+              ...currentState,
+              toolPosition: { x: newX, y: newY },
+              gameOver: true,
+              isMoving: false,
+            };
+          }
+
+          // Check for goal
+          if (currentTile === "G") {
+            setTimeout(() => {
+              if (currentState.level < Object.keys(levels).length) {
+                setGameState((prev) => ({
+                  ...prev,
+                  level: prev.level + 1,
+                  toolPosition: findStartPosition(levels[prev.level + 1]),
+                  switchesActivated: [],
+                  moves: 0,
+                  isMoving: false,
+                }));
+              } else {
+                setGameState((prev) => ({
+                  ...prev,
+                  gameWon: true,
+                  isMoving: false,
+                }));
+              }
+            }, 300);
+            break;
+          }
+
+          // Check for switch
+          if (currentTile === "T") {
+            newSwitchesActivated.push(`${currentState.level}-switch`);
+          }
+        }
+
+        // Schedule position update
+        setTimeout(() => {
+          setGameState((prev) => ({
+            ...prev,
+            toolPosition: { x: newX, y: newY },
+            moves: prev.moves + 1,
+            isMoving: false,
+            switchesActivated: newSwitchesActivated,
+          }));
+        }, 300);
+
+        return { ...movingState, switchesActivated: newSwitchesActivated };
+      });
+    },
+    [levels, findStartPosition]
+  );
 
   // Reset current level
   const resetLevel = useCallback(() => {
@@ -257,7 +304,7 @@ function Game() {
       moves: 0,
       isMoving: false,
     }));
-  }, [currentLevel]);
+  }, [currentLevel, findStartPosition]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -300,7 +347,7 @@ function Game() {
       ...prev,
       toolPosition: findStartPosition(currentLevel),
     }));
-  }, [currentLevel]);
+  }, [currentLevel, findStartPosition]);
 
   // Render tile
   const renderTile = (tile, x, y) => {
@@ -330,15 +377,14 @@ function Game() {
         content = "⭐";
         break;
       case "E":
-        tileClass += " bg-red-900 border-red-600 animate-pulse";
-        content = "⚡";
-        break;
-      case "D":
         if (isSwitchActivated) {
-          tileClass += " bg-gray-900 border-gray-700";
+          // Electric field disabled by switch
+          tileClass += " bg-gray-900 border-gray-700 opacity-50";
+          content = "⚡";
         } else {
-          tileClass += " bg-yellow-800 border-yellow-600";
-          content = "🚪";
+          // Active electric field
+          tileClass += " bg-red-900 border-red-600 animate-pulse";
+          content = "⚡";
         }
         break;
       case "T":
@@ -475,7 +521,7 @@ function Game() {
               <div className="w-6 h-6 bg-red-900 border border-red-600 flex items-center justify-center">
                 ⚡
               </div>
-              <span>Electric</span>
+              <span>Electric Field</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 bg-yellow-900 border border-yellow-500 flex items-center justify-center">
@@ -484,10 +530,10 @@ function Game() {
               <span>Switch</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-yellow-800 border border-yellow-600 flex items-center justify-center">
-                🚪
+              <div className="w-6 h-6 bg-gray-900 border border-gray-700 opacity-50 flex items-center justify-center">
+                ⚡
               </div>
-              <span>Door</span>
+              <span>Disabled Field</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 bg-gray-800 border border-gray-600"></div>
@@ -532,7 +578,7 @@ function Game() {
             />
             <button
               onClick={() => setHidePeter(true)}
-              className="absolute top-1/4 right-1/4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow-lg"
+              className="absolute z-50 top-1/4 right-1/7 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow-lg"
             >
               ✕
             </button>
@@ -546,7 +592,7 @@ function Game() {
             level
           </p>
           <p className="mt-1">
-            Guide the tool to the goal while avoiding electric zones!
+            Hit switches to disable electric fields and reach the goal safely!
           </p>
         </div>
       </div>

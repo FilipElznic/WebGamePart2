@@ -20,6 +20,7 @@ const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const Subtitles = lazy(() => import("./Components/Subtitles"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 // Stage components
 const Stage1Page = lazy(() => import("./pages/Stage1Page"));
@@ -171,6 +172,9 @@ function App() {
                 />
               )
             )}
+
+            {/* 404 Not Found Route - Must be last */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </UserDataProvider>

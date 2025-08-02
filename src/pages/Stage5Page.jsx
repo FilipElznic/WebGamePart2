@@ -21,22 +21,21 @@ function Stage4Page() {
   const [showPeter, setShowPeter] = useState(false);
   const peterSlides = [
     {
-      title: "Well, well, well...",
+      title: "Old good maze.",
       description:
-        "This looks like a bit complicated. I think the best way to go through is to go via all applications!",
+        "Move with W,A,S,D, and get to the finish line. You can move only in one direction at a time.",
     },
     {
       title: "Little bit of help",
       description:
-        "Don't forget to read hints, know basic terminal commands and try to remember primary school math jokes!",
+        "Don't forget to activate switches to disable electric fields. Sometimes you need take the same route twice!",
     },
   ];
 
   const aiText =
-    "Stage 5 is unlocked, your's truly a good finder and a problem solver, this is last challenge before the final, Good Luck!";
+    "Stage 5 is unlocked, your's truly a good finder and a problem solver, this is last challenge before the final. Get to the finish line. Good Luck!";
 
-  const peterText =
-    "Dont be scared, we will do this together, I can't be that bad right?!";
+  const peterText = "Dont be scared, this should be easy for you?!";
 
   // AI typing effect
   useEffect(() => {
@@ -268,7 +267,7 @@ function Stage4Page() {
 
           {/* Single button to hide both characters - only show after both finish typing */}
           {showButton && (
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50">
+            <div className="absolute bottom-60 left-1/2 transform -translate-x-1/2 z-50">
               <button
                 onClick={handleStartTask}
                 className="bg-gradient-to-r from-purple-400 to-blue-400 hover:from-purple-500 hover:to-blue-500 border-2 border-purple-600 text-black font-bold py-3 px-8 font-mono text-lg transition-all duration-200 transform hover:scale-105 relative group shadow-lg"
@@ -304,7 +303,7 @@ function Stage4Page() {
         </div>
       </div>
       <div className="container mx-auto  relative w-full h-full z-10">
-        <div className=" backdrop-blur-sm rounded-xl h-[90vh] border-4 border-zinc-400 shadow-2xl  relative overflow-hidden flex  flex-col items-center justify-center">
+        <div className=" backdrop-blur-sm rounded-xl min-h-[90vh] border-4 border-zinc-400 shadow-2xl  relative overflow-hidden flex  flex-col items-center justify-center">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-10 left-10 text-4xl text-purple-400 opacity-20 animate-pulse font-mono">
               ◆

@@ -19,7 +19,7 @@ function FindGame() {
 
   const handleXP = useCallback(async () => {
     try {
-      if (userXP === 300) {
+      if (userXP === 400) {
         const result = await addXPForTask(100); // Add 100 XP
         console.log("here");
         if (result.success) {
@@ -32,7 +32,7 @@ function FindGame() {
             console.log("Chest opened! (XP update failed)");
           }
         }
-      } else if (userXP == 400) {
+      } else if (userXP == 500) {
         console.log("Game finished! (XP already earned)");
       }
     } catch (error) {

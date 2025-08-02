@@ -1,6 +1,6 @@
 function Shipwrecked() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 flex flex-col relative font-mono">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex flex-col relative font-mono">
       <div className="flex-1 flex items-center justify-center">
         <div className="bg-white/95 p-6 sm:p-4 xs:p-2  shadow-lg border-4 border-purple-400 max-w-3xl w-full h-full text-center z-30 mx-2 relative retro-shadow">
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-400 border-2 border-purple-700 px-4 py-1 text-3xl rounded-t-lg shadow-md text-black  font-bold tracking-widest retro-title">

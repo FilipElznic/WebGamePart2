@@ -64,7 +64,7 @@ function HomeWork({ showHomework, setShowHomework, homeworkList }) {
               className="font-mono text-xl text-gray-600"
               style={{ lineHeight: "40px" }}
             >
-              Computer's secret
+              Rocket ship problems
             </div>
           </div>
 
