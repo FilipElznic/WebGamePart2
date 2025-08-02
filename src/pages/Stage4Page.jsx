@@ -19,10 +19,10 @@ function Stage4Page() {
   const [showPeter, setShowPeter] = useState(false);
 
   const aiText =
-    "Nice seeing you again! You are making great progress! Now You need to unlock the chest and see what is inside. Unlock it carefully, the key may be fragile.";
+    "Welcome to the stage 4. Right now we currently have a wrench and wiring to fix the engine. Now we need to find the access key to get into the engine room.";
 
   const peterText =
-    "Let me try! (Unlocking chest noises) ... (struggling noises) ... (key breaking noises) ... ... Oh no! The key broke too! I am so sorry, dont tell the AI. I guess we need to find another way to open it. Look around and try to find something that can help us. Maybe there is a hidden key somewhere else?";
+    "Let's go find the access key! I think it is somewhere in the station. We will need to search for it. I will help you with that. Let's get it done.";
 
   // AI typing effect
   useEffect(() => {

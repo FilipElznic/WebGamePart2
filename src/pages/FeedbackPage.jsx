@@ -98,7 +98,7 @@ function FeedbackPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       <Navbar />
 
       {showDialogue && (
@@ -168,7 +168,7 @@ function FeedbackPage() {
         </div>
       )}
 
-      <div className="container mx-auto px-4 py-8 relative w-full h-full z-10">
+      <div className="container mx-auto px-4 py-8 relative w-full h-full z-10 bg-gradient-to-br from-black via-zinc-900 to-purple-950">
         <div className="backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl relative overflow-hidden min-h-[90vh]">
           {/* Animated header with CRT effect */}
           <div className="text-center mb-8 relative">
@@ -289,7 +289,7 @@ function FeedbackPage() {
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
-                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
+                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-400 px-3 py-1 border border-purple-500 inline-block">
                   [PRIVACY_PROTOCOL]
                 </h3>
 
@@ -327,7 +327,7 @@ function FeedbackPage() {
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
-                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
+                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-400 px-3 py-1 border border-purple-500 inline-block">
                   [FEEDBACK_GUIDE]
                 </h3>
 
@@ -359,7 +359,7 @@ function FeedbackPage() {
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
-                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
+                <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-400 px-3 py-1 border border-purple-500 inline-block">
                   [RESPONSE_TIME]
                 </h3>
 

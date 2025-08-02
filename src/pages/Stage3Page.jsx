@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-
 import AIStraight from "/AIStraight.png";
-
-import JumpingGame from "../Components/JumpingGame";
 import GeoClone from "../Components/GeoClone";
 
 function Stage3Page() {
@@ -12,7 +9,7 @@ function Stage3Page() {
   const [showDialogue, setShowDialogue] = useState(true);
 
   const fullText =
-    "Now in this challenge, we need to get the wires for the engine. They will be used to power the system properly!";
+    "Now in this challenge, you will test your nerves, it is a geometry dash clone, but because we are running on backup generators, it will be glitchy. We need to get to the end to get the wires for the engine. They will be used to power the system properly!";
 
   useEffect(() => {
     let currentIndex = 0;

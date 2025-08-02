@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useUserData } from "./UserDataProvider";
+import Peter from "./Peter";
 
 function FindGame() {
   const [gameState, setGameState] = useState({
@@ -11,6 +13,49 @@ function FindGame() {
   const [message, setMessage] = useState(
     "Welcome to the Space Station! Find the access key to unlock the main console."
   );
+
+  // Get user data for XP handling
+  const { addXPForTask, userXP } = useUserData();
+
+  const handleXP = useCallback(async () => {
+    try {
+      if (userXP === 300) {
+        const result = await addXPForTask(100); // Add 100 XP
+        console.log("here");
+        if (result.success) {
+          console.log("XP added successfully:", result.newXP);
+        } else {
+          console.error("Failed to add XP:", result.error);
+          if (result.error.includes("already has XP")) {
+            console.log("Chest opened! (XP already earned)");
+          } else {
+            console.log("Chest opened! (XP update failed)");
+          }
+        }
+      } else if (userXP == 400) {
+        console.log("Game finished! (XP already earned)");
+      }
+    } catch (error) {
+      console.error("Failed to add XP:", error);
+    }
+  }, [userXP, addXPForTask]);
+
+  // Handle XP when game is won
+  useEffect(() => {
+    if (gameState.gameWon) {
+      handleXP();
+    }
+  }, [gameState.gameWon, handleXP]);
+
+  const peterSlides = [
+    {
+      title: "Nice find!",
+      description:
+        "You found the access key! Now we are almost at the engine, only one more stage left. Then we can fix the engine and get back to the frozen sleep!",
+    },
+  ];
+
+  const [hidePeter, setHidePeter] = useState(false);
 
   // Expanded list of searchable items
   const searchableItems = [
@@ -180,7 +225,7 @@ function FindGame() {
     // Updated switch with new items and white theme styling
     switch (item.id) {
       case "wardrobe":
-        positionClasses = "left-4 top-24 w-20 h-40";
+        positionClasses = "left-20 bottom-24 w-20 h-40";
         itemJsx = (
           <div
             className={`w-full h-full bg-gray-200 border-2 border-gray-400 rounded-md flex ${
@@ -261,7 +306,7 @@ function FindGame() {
         );
         break;
       case "toolbox":
-        positionClasses = "left-8 bottom-4 w-16 h-10";
+        positionClasses = "left-30 bottom-4 w-16 h-10";
         itemJsx = (
           <div className="w-full h-full bg-red-500 border-2 border-red-700 rounded">
             <div
@@ -290,7 +335,7 @@ function FindGame() {
         positionClasses = "right-1/4 bottom-4 w-14 h-20";
         itemJsx = (
           <div className="w-full h-full flex flex-col items-center">
-            <div className="w-full h-2/3 text-green-500 text-4xl text-center">
+            <div className="w-full h-2/4 text-green-500 text-4xl text-center">
               🌱
             </div>
             <div className="w-full h-1/3 bg-orange-300 border-2 border-orange-500 rounded-b-full p-1 flex items-center justify-center">
@@ -300,7 +345,7 @@ function FindGame() {
         );
         break;
       case "locker":
-        positionClasses = "right-6 bottom-4 w-12 h-20";
+        positionClasses = "right-23 bottom-24 w-16 h-40";
         itemJsx = (
           <div className="w-full h-full bg-blue-300 border-2 border-blue-500 rounded">
             <div
@@ -313,7 +358,7 @@ function FindGame() {
         break;
       case "viewscreen":
         positionClasses =
-          "left-1/2 transform -translate-x-1/2 top-4 w-1/2 h-24";
+          "left-1/2 transform -translate-x-1/2 top-15 w-1/2 h-44";
         itemJsx = (
           <div className="w-full h-full bg-black border-4 border-gray-500 rounded-lg p-1 flex items-center justify-center overflow-hidden">
             <div className="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-500 animate-pulse">
@@ -337,7 +382,7 @@ function FindGame() {
         );
         break;
       case "first-aid-kit":
-        positionClasses = "right-4 top-4 w-12 h-12";
+        positionClasses = "right-1/5 top-1/2 w-12 h-12";
         itemJsx = (
           <div className="w-full h-full bg-white border-2 border-red-500 rounded-lg flex items-center justify-center">
             <div className="w-1/2 h-2 bg-red-500 rounded-full"></div>
@@ -347,7 +392,7 @@ function FindGame() {
         );
         break;
       case "bunk-bed":
-        positionClasses = "left-4 top-4 w-24 h-16";
+        positionClasses = "left-20 top-32 w-24 h-16";
         itemJsx = (
           <div className="w-full h-full flex flex-col justify-between">
             <div className="w-full h-1/2 bg-blue-200 border-2 border-blue-400 rounded-md p-1">
@@ -368,7 +413,7 @@ function FindGame() {
         );
         break;
       case "waste-chute":
-        positionClasses = "right-6 bottom-28 w-12 h-12";
+        positionClasses = "right-4 bottom-28 w-12 h-12";
         itemJsx = (
           <div className="w-full h-full bg-gray-400 border-2 border-gray-500 rounded-full flex items-center justify-center">
             <div
@@ -391,7 +436,7 @@ function FindGame() {
         );
         break;
       case "pipes":
-        positionClasses = "left-1/4 top-20 w-1/2 h-4";
+        positionClasses = "left-1/4 top-8 w-1/2 h-4";
         itemJsx = (
           <div className="w-full h-full flex justify-around items-center">
             <div
@@ -408,7 +453,7 @@ function FindGame() {
         );
         break;
       case "ventilation-duct":
-        positionClasses = "top-20 right-4 w-16 h-8";
+        positionClasses = "top-18 right-23 w-16 h-8";
         itemJsx = (
           <div className="w-full h-full bg-gray-400 border-2 border-gray-500 rounded-md flex items-center justify-around p-1">
             <div className="w-3/4 h-1 bg-gray-600"></div>
@@ -419,7 +464,7 @@ function FindGame() {
         );
         break;
       case "food-replicator":
-        positionClasses = "left-20 bottom-20 w-16 h-16";
+        positionClasses = "left-50 bottom-24 w-16 h-16";
         itemJsx = (
           <div className="w-full h-full bg-purple-300 border-2 border-purple-500 rounded-lg p-1">
             <div className="w-full h-1/2 bg-gray-800 rounded-sm"></div>
@@ -432,9 +477,9 @@ function FindGame() {
         );
         break;
       case "exposed-wiring":
-        positionClasses = "bottom-20 right-1/4 w-12 h-6";
+        positionClasses = "bottom-1/2 right-5 w-12 h-10";
         itemJsx = (
-          <div className="w-full h-full flex items-center justify-around">
+          <div className="w-full h-full flex items-center justify-around bg-black p-2">
             <div
               className={`w-1 h-full bg-yellow-500 ${
                 isSearched ? "animate-pulse" : ""
@@ -465,7 +510,7 @@ function FindGame() {
       >
         {itemJsx}
         {isSearched && (
-          <div className="absolute -top-2 -right-2 z-10">
+          <div className="absolute -top-2 -right-2 z-50">
             {isKey ? (
               <span className="text-xl animate-bounce">🔑</span>
             ) : (
@@ -474,7 +519,7 @@ function FindGame() {
           </div>
         )}
         {!isSearched && (
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+          <div className="absolute bottom-full left-1/2 z-50 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
             🔍 Search {item.name}
           </div>
         )}
@@ -529,13 +574,13 @@ function FindGame() {
         {/* Space Station Room - Seamless Layout */}
         <div className="relative w-full h-[65vh] bg-gradient-to-b from-gray-300 via-gray-200 to-gray-300 rounded-lg border-2 border-gray-400 overflow-hidden shadow-lg">
           {/* Table */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-44 w-40 h-4 bg-gray-400 border-2 border-gray-500 rounded-t-md"></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-28 w-32 h-4 bg-gray-400 border-2 border-gray-500 rounded-b-md"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-26 w-40 h-4 bg-gray-400 border-2 border-gray-500 rounded-t-md"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-22 w-32 h-4 bg-gray-400 border-2 border-gray-500 rounded-b-md"></div>
           <div
-            className="absolute"
+            className="absolute z-10"
             style={{
               left: "calc(50% - 80px)",
-              bottom: "112px",
+              bottom: "42px",
               width: "8px",
               height: "64px",
               backgroundColor: "#a0aec0",
@@ -543,10 +588,10 @@ function FindGame() {
             }}
           ></div>
           <div
-            className="absolute"
+            className="absolute z-10"
             style={{
               left: "calc(50% + 72px)",
-              bottom: "112px",
+              bottom: "42px",
               width: "8px",
               height: "64px",
               backgroundColor: "#a0aec0",
@@ -580,28 +625,19 @@ function FindGame() {
         </div>
 
         {/* Victory Screen */}
-        {gameState.gameWon && (
-          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-            <div className="bg-gradient-to-b from-green-100 to-white border-2 border-green-400 rounded-lg p-8 text-center max-w-md mx-4 shadow-2xl">
-              <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-3xl font-bold text-green-700 mb-4">
-                ACCESS GRANTED!
-              </h2>
-              <p className="text-lg mb-4 text-gray-800">
-                You found the access key! The space station's main console is
-                now unlocked.
-              </p>
-              <p className="text-sm text-green-600 mb-6">
-                Items searched: {gameState.searchedItems.length}/
-                {searchableItems.length} | Hints used: {gameState.hints}
-              </p>
-              <button
-                onClick={resetGame}
-                className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded transition-colors"
-              >
-                🔄 Search Again
-              </button>
-            </div>
+        {gameState.gameWon && !hidePeter && (
+          <div className="bg-white/40 fixed inset-0 flex items-center justify-center z-50">
+            <Peter
+              slides={peterSlides}
+              imageSrc="/AIHappy.png"
+              className="absolute top-0 right-0"
+            />
+            <button
+              onClick={() => setHidePeter(true)}
+              className="absolute top-1/3 right-1/6 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
+            >
+              X
+            </button>
           </div>
         )}
 

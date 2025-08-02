@@ -18,13 +18,11 @@ export function AuthProtectedRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex items-center justify-center">
         <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl">
           <div className="text-center font-mono">
-            <div className="text-purple-600 text-xl mb-4">
-              [CHECKING AUTH...]
-            </div>
-            <div className="animate-pulse text-gray-600">Please wait...</div>
+            <div className="text-white text-xl mb-4">[CHECKING AUTH...]</div>
+            <div className="animate-pulse text-gray-200">Please wait...</div>
           </div>
         </div>
       </div>
@@ -56,12 +54,10 @@ export function RequireAuth({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex items-center justify-center">
         <div className="bg-white/90 backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl">
           <div className="text-center font-mono">
-            <div className="text-purple-600 text-xl mb-4">
-              [CHECKING AUTH...]
-            </div>
+            <div className="text-black text-xl mb-4">[CHECKING AUTH...]</div>
             <div className="animate-pulse text-gray-600">Please wait...</div>
           </div>
         </div>

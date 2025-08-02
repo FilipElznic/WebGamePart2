@@ -30,6 +30,8 @@ with command cat password.txt it will echo the password then user will do sudo
 
 3. It is a goemetry dash web version, at the end you will colect, eletric wires, used in the final
 
+4. stage, user finds a an accss key to the engine room, it is hidden it he plant
+
 
 Finale: create a game with the engine 
 

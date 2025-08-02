@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AIAngry from "/AIAngry.png";
 import peterThink from "/peterThink.png";
 import { Link } from "react-router-dom";
-import LetsPlayGame from "../Components/LetsPlayGame";
+import Game from "../Components/Game";
 import Peter from "../Components/Peter";
 
 function Stage4Page() {
@@ -33,7 +33,7 @@ function Stage4Page() {
   ];
 
   const aiText =
-    "Welcome to Stage 5! This stage is a bit different and hard stage, as you will see, there is a desktop behind me, You will need to find the missing numbers to unlock the next stage. The numbers are hidden somewhere in the desktop, Good Luck!";
+    "Stage 5 is unlocked, your's truly a good finder and a problem solver, this is last challenge before the final, Good Luck!";
 
   const peterText =
     "Dont be scared, we will do this together, I can't be that bad right?!";
@@ -351,8 +351,7 @@ function Stage4Page() {
               </button>
             </div>
           )}
-
-          <LetsPlayGame />
+          <Game />
         </div>
       </div>
 
