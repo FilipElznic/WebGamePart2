@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import Final from "../Components/Final";
 import Peter from "../Components/Peter";
 
-function Stage4Page() {
+const Stage4Page = React.memo(() => {
   // AI text states
   const [aiDisplayText, setAiDisplayText] = useState("");
   const [aiIsTypingComplete, setAiIsTypingComplete] = useState(false);
   const [PeterHide, setPeterHide] = useState(true);
-  const [showNumbers, setShowNumbers] = useState(false);
 
   // Peter text states
   const [peterDisplayText, setPeterDisplayText] = useState("");
@@ -22,9 +21,9 @@ function Stage4Page() {
   const [showPeter, setShowPeter] = useState(false);
   const peterSlides = [
     {
-      title: "It's time my buddy",
+      title: "It's time buddy",
       description:
-        "I wish you good luck my friend, You need to do this for both of us.",
+        "I wish you good luck my friend, Sorry for the code, but you need to do this section for both of us.",
     },
     {
       title: "Even if you lose",
@@ -34,46 +33,69 @@ function Stage4Page() {
   ];
 
   const aiText =
-    "Welcome to the final stage! Unlock the lock that is in on your screen with the numbers you have been collecting!";
+    "Great job, we are almost there! Now you need to insert the code to the the lock. That Peter had surely written down and remembered it for you.";
 
   const peterText =
-    "Don't worry, I have written all the number for us, It's 822794. You can display the numbers by clicking the button on the left!";
+    "Ummmmm, well we have a big problem! I lost the code and I don't remember it. But they were just 4 digit. But I think you can guess it.";
 
-  // AI typing effect
+  // AI typing effect - optimized version
   useEffect(() => {
-    let currentIndex = 0;
-    const typingSpeed = 20; // milliseconds per character
+    let animationFrameId;
+    let startTime;
+    const typingSpeed = 30; // milliseconds per character
+    const totalDuration = aiText.length * typingSpeed;
 
-    const typeAiText = () => {
-      if (currentIndex < aiText.length) {
+    const animateText = (timestamp) => {
+      if (!startTime) startTime = timestamp + 1000; // 1 second delay
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / totalDuration, 1);
+      const currentIndex = Math.floor(progress * aiText.length);
+
+      if (currentIndex >= 0) {
         setAiDisplayText(aiText.slice(0, currentIndex + 1));
-        currentIndex++;
-        setTimeout(typeAiText, typingSpeed);
+      }
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animateText);
       } else {
         setAiIsTypingComplete(true);
-        // Show Peter after AI finishes typing (with a small delay)
+        // Show Peter after AI finishes typing
         setTimeout(() => setShowPeter(true), 1000);
       }
     };
 
-    // Start AI typing after 1 second
-    const startDelay = setTimeout(typeAiText, 1000);
+    animationFrameId = requestAnimationFrame(animateText);
 
-    return () => clearTimeout(startDelay);
-  }, []);
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [aiText]);
 
-  // Peter typing effect
+  // Peter typing effect - optimized version
   useEffect(() => {
     if (!showPeter) return;
 
-    let currentIndex = 0;
-    const typingSpeed = 20; // milliseconds per character
+    let animationFrameId;
+    let startTime;
+    const typingSpeed = 30; // milliseconds per character
+    const totalDuration = peterText.length * typingSpeed;
 
-    const typePeterText = () => {
-      if (currentIndex < peterText.length) {
+    const animateText = (timestamp) => {
+      if (!startTime) startTime = timestamp + 500; // 500ms delay
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / totalDuration, 1);
+      const currentIndex = Math.floor(progress * peterText.length);
+
+      if (currentIndex >= 0) {
         setPeterDisplayText(peterText.slice(0, currentIndex + 1));
-        currentIndex++;
-        setTimeout(typePeterText, typingSpeed);
+      }
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animateText);
       } else {
         setPeterIsTypingComplete(true);
         // Show button after Peter finishes typing
@@ -81,11 +103,14 @@ function Stage4Page() {
       }
     };
 
-    // Start Peter typing after 500ms
-    const startDelay = setTimeout(typePeterText, 500);
+    animationFrameId = requestAnimationFrame(animateText);
 
-    return () => clearTimeout(startDelay);
-  }, [showPeter]);
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [showPeter, peterText]);
 
   const handleStartTask = () => {
     // Hide the dialogue (both characters)
@@ -95,49 +120,6 @@ function Stage4Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden ">
-      <div
-        className="w-[8vw] h-[8vw] bg-gradient-to-br from-black via-zinc-900 to-purple-950  border-4 text-white border-purple-400 absolute left-7 top-1/2 transform -translate-y-1/2 z-30 text-center flex items-center justify-center cursor-pointer hover:bg-purple-50 transition-colors duration-200"
-        onClick={() => setShowNumbers(true)}
-      >
-        {/* Corner decorations for homework button */}
-        <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-purple-500"></div>
-        <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-purple-500"></div>
-        <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-purple-500"></div>
-        <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-purple-500"></div>
-
-        <span className="  font-mono text-xs font-bold text-center px-2">
-          <div className="absolute -top-3 -left-3 w-4 h-4 border-t-4 border-l-4 border-purple-500"></div>
-          <div className="absolute -top-3 -right-3 w-4 h-4 border-t-4 border-r-4 border-purple-500"></div>
-          <div className="absolute -bottom-3 -left-3 w-4 h-4 border-b-4 border-l-4 border-purple-500"></div>
-          <div className="absolute -bottom-3 -right-3 w-4 h-4 border-b-4 border-r-4 border-purple-500"></div>
-          [SHOW SECRET
-          <br />
-          NUMBERS]
-        </span>
-      </div>
-      {showNumbers && (
-        <>
-          <div className="absolute inset-0 flex items-center justify-center z-30 ">
-            <div className="bg-black text-white p-4 rounded shadow-lg text-center relative border-4 border-purple-500 max-w-md w-full">
-              {/* Corner decorations for homework button */}
-              <div className="absolute -top-3 -left-3 w-4 h-4 border-t-2 border-l-2 border-purple-500"></div>
-              <div className="absolute -top-3 -right-3 w-4 h-4 border-t-2 border-r-2 border-purple-500"></div>
-              <div className="absolute -bottom-3 -left-3 w-4 h-4 border-b-2 border-l-2 border-purple-500"></div>
-              <div className="absolute -bottom-3 -right-3 w-4 h-4 border-b-2 border-r-2 border-purple-500"></div>
-              <h2 className="text-lg font-bold mb-2">Secret Numbers</h2>
-              <p className="text-4xl font-semibold tracking-widest">822794</p>
-
-              <button
-                onClick={() => setShowNumbers(false)}
-                className="absolute top-0 right-0 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
-              >
-                X
-              </button>
-            </div>
-          </div>
-        </>
-      )}
-
       {showDialogue && (
         <>
           {/* Overlay background while dialogue is active */}
@@ -148,13 +130,13 @@ function Stage4Page() {
               <div className="absolute -bottom-3 -left-3 w-5 h-5 border-b-5 border-l-5 border-purple-600"></div>
               <div className="absolute -bottom-3 -right-3 w-5 h-5 border-b-5 border-r-5 border-purple-600"></div>
               <div className="absolute inset-0 opacity-10 ">
-                <div className="grid grid-cols-16 h-full">
-                  {Array.from({ length: 16 }).map((_, i) => (
+                <div className="grid grid-cols-8 h-full">
+                  {Array.from({ length: 8 }).map((_, i) => (
                     <div key={i} className="border-r border-purple-300"></div>
                   ))}
                 </div>
-                <div className="absolute inset-0 grid grid-rows-12">
-                  {Array.from({ length: 12 }).map((_, i) => (
+                <div className="absolute inset-0 grid grid-rows-6">
+                  {Array.from({ length: 6 }).map((_, i) => (
                     <div
                       key={i}
                       className="border-b border-purple-300 w-full"
@@ -219,13 +201,12 @@ function Stage4Page() {
                 <div className="text-black font-mono">
                   <p className="text-lg font-bold text-purple-700 mb-2">AI:</p>
                   <p className="text-sm leading-relaxed">
-                    "{aiDisplayText}
+                    "{aiDisplayText}"
                     {!aiIsTypingComplete && (
-                      <span className="inline-block w-2 h-4 bg-purple-600 ml-1 animate-pulse">
+                      <span className="inline-block w-0.5 h-4 bg-purple-600 ml-1 animate-pulse">
                         |
                       </span>
                     )}
-                    "
                   </p>
 
                   {/* AI Typing indicator - only show while typing */}
@@ -278,13 +259,12 @@ function Stage4Page() {
                       Peter:
                     </p>
                     <p className="text-sm leading-relaxed">
-                      "{peterDisplayText}
+                      "{peterDisplayText}"
                       {!peterIsTypingComplete && (
-                        <span className="inline-block w-2 h-4 bg-blue-600 ml-1 animate-pulse">
+                        <span className="inline-block w-0.5 h-4 bg-blue-600 ml-1 animate-pulse">
                           |
                         </span>
                       )}
-                      "
                     </p>
 
                     {/* Peter Typing indicator - only show while typing */}
@@ -335,14 +315,14 @@ function Stage4Page() {
         </span>
       </Link>
 
-      <div className="absolute inset-0 opacity-10">
-        <div className="grid grid-cols-16 h-full">
-          {Array.from({ length: 16 }).map((_, i) => (
+      <div className="absolute inset-0 opacity-5">
+        <div className="grid grid-cols-8 h-full">
+          {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="border-r border-purple-300"></div>
           ))}
         </div>
-        <div className="absolute inset-0 grid grid-rows-12">
-          {Array.from({ length: 12 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-rows-6">
+          {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="border-b border-purple-300 w-full"></div>
           ))}
         </div>
@@ -434,6 +414,6 @@ function Stage4Page() {
       </div>
     </div>
   );
-}
+});
 
 export default Stage4Page;
