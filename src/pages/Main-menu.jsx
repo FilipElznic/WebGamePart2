@@ -37,13 +37,13 @@ function MainMenu() {
     },
     {
       id: 4,
-      task: "Stage 4 - ",
+      task: "Stage 4 - Find the key",
       dueDate: "As soon as possible",
       completed: false,
     },
     {
       id: 5,
-      task: "Stage 5 - AI's Secret almost there",
+      task: "Stage 5 - Maze",
       dueDate: "As soon as possible",
       completed: false,
     },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useUserData } from "./UserDataProvider";
+import Peter from "./Peter"; // Assuming Peter is a component for the final stage
 
 function Final() {
   const { addXPForTask, userXP } = useUserData();
@@ -12,13 +13,14 @@ function Final() {
   // Game 1: Access Code Puzzle
   const [codeSequence, setCodeSequence] = useState(["∆", "◇", "□", "◯"]);
   const [playerInput, setPlayerInput] = useState(["", "", "", ""]);
-  const [codeAttempts, setCodeAttempts] = useState(100);
+  const [codeAttempts, setCodeAttempts] = useState(3);
   const [codeHints, setCodeHints] = useState([]);
 
   // Game 2: Wiring System
   const [wireConnections, setWireConnections] = useState({});
-  const [wireTimeLeft, setWireTimeLeft] = useState(60);
+  const [wireTimeLeft, setWireTimeLeft] = useState(15);
   const [draggedWire, setDraggedWire] = useState(null);
+  const [showWireFailure, setShowWireFailure] = useState(false);
   const [wireTargets] = useState([
     { id: "A", color: "red", connected: false },
     { id: "B", color: "blue", connected: false },
@@ -49,6 +51,7 @@ function Final() {
   const [rhythmBeat, setRhythmBeat] = useState(0);
   const [rhythmScore, setRhythmScore] = useState(0);
   const [rhythmMisses, setRhythmMisses] = useState(0);
+  const [showRhythmFailure, setShowRhythmFailure] = useState(false);
 
   // Game 4: Final Sequence
   const [finalSequence, setFinalSequence] = useState([]);
@@ -89,6 +92,12 @@ function Final() {
       setPlayerInput(["", "", "", ""]);
       setCodeAttempts(100); //testing
       setCodeHints([]);
+    } else if (currentStage === 2) {
+      // Initialize wiring game
+      setWireConnections({});
+      setWireTimeLeft(15);
+      setShowWireFailure(false);
+      setDraggedWire(null);
     } else if (currentStage === 3) {
       // Initialize rhythm game
       const directions = ["↑", "↓", "←", "→"];
@@ -101,6 +110,7 @@ function Final() {
       setRhythmBeat(0);
       setRhythmScore(0);
       setRhythmMisses(0);
+      setShowRhythmFailure(false);
     } else if (currentStage === 4) {
       // Initialize final sequence
       const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
@@ -198,6 +208,9 @@ function Final() {
         setRhythmScore((prev) => prev + 10);
       } else {
         setRhythmMisses((prev) => prev + 1);
+        // Immediate failure on wrong arrow
+        setShowRhythmFailure(true);
+        return; // Exit early to show popup
       }
 
       setRhythmBeat((prev) => prev + 1);
@@ -237,6 +250,9 @@ function Final() {
     if (currentStage === 2 && wireTimeLeft > 0) {
       const timer = setTimeout(() => setWireTimeLeft((prev) => prev - 1), 1000);
       return () => clearTimeout(timer);
+    } else if (currentStage === 2 && wireTimeLeft === 0) {
+      // Game over - wiring timer reached 0
+      setShowWireFailure(true);
     }
   }, [currentStage, wireTimeLeft]);
 
@@ -247,6 +263,11 @@ function Final() {
         1000
       );
       return () => clearTimeout(timer);
+    } else if (currentStage === 4 && finalCountdown === 0) {
+      // Game over - countdown reached 0
+      setFinalInput([]);
+      setFinalCountdown(10);
+      alert("TIME'S UP! Mission failed. Try again!");
     }
   }, [currentStage, finalCountdown]);
 
@@ -299,7 +320,33 @@ function Final() {
   );
 
   const renderCodePuzzle = () => (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto space-y-6">
+      {/* Progress Bar integrated into code puzzle */}
+      <div className="bg-gray-800 border-2 border-purple-400 p-4">
+        <div className="text-center font-mono text-purple-300 mb-2">
+          MISSION PROGRESS: {stagesCompleted.length}/4
+        </div>
+        <div className="flex justify-center space-x-2">
+          {[1, 2, 3, 4].map((stage) => (
+            <div
+              key={stage}
+              className={`w-8 h-8 border-2 flex items-center justify-center font-mono font-bold
+                ${
+                  stagesCompleted.includes(stage)
+                    ? "bg-green-600 border-green-400 text-white"
+                    : currentStage === stage
+                    ? "bg-yellow-600 border-yellow-400 text-black animate-pulse"
+                    : "bg-gray-600 border-gray-400 text-gray-300"
+                }
+              `}
+            >
+              {stage}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Security Terminal */}
       <div className="bg-black border-4 border-green-500 p-6 font-mono">
         <div className="text-green-400 mb-4">
           <div className="text-xl mb-2">&gt; SECURITY TERMINAL ACCESSED</div>
@@ -489,6 +536,43 @@ function Final() {
             TEST CONNECTIONS
           </button>
         </div>
+
+        {/* Failure Popup */}
+        {showWireFailure && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-red-900 border-4 border-red-500 p-8 max-w-md mx-4 relative">
+              <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-red-400"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-red-400"></div>
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-red-400"></div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-red-400"></div>
+
+              <div className="text-center">
+                <div className="text-4xl mb-4 animate-pulse">⚠️</div>
+                <h3 className="text-2xl font-mono font-bold text-red-300 mb-4">
+                  SYSTEM FAILURE
+                </h3>
+                <p className="text-lg font-mono text-red-200 mb-4">
+                  TIME'S UP!
+                </p>
+                <p className="text-sm font-mono text-gray-300 mb-6">
+                  The power grid failed to connect in time. The system has
+                  overloaded!
+                </p>
+                <button
+                  onClick={() => {
+                    setShowWireFailure(false);
+                    setWireConnections({});
+                    setWireTimeLeft(15);
+                    setDraggedWire(null);
+                  }}
+                  className="bg-yellow-600 hover:bg-yellow-700 border-2 border-yellow-500 text-black font-mono font-bold py-3 px-6 transition-all duration-200 transform hover:scale-105"
+                >
+                  [TRY AGAIN]
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -552,12 +636,76 @@ function Final() {
             </button>
           </div>
         </div>
+
+        {/* Rhythm Game Failure Popup */}
+        {showRhythmFailure && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-purple-900 border-4 border-purple-500 p-8 max-w-md mx-4 relative">
+              <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-400"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-400"></div>
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-400"></div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-400"></div>
+
+              <div className="text-center">
+                <div className="text-4xl mb-4 animate-pulse">🎵</div>
+                <h3 className="text-2xl font-mono font-bold text-purple-300 mb-4">
+                  SYNCHRONIZATION FAILED
+                </h3>
+                <p className="text-lg font-mono text-purple-200 mb-4">
+                  WRONG SEQUENCE!
+                </p>
+                <p className="text-sm font-mono text-gray-300 mb-6">
+                  Core synchronization failed. The rhythm sequence was
+                  incorrect!
+                </p>
+                <button
+                  onClick={() => {
+                    setShowRhythmFailure(false);
+                    setRhythmBeat(0);
+                    setRhythmInput([]);
+                    setRhythmMisses(0);
+                    setRhythmScore(0);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 border-2 border-blue-500 text-white font-mono font-bold py-3 px-6 transition-all duration-200 transform hover:scale-105"
+                >
+                  [TRY AGAIN]
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 
   const renderFinalSequence = () => (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto flex flex-col space-y-6">
+      {/* Mission Progress integrated into final sequence */}
+      <div className="bg-gray-800 border-2 border-purple-400 p-4">
+        <div className="text-center font-mono text-purple-300 mb-2">
+          MISSION PROGRESS: {stagesCompleted.length}/4
+        </div>
+        <div className="flex justify-center space-x-2">
+          {[1, 2, 3, 4].map((stage) => (
+            <div
+              key={stage}
+              className={`w-8 h-8 border-2 flex items-center justify-center font-mono font-bold
+                ${
+                  stagesCompleted.includes(stage)
+                    ? "bg-green-600 border-green-400 text-white"
+                    : currentStage === stage
+                    ? "bg-yellow-600 border-yellow-400 text-black animate-pulse"
+                    : "bg-gray-600 border-gray-400 text-gray-300"
+                }
+              `}
+            >
+              {stage}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Ignition Sequence */}
       <div className="bg-gradient-to-r from-red-900 to-orange-900 border-4 border-orange-500 p-6">
         <div className="text-center mb-6">
           <h3 className="text-2xl font-mono text-orange-300 mb-2">
@@ -693,7 +841,82 @@ function Final() {
           </div>
         </div>
 
-        <div className="text-purple-300 font-mono text-lg">+100 XP EARNED</div>
+        <div className="text-purple-300 font-mono text-lg mb-6">
+          +100 XP EARNED
+        </div>
+
+        {/* Final Stats Display */}
+        <div className="bg-black/30 border border-purple-400 p-4 mb-6 rounded">
+          <h3 className="text-yellow-300 font-mono text-lg mb-3">
+            MISSION STATISTICS
+          </h3>
+          <div className="grid grid-cols-2 gap-4 text-sm font-mono">
+            <div className="text-blue-300">
+              <div>Tasks Completed: 4/4</div>
+              <div>Success Rate: 100%</div>
+            </div>
+            <div className="text-green-300">
+              <div>Status: ELITE</div>
+              <div>Rank: COMMANDER</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Character celebration */}
+        <div className="mb-6">
+          <Peter
+            slides={[
+              {
+                title: "Mission Complete!",
+                description:
+                  "Amazing work! You've saved the ship and completed all the challenges. I knew you could do it!",
+              },
+              {
+                title: "What's Next?",
+                description:
+                  "The core is online and we're ready for the next phase of our journey. Thank you for your incredible skills!",
+              },
+            ]}
+            imageSrc="/peterHappy.png"
+          />
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={() => {
+              setGameStarted(false);
+              setCurrentStage(0);
+              setStagesCompleted([]);
+              // Reset all game states
+              setPlayerInput(["", "", "", ""]);
+              setWireConnections({});
+              setRhythmInput([]);
+              setFinalInput([]);
+            }}
+            className="bg-blue-600 hover:bg-blue-700 border-2 border-blue-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
+          >
+            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-blue-300"></div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-blue-300"></div>
+            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-blue-300"></div>
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-blue-300"></div>
+            [PLAY AGAIN]
+          </button>
+
+          <button
+            onClick={() => {
+              // This could navigate to main menu or next stage
+              window.history.back();
+            }}
+            className="bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
+          >
+            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-purple-300"></div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-300"></div>
+            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-purple-300"></div>
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-300"></div>
+            [CONTINUE JOURNEY]
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -764,7 +987,11 @@ function Final() {
       <div className="container mx-auto flex justify-center items-center h-full relative z-10">
         {!gameStarted && renderIntro()}
 
-        {gameStarted && currentStage < 5 && renderProgressBar()}
+        {gameStarted &&
+          currentStage < 5 &&
+          currentStage !== 1 &&
+          currentStage !== 4 &&
+          renderProgressBar()}
 
         {currentStage === 1 && renderCodePuzzle()}
         {currentStage === 2 && renderWiringGame()}

@@ -124,7 +124,7 @@ const Stage4Page = React.memo(() => {
         <>
           {/* Overlay background while dialogue is active */}
           <div className="fixed inset-0 bg-black bg-opacity-80 z-20 pointer-events-none transition-all duration-500 flex items-center justify-center w-full">
-            <div className="container  border-4 border-purple-500 h-[100vh] relative">
+            <div className="container  border-4 border-purple-500 h-[90vh]  relative">
               <div className="absolute -top-3 -left-3 w-5 h-5 border-t-5 border-l-5 border-purple-600"></div>
               <div className="absolute -top-3 -right-3 w-5 h-5 border-t-5 border-r-5 border-purple-600"></div>
               <div className="absolute -bottom-3 -left-3 w-5 h-5 border-b-5 border-l-5 border-purple-600"></div>

@@ -1,53 +1,317 @@
-# Peter's Quest - WebGamePart2
+# 🚀 WebGame - Interactive Space Adventure
 
-A retro-inspired web game built with React and Tailwind CSS. Help Peter solve mysteries, complete mini-games, and unlock secrets in a dark-themed, story-driven adventure.
+<div align="center">
 
-## Features
+![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Latest-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-12.0.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
-- Dark color theme (black, dark zinc, dark purple)
-- User authentication (login/register)
-- Multiple game stages and mini-games (Jumping Game, Snake Game, Chest, etc.)
-- XP system and stage unlocking
-- Animated retro UI elements and scan lines
-- Responsive design for desktop
-- Firebase integration for auth and user data
+**An immersive web-based space adventure game featuring interactive puzzles, character dialogue, and progressive storylines.**
 
-## Tech Stack
+[🎮 Play Now](#getting-started) • [📖 Documentation](#features) • [🛠️ Contributing](#development)
 
-- React
-- Tailwind CSS
-- Vite
-- Firebase (auth, user data)
+</div>
 
-## Getting Started
+---
 
-1. **Install dependencies:**
+## 🌟 Features
+
+### 🎯 **Interactive Gameplay**
+
+- **6 Progressive Stages** - Journey through challenging levels with unique objectives
+- **Character Dialogue System** - Engaging conversations with AI and Peter companions
+- **Typing Animation Effects** - Smooth, optimized text reveal animations
+- **Mini-Games Collection** - Diverse puzzle types including:
+  - 🔐 Access Code Decryption
+  - ⚡ Grid Rewiring Challenges
+  - 🎵 Rhythm Synchronization
+  - 🚀 Ignition Sequences
+
+### 🎨 **Visual Experience**
+
+- **Retro-Futuristic UI** - Cyberpunk-inspired design with animated elements
+- **Responsive Design** - Optimized for various screen sizes
+- **Smooth Animations** - RequestAnimationFrame-powered typing effects
+- **Dynamic Backgrounds** - Animated grid patterns and floating symbols
+
+### 🔧 **Technical Features**
+
+- **User Authentication** - Firebase-powered login/registration system
+- **Progress Tracking** - XP system with protected routes
+- **State Management** - Context-based user data management
+- **Performance Optimized** - React.memo and efficient rendering
+
+---
+
+## 🎮 Game Stages
+
+| Stage | Name               | Description                       | Key Features                                     |
+| ----- | ------------------ | --------------------------------- | ------------------------------------------------ |
+| **1** | Initial Diagnosis  | System awakening and introduction | Character introduction, basic navigation         |
+| **2** | Secondary Analysis | Deep system analysis              | Advanced puzzles, pattern recognition            |
+| **3** | Core Diagnostics   | Critical system evaluation        | Logic challenges, decision making                |
+| **4** | System Recovery    | Repair and restoration tasks      | Interactive repair mini-games                    |
+| **5** | Final Protocols    | Advanced system operations        | Complex multi-step procedures                    |
+| **6** | Mission Complete   | Epic final challenge              | **4 Mini-Games**: Code, Wiring, Rhythm, Ignition |
+
+---
+
+## 🛠️ Tech Stack
+
+### **Frontend**
+
+- **React 19.1.0** - Modern UI framework with latest features
+- **Vite** - Lightning-fast build tool and dev server
+- **TailwindCSS 4.x** - Utility-first CSS framework
+- **React Router DOM** - Client-side routing
+
+### **Backend & Services**
+
+- **Firebase 12.0.0** - Authentication and backend services
+- **EmailJS** - Contact form functionality
+
+### **Development Tools**
+
+- **ESLint** - Code linting and formatting
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (v16 or higher)
+- **npm** or **yarn**
+- **Git**
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/FilipElznic/WebGamePart2.git
+   cd WebGamePart2
+   ```
+
+2. **Install dependencies**
+
    ```bash
    npm install
+   # or
+   yarn install
    ```
-2. **Start the development server:**
+
+3. **Set up environment variables**
+
+   ```bash
+   # Create .env file in root directory
+   cp .env.example .env
+
+   # Add your Firebase configuration
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   # ... other Firebase config
+   ```
+
+4. **Start development server**
+
    ```bash
    npm run dev
+   # or
+   yarn dev
    ```
-3. **Open in browser:**
-   Visit `http://localhost:5173` (or as shown in terminal)
 
-## Project Structure
+5. **Open your browser**
+   ```
+   http://localhost:5173
+   ```
 
-- `src/Components/` - UI components (Navbar, Footer, GameStart, etc.)
-- `src/pages/` - Main pages (MainPage, GamePage, LoginPage, RegisterPage, etc.)
-- `src/firebase/` - Firebase config and auth logic
-- `public/` - Static assets (images)
+---
 
-## Customization
+## 📁 Project Structure
 
-- **Colors:** All major UI elements use dark theme colors. Adjust Tailwind config or component classes for further customization.
-- **Mini-games:** Add or modify mini-games in `src/Components/` and link them in the main menu.
+```
+WebGamePart2/
+├── 📁 public/                 # Static assets
+│   ├── 🖼️ AI*.png           # Character images
+│   ├── 🖼️ peter*.png        # Character images
+│   └── 🖼️ dino.png          # Game assets
+├── 📁 src/
+│   ├── 📁 Components/         # Reusable React components
+│   │   ├── 🎮 Final.jsx      # Epic final mission mini-games
+│   │   ├── 👤 Peter.jsx      # Character dialogue component
+│   │   ├── 🔒 ProtectedRoute.jsx # Auth protection
+│   │   └── 📊 UserDataProvider.jsx # State management
+│   ├── 📁 pages/             # Route components
+│   │   ├── 🏠 MainPage.jsx   # Home page
+│   │   ├── 🎯 Stage*Page.jsx # Game stages
+│   │   └── 🔐 LoginPage.jsx  # Authentication
+│   ├── 📁 firebase/          # Firebase configuration
+│   └── 📁 assets/            # Additional assets
+├── 📋 package.json           # Dependencies and scripts
+├── ⚙️ vite.config.js         # Vite configuration
+├── 🎨 tailwind.config.js     # Tailwind configuration
+└── 📖 README.md              # This file
+```
 
-## Credits
+---
 
-- Developed by Filip Elznic
-- Art and story by project contributors
+## 🎯 Development
+
+### **Available Scripts**
+
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
+| `npm run preview` | Preview production build |
+| `npm run lint`    | Run ESLint               |
+
+### **Code Style**
+
+- **ESLint** configuration enforces consistent code style
+- **Prettier** integration for automatic formatting
+- **React Hooks** rules for optimal component patterns
+
+### **Performance Optimizations**
+
+- **React.memo** for component memoization
+- **RequestAnimationFrame** for smooth animations
+- **Lazy loading** for route-based code splitting
+- **Optimized bundle** with Vite's tree shaking
+
+---
+
+## 🎨 Design System
+
+### **Color Palette**
+
+```css
+Primary: #8B5CF6 (Purple)
+Secondary: #3B82F6 (Blue)
+Accent: #F59E0B (Yellow)
+Background: Linear gradient from black to purple
+Text: White/Gray variations
+```
+
+### **Typography**
+
+- **Primary Font**: Monospace (retro-tech aesthetic)
+- **Headings**: Bold, uppercase styling
+- **Body**: Clean, readable spacing
+
+### **Components**
+
+- **Buttons**: Gradient backgrounds with hover effects
+- **Cards**: Border styling with corner decorations
+- **Animations**: Subtle pulse and bounce effects
+
+---
+
+## 🔧 Configuration
+
+### **Firebase Setup**
+
+1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+2. Enable Authentication with Email/Password
+3. Copy configuration to your `.env` file
+4. Update security rules as needed
+
+### **Deployment**
+
+The project is configured for deployment on:
+
+- **Vercel** (recommended) - Zero configuration deployment
+- **Netlify** - Static site hosting
+- **Firebase Hosting** - Integrated with backend services
+
+---
+
+## 🎮 Gameplay Features
+
+### **Mini-Games**
+
+#### 🔐 **Access Code Puzzle**
+
+- Symbol-based pattern matching
+- Progressive difficulty
+- Hint system for guidance
+
+#### ⚡ **Grid Rewiring**
+
+- Drag-and-drop interface
+- Color-coded connections
+- Randomized challenge layout
+
+#### 🎵 **Rhythm Synchronization**
+
+- Directional input sequences
+- Beat-based timing
+- Score tracking system
+
+#### 🚀 **Ignition Sequence**
+
+- Memory-based color patterns
+- Time pressure elements
+- Visual feedback system
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### **Development Workflow**
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### **Bug Reports**
+
+Please use our [Issue Template](.github/ISSUE_TEMPLATE.md) when reporting bugs.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Team
+
+<div align="center">
+
+**Developed with ❤️ by Filip Elznic**
+
+[🐛 Report Bug](https://github.com/FilipElznic/WebGamePart2/issues) • [✨ Request Feature](https://github.com/FilipElznic/WebGamePart2/issues) • [💬 Discussions](https://github.com/FilipElznic/WebGamePart2/discussions)
+
+</div>
+
+---
+
+## 🎉 Acknowledgments
+
+- **React Team** for the amazing framework
+- **Vite Team** for the lightning-fast build tool
+- **Tailwind Labs** for the utility-first CSS framework
+- **Firebase Team** for the backend infrastructure
+- **Community Contributors** for bug reports and suggestions
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you found it helpful! ⭐**
+
+</div>
 
 ## License
 
