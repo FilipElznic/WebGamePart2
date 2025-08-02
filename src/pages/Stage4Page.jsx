@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AICurious from "/AICurious.png";
 import peterThink from "/peterThink.png";
 import { Link } from "react-router-dom";
-import Chest from "../Components/Chest";
+import FindGame from "../Components/FindGame";
 
 function Stage4Page() {
   // AI text states
@@ -79,7 +79,7 @@ function Stage4Page() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-800 via-zinc-400 to-zinc-800 relative overflow-hidden">
+    <div className="min-h-screen  bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       {showDialogue && (
         <>
           {/* AI Character */}
@@ -236,8 +236,8 @@ function Stage4Page() {
         </div>
       </div>
       <div className="container mx-auto  relative w-full h-full z-10">
-        <div className=" backdrop-blur-sm rounded-xl h-[90vh] border-4 border-purple-400 shadow-2xl  relative overflow-hidden flex  flex-col items-center justify-center">
-          <Chest />
+        <div className=" backdrop-blur-sm rounded-xl h-[90vh] border-4 border-purple-400 shadow-2xl  relative overflow-hidden flex  flex-col items-center justify-center w-full">
+          <FindGame />
         </div>
       </div>
 

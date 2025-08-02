@@ -484,7 +484,7 @@ function SpaceJumpingGame() {
     {
       title: "Awesome job!",
       description:
-        "You collected the space wrench! Now you can fix the engine. You have earned 100 XP! Next stage: Repair the engine. Continue at number 3.",
+        "You collected the space wrench! But we need more tools. Continue to the next stage to get more tools for the engine. Continue at number stage 3.",
     },
   ];
 
