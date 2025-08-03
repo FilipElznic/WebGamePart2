@@ -24,7 +24,7 @@
 - **Typing Animation Effects** - Smooth, optimized text reveal animations
 - **Mini-Games Collection** - Diverse puzzle types including:
   - 🔐 Access Code Decryption
-  - ⚡ Grid Rewiring Challenges
+  - ⚡ Wiring Grid Challenges
   - 🎵 Rhythm Synchronization
   - 🚀 Ignition Sequences
 
@@ -107,10 +107,8 @@
 3. **Set up environment variables**
 
    ```bash
-   # Create .env file in root directory
-   cp .env.example .env
-
-   # Add your Firebase configuration
+   # Create .env file in root directory and add your Firebase configuration
+   # Contact the repository owner for Firebase configuration details
    VITE_FIREBASE_API_KEY=your_api_key
    VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
    VITE_FIREBASE_PROJECT_ID=your_project_id
@@ -263,7 +261,7 @@ The project is configured for deployment on:
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! Please follow these steps:
 
 ### **Development Workflow**
 
@@ -275,13 +273,13 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ### **Bug Reports**
 
-Please use our [Issue Template](.github/ISSUE_TEMPLATE.md) when reporting bugs.
+Please create an issue with detailed information about the bug, including steps to reproduce.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is for educational and personal use. Contact the author for commercial use.
 
 ---
 
@@ -291,7 +289,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Developed with ❤️ by Filip Elznic**
 
-[🐛 Report Bug](https://github.com/FilipElznic/WebGamePart2/issues) • [✨ Request Feature](https://github.com/FilipElznic/WebGamePart2/issues) • [💬 Discussions](https://github.com/FilipElznic/WebGamePart2/discussions)
+[🐛 Report Bug](https://github.com/FilipElznic/WebGamePart2/issues) • [✨ Request Feature](https://github.com/FilipElznic/WebGamePart2/issues)
 
 </div>
 

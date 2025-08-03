@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# Main pages
+Allow: /login
+Allow: /register
+Allow: /game
+Allow: /main-menu
+
+# Game stages
+Allow: /stage1
+Allow: /stage2
+Allow: /stage3
+Allow: /stage4
+Allow: /stage5
+Allow: /stage6
+
+# Information pages
+Allow: /about
+Allow: /help
+Allow: /privacy
+Allow: /contact
+Allow: /feedback
+
+# Static assets
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+
+# Disallow admin or sensitive areas (if any)
+Disallow: /admin/
+Disallow: /.env
+Disallow: /api/keys/
+
+# Sitemap
+Sitemap: https://peters-quest-part2.vercel.app/sitemap.xml
+
+# Crawl delay (be respectful)
+Crawl-delay: 1

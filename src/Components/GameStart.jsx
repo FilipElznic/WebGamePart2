@@ -28,7 +28,7 @@ function GameStart() {
     {
       title: "Why do we have problem?",
       description:
-        "Well it looks like we woke up early then everyone else, and that's the problem. Because we got 400 years to go!",
+        "Well it looks like we woke up earlier than everyone else, and that's the problem. Because we got 400 years to go!",
     },
     {
       title: "Well, we need to fix it.?",

@@ -1,0 +1,31 @@
+{
+  "name": "Peter's Quest Part 2 - Space Adventure Game",
+  "short_name": "Peter's Quest 2",
+  "description": "An interactive space adventure game where you help Peter fix his damaged spaceship in the year 2150. Features 6 progressive stages with mini-games and character dialogue.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1e40af",
+  "orientation": "landscape-primary",
+  "categories": ["games", "entertainment", "education"],
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
