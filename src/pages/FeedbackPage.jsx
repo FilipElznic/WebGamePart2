@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import PeterLike from "/peterLike.png";

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import AIHappy from "/AIHappy.png";
 import SpaceJumpingGame from "../Components/JumpingGame";
 

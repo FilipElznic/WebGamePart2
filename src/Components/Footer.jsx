@@ -88,7 +88,7 @@ function Footer() {
               <ul className="space-y-2 font-mono text-sm">
                 <li>
                   <a
-                    href="/home"
+                    href="/"
                     className="text-zinc-200 hover:text-purple-300 transition-colors duration-200 block hover:bg-purple-950 px-2 py-1 rounded"
                   >
                     <span className="text-purple-400 font-bold">&gt;</span>{" "}

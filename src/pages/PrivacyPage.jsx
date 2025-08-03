@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import peterThink from "/peterThink.png";
-import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
