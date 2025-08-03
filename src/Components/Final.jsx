@@ -4,6 +4,7 @@ import Peter from "./Peter"; // Assuming Peter is a component for the final stag
 
 function Final() {
   const { addXPForTask, userXP } = useUserData();
+  const [peterFinal, setPeterFinal] = useState(true);
 
   // Main game state
   const [currentStage, setCurrentStage] = useState(0); // 0 = intro, 1-4 = mini-games, 5 = victory
@@ -58,6 +59,7 @@ function Final() {
   const [finalInput, setFinalInput] = useState([]);
   const [finalCountdown, setFinalCountdown] = useState(10);
   const [sequenceShowing, setSequenceShowing] = useState(false);
+  const [showFinalFailure, setShowFinalFailure] = useState(false);
 
   const intervalRef = useRef(null);
 
@@ -265,9 +267,9 @@ function Final() {
       return () => clearTimeout(timer);
     } else if (currentStage === 4 && finalCountdown === 0) {
       // Game over - countdown reached 0
+      setShowFinalFailure(true);
       setFinalInput([]);
       setFinalCountdown(10);
-      alert("TIME'S UP! Mission failed. Try again!");
     }
   }, [currentStage, finalCountdown]);
 
@@ -320,7 +322,7 @@ function Final() {
   );
 
   const renderCodePuzzle = () => (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="flex flex-col max-w-2xl mx-auto space-y-6">
       {/* Progress Bar integrated into code puzzle */}
       <div className="bg-gray-800 border-2 border-purple-400 p-4">
         <div className="text-center font-mono text-purple-300 mb-2">
@@ -422,7 +424,32 @@ function Final() {
   );
 
   const renderWiringGame = () => (
-    <div className="max-w-4xl mx-auto">
+    <div className="flex flex-col max-w-4xl mx-auto space-y-6">
+      {/* Progress Bar for wiring game */}
+      <div className="bg-gray-800 border-2 border-purple-400 p-4">
+        <div className="text-center font-mono text-purple-300 mb-2">
+          MISSION PROGRESS: {stagesCompleted.length}/4
+        </div>
+        <div className="flex justify-center space-x-2">
+          {[1, 2, 3, 4].map((stage) => (
+            <div
+              key={stage}
+              className={`w-8 h-8 border-2 flex items-center justify-center font-mono font-bold
+                ${
+                  stagesCompleted.includes(stage)
+                    ? "bg-green-600 border-green-400 text-white"
+                    : currentStage === stage
+                    ? "bg-yellow-600 border-yellow-400 text-black animate-pulse"
+                    : "bg-gray-600 border-gray-400 text-gray-300"
+                }
+              `}
+            >
+              {stage}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="bg-gray-900 border-4 border-yellow-500 p-6">
         <div className="text-center mb-4">
           <h3 className="text-2xl font-mono text-yellow-300 mb-2">
@@ -578,7 +605,32 @@ function Final() {
   );
 
   const renderRhythmGame = () => (
-    <div className="max-w-2xl mx-auto">
+    <div className="flex flex-col max-w-2xl mx-auto space-y-6">
+      {/* Progress Bar for rhythm game */}
+      <div className="bg-gray-800 border-2 border-purple-400 p-4">
+        <div className="text-center font-mono text-purple-300 mb-2">
+          MISSION PROGRESS: {stagesCompleted.length}/4
+        </div>
+        <div className="flex justify-center space-x-2">
+          {[1, 2, 3, 4].map((stage) => (
+            <div
+              key={stage}
+              className={`w-8 h-8 border-2 flex items-center justify-center font-mono font-bold
+                ${
+                  stagesCompleted.includes(stage)
+                    ? "bg-green-600 border-green-400 text-white"
+                    : currentStage === stage
+                    ? "bg-yellow-600 border-yellow-400 text-black animate-pulse"
+                    : "bg-gray-600 border-gray-400 text-gray-300"
+                }
+              `}
+            >
+              {stage}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="bg-purple-900 border-4 border-purple-400 p-6">
         <div className="text-center mb-6">
           <h3 className="text-2xl font-mono text-purple-300 mb-2">
@@ -804,6 +856,42 @@ function Final() {
             </button>
           </div>
         </div>
+
+        {/* Final Sequence Failure Popup */}
+        {showFinalFailure && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-orange-900 border-4 border-orange-500 p-8 max-w-md mx-4 relative">
+              <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-orange-400"></div>
+              <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-orange-400"></div>
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-orange-400"></div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-orange-400"></div>
+
+              <div className="text-center">
+                <div className="text-4xl mb-4 animate-pulse">⏰</div>
+                <h3 className="text-2xl font-mono font-bold text-orange-300 mb-4">
+                  IGNITION FAILED
+                </h3>
+                <p className="text-lg font-mono text-orange-200 mb-4">
+                  TIME'S UP!
+                </p>
+                <p className="text-sm font-mono text-gray-300 mb-6">
+                  The ignition sequence timed out. Mission failed. The core
+                  requires immediate reactivation!
+                </p>
+                <button
+                  onClick={() => {
+                    setShowFinalFailure(false);
+                    setFinalInput([]);
+                    setFinalCountdown(10);
+                  }}
+                  className="bg-orange-600 hover:bg-orange-700 border-2 border-orange-500 text-white font-mono font-bold py-3 px-6 transition-all duration-200 transform hover:scale-105"
+                >
+                  [TRY AGAIN]
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -863,39 +951,48 @@ function Final() {
               <div>Tasks Completed: 4/4</div>
               <div>Success Rate: 100%</div>
             </div>
-            <div className="text-green-300">
-              <div>Status: ELITE</div>
-              <div>Rank: COMMANDER</div>
-            </div>
           </div>
         </div>
 
         {/* Character celebration */}
-        <div className="mb-6">
-          <Peter
-            slides={[
-              {
-                title: "Mission Complete!",
-                description:
-                  "Amazing work! You've saved the ship and completed all the challenges. I knew you could do it!",
-              },
-              {
-                title: "What's Next?",
-                description:
-                  "The core is online and we're ready for the next phase of our journey. Thank you for your incredible skills!",
-              },
-            ]}
-            imageSrc="/peterHappy.png"
-          />
+        <div className="mb-6 z-50 absolute inset-0 flex  justify-center">
+          {peterFinal && (
+            <>
+              {" "}
+              <Peter
+                slides={[
+                  {
+                    title: "Mission Complete!",
+                    description:
+                      "Amazing work! You've saved the ship and completed all the challenges. I knew you could do it!",
+                  },
+                  {
+                    title: "What's Next?",
+                    description:
+                      "The engine is online and we're ready to go back to sleep. Thank you for your incredible skills! And see you in 650 years!",
+                  },
+                ]}
+                imageSrc="/peterSalut.png"
+              />
+              <button
+                className="absolute top-1/4 right-1/8 z-50 cursor-pointer m-4 text-white bg-red-600 hover:bg-red-700  w-8 h-8 flex items-center justify-center font-bold"
+                onClick={() => {
+                  setPeterFinal(false);
+                }}
+              >
+                X
+              </button>
+            </>
+          )}
         </div>
 
         {/* Action buttons */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 z-50  mt-6">
           <button
             onClick={() => {
               window.location.href = "/subtitles";
             }}
-            className="bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
+            className="bg-purple-600 cursor-pointer z-50 hover:bg-purple-700 border-2 border-purple-500 text-white font-mono font-bold py-3 px-6 text-lg transition-all duration-200 transform hover:scale-105 relative"
           >
             <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-purple-300"></div>
             <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-300"></div>
@@ -903,34 +1000,6 @@ function Final() {
             <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-purple-300"></div>
             [FINAL SUBTITLES]
           </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderProgressBar = () => (
-    <div className="mb-6">
-      <div className="bg-gray-800 border-2 border-purple-400 p-4">
-        <div className="text-center font-mono text-purple-300 mb-2">
-          MISSION PROGRESS: {stagesCompleted.length}/4
-        </div>
-        <div className="flex justify-center space-x-2">
-          {[1, 2, 3, 4].map((stage) => (
-            <div
-              key={stage}
-              className={`w-8 h-8 border-2 flex items-center justify-center font-mono font-bold
-                ${
-                  stagesCompleted.includes(stage)
-                    ? "bg-green-600 border-green-400 text-white"
-                    : currentStage === stage
-                    ? "bg-yellow-600 border-yellow-400 text-black animate-pulse"
-                    : "bg-gray-600 border-gray-400 text-gray-300"
-                }
-              `}
-            >
-              {stage}
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -973,12 +1042,6 @@ function Final() {
 
       <div className="container mx-auto flex justify-center items-center h-full relative z-10">
         {!gameStarted && renderIntro()}
-
-        {gameStarted &&
-          currentStage < 5 &&
-          currentStage !== 1 &&
-          currentStage !== 4 &&
-          renderProgressBar()}
 
         {currentStage === 1 && renderCodePuzzle()}
         {currentStage === 2 && renderWiringGame()}

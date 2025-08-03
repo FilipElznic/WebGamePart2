@@ -40,24 +40,23 @@ const Subtitles = () => {
       duration: 3500,
     },
     { text: "GAME COMPLETED", delay: 2000, duration: 3000, trigger: "credits" },
-    { text: "Press button to continue...", delay: 1500, duration: -1 },
   ];
 
   const credits = [
-    "A Story About Choice",
+    "A Story About Space friends",
     "Created by Filip Elznic",
     "",
     "Created with love for",
-    "Those who see humanity",
-    "In unexpected places",
+    "Those who enjoy gaming",
+
     "",
-    "Thank you for caring about AI",
+    "Thank you for caring.",
   ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSubtitlesButton(true);
-    }, 60000); // 60 seconds
+    }, 50000); // 5 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -103,7 +102,7 @@ const Subtitles = () => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
       {showSubtitlesButton && (
-        <div className="absolute z-10 bottom-32 left-1/2 transform -translate-x-1/2 text-white font-mono">
+        <div className="absolute z-50 bottom-32 left-1/2 transform -translate-x-1/2 text-white font-mono">
           <div className="relative bg-gray-900 rounded-lg  shadow-2xl ">
             <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-purple-600"></div>
             <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-purple-600"></div>
@@ -113,9 +112,9 @@ const Subtitles = () => {
               onClick={() => {
                 window.location.href = "/";
               }}
-              className=" text-white bg-gray-800 px-4 py-2 rounded hover:bg-gray-700 transition border-2 border-gray-600 font-mono text-xl"
+              className=" text-white cursor-pointer bg-gray-800 px-4 py-2 rounded hover:bg-gray-700 transition border-2 border-gray-600 font-mono text-xl"
             >
-              Subtitles
+              HOME
             </button>
           </div>
         </div>
@@ -123,16 +122,16 @@ const Subtitles = () => {
       {/* CRT Monitor Frame */}
       <div className="relative w-full max-w-4xl aspect-video bg-gray-900 rounded-lg p-6 shadow-2xl">
         {/* Screen Border */}
-        <div className="relative w-full h-full bg-gray-800 rounded border-4 border-gray-700 overflow-hidden">
-          {/* Screen Background with amber/green tint */}
-          <div className="absolute inset-0 bg-gradient-to-b from-amber-950 via-green-950 to-black opacity-90"></div>
+        <div className="relative w-full h-full bg-black rounded border-4 border-purple-900 overflow-hidden">
+          {/* Screen Background with purple/dark tint */}
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-950 via-violet-950 to-black opacity-95"></div>
 
           {/* Floating Particles */}
           <div className="absolute inset-0 overflow-hidden">
             {Array.from({ length: 15 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-green-400 rounded-full opacity-60 animate-pulse"
+                className="absolute w-1 h-1 bg-purple-400 rounded-full opacity-60 animate-pulse"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -148,7 +147,7 @@ const Subtitles = () => {
             {Array.from({ length: 40 }).map((_, i) => (
               <div
                 key={i}
-                className="w-full h-0.5 bg-green-400 mb-3 animate-pulse"
+                className="w-full h-0.5 bg-purple-400 mb-3 animate-pulse"
                 style={{ animationDelay: `${i * 0.15}s` }}
               ></div>
             ))}
@@ -160,15 +159,15 @@ const Subtitles = () => {
               {/* Logo/Symbol Area */}
               <div className="mb-12">
                 <div className="flex justify-center items-center space-x-4 mb-6">
-                  <div className="w-8 h-8 bg-green-500 rounded-sm animate-pulse shadow-lg shadow-green-500/50"></div>
-                  <div className="text-green-400 font-mono text-2xl">❤</div>
-                  <div className="w-8 h-8 bg-blue-500 rounded-sm animate-pulse shadow-lg shadow-blue-500/50"></div>
+                  <div className="w-8 h-8 bg-purple-500 rounded-sm animate-pulse shadow-lg shadow-purple-500/50"></div>
+                  <div className="text-purple-400 font-mono text-2xl">❤</div>
+                  <div className="w-8 h-8 bg-violet-500 rounded-sm animate-pulse shadow-lg shadow-violet-500/50"></div>
                 </div>
               </div>
 
               {/* Main Subtitle Text */}
               <div className="min-h-[120px] flex items-center justify-center mb-8">
-                <p className="text-green-300 font-mono text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-wide text-center">
+                <p className="text-purple-300 font-mono text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-wide text-center">
                   {displayedText && (
                     <span className="animate-pulse">
                       {displayedText}
@@ -184,7 +183,7 @@ const Subtitles = () => {
                   {credits.map((line, index) => (
                     <div
                       key={index}
-                      className="text-green-400 font-mono text-sm md:text-base opacity-0 animate-fadeIn"
+                      className="text-purple-400 font-mono text-sm md:text-base opacity-0 animate-fadeIn"
                       style={{
                         animationDelay: `${index * 0.5}s`,
                         animationFillMode: "forwards",
@@ -199,25 +198,25 @@ const Subtitles = () => {
               {/* Terminal Cursor */}
               {isComplete && (
                 <div className="mt-8">
-                  <span className="text-green-400 text-2xl animate-blink">
+                  <span className="text-purple-400 text-2xl animate-blink">
                     █
                   </span>
                 </div>
               )}
 
               {/* Additional Retro Elements */}
-              <div className="absolute bottom-4 left-4 text-green-500 font-mono text-xs opacity-50">
+              <div className="absolute bottom-4 left-4 text-purple-500 font-mono text-xs opacity-50">
                 SYSTEM: STORY_ENGINE_V1.0
               </div>
 
-              <div className="absolute bottom-4 right-4 text-green-500 font-mono text-xs opacity-50">
+              <div className="absolute bottom-4 right-4 text-purple-500 font-mono text-xs opacity-50">
                 {new Date().getFullYear()} - DIGITAL_MEMORIES.EXE
               </div>
             </div>
           </div>
 
           {/* Screen Glow Effect */}
-          <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-amber-900/20 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-purple-900/20 pointer-events-none"></div>
 
           {/* Occasional Screen Flicker */}
           <div className="absolute inset-0 bg-white opacity-0 animate-flicker pointer-events-none"></div>
@@ -227,7 +226,7 @@ const Subtitles = () => {
         <div className="absolute inset-6 bg-gradient-to-br from-white/10 to-transparent rounded pointer-events-none"></div>
 
         {/* Power LED */}
-        <div className="absolute bottom-2 right-8 w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+        <div className="absolute bottom-2 right-8 w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50"></div>
       </div>
 
       <style jsx>{`

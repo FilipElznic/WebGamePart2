@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import peterIdea from "/peterIdea.png";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -194,7 +193,7 @@ function FeedbackPage() {
                 <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-purple-400"></div>
                 <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-purple-400"></div>
 
-                <h3 className="text-purple-400 font-mono text-xl font-bold mb-4 bg-purple-400 text-black px-3 py-1 inline-block">
+                <h3 className=" font-mono text-xl font-bold mb-4 bg-purple-400 text-black px-3 py-1 inline-block">
                   [INPUT_FORM]
                 </h3>
 
@@ -286,7 +285,7 @@ function FeedbackPage() {
             {/* Right side - Info Panels */}
             <div className="space-y-6">
               {/* Privacy Info */}
-              <div className="bg-purple-50 border-4 border-purple-400 p-6 relative">
+              <div className="bg-black border-4 border-purple-400 p-6 relative">
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -294,7 +293,7 @@ function FeedbackPage() {
                   [PRIVACY_PROTOCOL]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200  space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> All
                     feedback is sent securely via EmailJS and delivered directly
@@ -306,7 +305,7 @@ function FeedbackPage() {
                     old-school privacy!
                   </p>
 
-                  <div className="bg-white border border-purple-300 p-3 mt-4">
+                  <div className="bg-purple-400 border border-purple-300 p-3 mt-4">
                     <p className="text-sm mb-1">
                       <span className="text-purple-600">&gt;</span> SERVICE:
                       EmailJS
@@ -324,7 +323,7 @@ function FeedbackPage() {
               </div>
 
               {/* Feedback Guidelines */}
-              <div className="bg-purple-50 border-4 border-purple-400 p-6 relative">
+              <div className="bg-black  border-4 border-purple-400 p-6 relative">
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -332,7 +331,7 @@ function FeedbackPage() {
                   [FEEDBACK_GUIDE]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <h4 className="font-bold">For Bug Reports:</h4>
                   <p className="text-sm leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span>{" "}
@@ -356,7 +355,7 @@ function FeedbackPage() {
               </div>
 
               {/* Response Time */}
-              <div className="bg-purple-50 border-4 border-purple-400 p-6 relative">
+              <div className="bg-black border-4 border-purple-400 p-6 relative">
                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -364,7 +363,7 @@ function FeedbackPage() {
                   [RESPONSE_TIME]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> We
                     typically respond to feedback within 24-48 hours during

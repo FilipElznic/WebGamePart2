@@ -70,7 +70,7 @@ function AboutPage() {
               </div>
               <h2 className="text-5xl font-mono font-bold text-gray-800 relative">
                 <span className="relative z-10">
-                  <span className="text-purple-600 bg-purple-100 px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
+                  <span className="text-purple-600 bg-black px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
                     &gt; ABOUT_US.EXE
                   </span>
                 </span>
@@ -81,7 +81,7 @@ function AboutPage() {
             {/* Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Team Info */}
-              <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+              <div className="bg-black border-2 border-purple-400 p-6 relative">
                 <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -89,7 +89,7 @@ function AboutPage() {
                   [TEAM_DATA]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> I am
                     a solo full-stack developer with a passion for creating
@@ -98,7 +98,7 @@ function AboutPage() {
                   </p>
 
                   {/* Team stats */}
-                  <div className="bg-white border border-purple-300 p-3 mt-4">
+                  <div className="bg-purple-950 border border-purple-300 p-3 mt-4">
                     <p className="text-sm mb-1">
                       <span className="text-purple-600">&gt;</span> DEVELOPERS:
                       ACTIVE
@@ -116,7 +116,7 @@ function AboutPage() {
               </div>
 
               {/* Mission Info */}
-              <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+              <div className="bg-black border-2 border-purple-400 p-6 relative">
                 <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -124,7 +124,7 @@ function AboutPage() {
                   [MISSION_LOG]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> My
                     mission is to create a unique gaming experience that
@@ -132,7 +132,7 @@ function AboutPage() {
                   </p>
 
                   {/* Mission objectives */}
-                  <div className="bg-white border border-purple-300 p-3 mt-4">
+                  <div className="bg-purple-950 border border-purple-300 p-3 mt-4">
                     <p className="text-sm mb-1">
                       <span className="text-green-600">✓</span> Make it fun to
                       play
@@ -155,25 +155,25 @@ function AboutPage() {
             </div>
 
             {/* Technologies Section */}
-            <div className="mt-8 bg-purple-50 border-2 border-purple-400 p-6">
+            <div className="mt-8 bg-black border-2 border-purple-400 p-6">
               <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
                 [TECH_STACK]
               </h3>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-sm">
-                <div className="bg-white border border-purple-300 p-3 text-center hover:bg-purple-100 transition-colors duration-200">
+                <div className="bg-black border border-purple-300 p-3 text-center hover:bg-zinc-950 transition-colors duration-200">
                   <div className="text-purple-600 font-bold mb-1">REACT.JS</div>
                   <div className="text-gray-600">Frontend</div>
                 </div>
-                <div className="bg-white border border-purple-300 p-3 text-center hover:bg-purple-100 transition-colors duration-200">
+                <div className="bg-black border border-purple-300 p-3 text-center hover:bg-zinc-950 transition-colors duration-200">
                   <div className="text-purple-600 font-bold mb-1">VITE</div>
                   <div className="text-gray-600">Build Tool</div>
                 </div>
-                <div className="bg-white border border-purple-300 p-3 text-center hover:bg-purple-100 transition-colors duration-200">
+                <div className="bg-black border border-purple-300 p-3 text-center hover:bg-zinc-950 transition-colors duration-200">
                   <div className="text-purple-600 font-bold mb-1">TAILWIND</div>
                   <div className="text-gray-600">Styling</div>
                 </div>
-                <div className="bg-white border border-purple-300 p-3 text-center hover:bg-purple-100 transition-colors duration-200">
+                <div className="bg-black border border-purple-300 p-3 text-center hover:bg-zinc-950 transition-colors duration-200">
                   <div className="text-purple-600 font-bold mb-1">
                     JAVASCRIPT
                   </div>
@@ -186,7 +186,7 @@ function AboutPage() {
               <div className="bg-purple-400 hover:bg-purple-500 border-4 border-gray-800 px-8 py-4 font-mono font-bold text-gray-800 text-lg uppercase tracking-wider transition-all duration-200 hover:scale-105 cursor-pointer relative overflow-hidden inline-block">
                 <span
                   onClick={() => (window.location.href = "/game")}
-                  className="relative z-10"
+                  className="relative z-40"
                 >
                   [ JOIN THE ADVENTURE ]
                 </span>

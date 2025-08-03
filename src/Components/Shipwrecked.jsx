@@ -2,7 +2,7 @@ function Shipwrecked() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 flex flex-col relative font-mono">
       <div className="flex-1 flex items-center justify-center">
-        <div className="bg-white/95 p-6 sm:p-4 xs:p-2  shadow-lg border-4 border-purple-400 max-w-3xl w-full h-full text-center z-30 mx-2 relative retro-shadow">
+        <div className="bg-black p-6 sm:p-4 xs:p-2  shadow-lg border-4 border-purple-400 max-w-3xl w-full h-full text-center z-30 mx-2 relative retro-shadow">
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-400 border-2 border-purple-700 px-4 py-1 text-3xl rounded-t-lg shadow-md text-black  font-bold tracking-widest retro-title">
             [SHIPWRECKED]
           </div>
@@ -12,12 +12,12 @@ function Shipwrecked() {
                 Boston Private Island Hackathon
               </span>
             </p>
-            <p className="text-2xl sm:text-base xs:text-sm text-gray-800 mb-2 retro-desc">
+            <p className="text-2xl sm:text-base xs:text-sm text-gray-200 mb-2 retro-desc">
               Welcome to{" "}
-              <span className="font-bold text-purple-600">Shipwrecked</span>,
+              <span className="font-bold text-purple-200">Shipwrecked</span>,
               the legendary hackathon adventure!
             </p>
-            <p className="text-lg text-gray-700 mb-4 retro-desc">
+            <p className="text-lg text-gray-200 mb-4 retro-desc">
               This unique event takes place on a private island,this is the
               first ever hackathon on a private island, where
             </p>
