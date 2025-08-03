@@ -810,30 +810,34 @@ function Final() {
 
   const renderVictory = () => (
     <div className="text-center">
-      <div className="bg-gradient-to-br from-green-800 via-blue-900 to-purple-950 backdrop-blur-sm p-8 border-4 border-green-400 shadow-2xl relative mb-8">
-        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-green-500"></div>
-        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-green-500"></div>
-        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-green-500"></div>
-        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-green-500"></div>
+      <div className="  p-8 border-4 border-purple-400 shadow-2xl relative my-8">
+        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+        <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+        <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
 
         <div className="text-6xl mb-6 animate-pulse">🎉</div>
         <h1 className="text-5xl font-mono font-bold text-green-300 mb-6">
           MISSION ACCOMPLISHED!
         </h1>
         <h2 className="text-3xl font-mono text-yellow-300 mb-4">
-          CORE REACTIVATED
+          Engine fixed
         </h2>
 
-        <div className="bg-black/50 border-2 border-green-500 p-6 mb-6">
+        <div className="bg-black/50 border-2 border-purple-500 p-6 mb-6 w-2/3  mx-auto relative">
+          <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
           <p className="text-lg font-mono text-green-300 mb-4">
             [SYSTEM STATUS: OPERATIONAL]
           </p>
-          <p className="text-gray-300 font-mono text-sm leading-relaxed mb-4">
+          <p className="text-gray-300 font-mono text-sm leading-relaxed mb-4 w-2/3 text-center mx-auto">
             Congratulations! You have successfully completed all critical tasks
             and reactivated the ship's core. The engine is now online and the
             mission can continue. Well done, Commander!
           </p>
-          <div className="text-left space-y-2 text-sm font-mono text-green-200">
+          <div className="text-left space-y-2 text-sm font-mono text-green-200 mx-auto  w-1/3">
             <div>✓ Access Code Decrypted</div>
             <div>✓ Power Grid Rewired</div>
             <div>✓ Core Beat Synchronized</div>
@@ -846,7 +850,11 @@ function Final() {
         </div>
 
         {/* Final Stats Display */}
-        <div className="bg-black/30 border border-purple-400 p-4 mb-6 rounded">
+        <div className="bg-black/30 border border-purple-400 p-4 mb-6 rounded w-1/2 mx-auto relative">
+          <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
           <h3 className="text-yellow-300 font-mono text-lg mb-3">
             MISSION STATISTICS
           </h3>

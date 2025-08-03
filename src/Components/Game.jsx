@@ -20,7 +20,7 @@ function Game() {
 
   const handleXP = useCallback(async () => {
     try {
-      if (userXP === 500) {
+      if (userXP === 400) {
         const result = await addXPForTask(100); // Add 100 XP
         console.log("Gravity Magnet Maze completed!");
         if (result.success) {
@@ -33,7 +33,7 @@ function Game() {
             console.log("Maze completed! (XP update failed)");
           }
         }
-      } else if (userXP === 600) {
+      } else if (userXP === 500) {
         console.log("Game finished! (XP already earned)");
       }
     } catch (error) {

@@ -25,7 +25,7 @@ function SpaceGeometryDash() {
 
   const handleXP = useCallback(async () => {
     try {
-      if (userXP === 300) {
+      if (userXP === 200) {
         const result = await addXPForTask(100); // Add 100 XP
         console.log("here");
         if (result.success) {
@@ -38,7 +38,7 @@ function SpaceGeometryDash() {
             console.log("Game finished! (XP update failed)");
           }
         }
-      } else if (userXP == 400) {
+      } else if (userXP == 300) {
         console.log("Game finished! (XP already earned)");
       }
     } catch (error) {
@@ -833,56 +833,15 @@ function SpaceGeometryDash() {
         )}
       </div>
 
-      {/* Enhanced Victory message */}
-      {gameState.distance > 6000 && !gameState.running && !gameState.over && (
-        <div className="mt-6 p-6 bg-gradient-to-br from-green-800 via-emerald-800 to-green-900 backdrop-blur-sm border-4 border-green-400 text-white rounded-lg font-bold text-center shadow-2xl relative z-10 max-w-2xl">
-          {/* Success border effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 rounded-lg opacity-30 animate-pulse"></div>
-          <div className="relative bg-gradient-to-br from-green-800/95 via-emerald-800/95 to-green-900/95 rounded-lg p-6 m-1">
-            {/* Corner decorations */}
-            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-green-300"></div>
-            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-green-300"></div>
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-green-300"></div>
-            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-green-300"></div>
-
-            <div className="text-6xl mb-4 animate-bounce">🎉</div>
-            <div className="text-4xl mb-4 text-green-300 animate-pulse">
-              MISSION ACCOMPLISHED!
-            </div>
-            <div className="text-2xl mb-4 text-yellow-300">
-              🔌 Electric Wires Collected! 🔌
-            </div>
-            <div className="bg-black/50 border-2 border-green-400 p-4 rounded mb-4">
-              <div className="text-lg mb-2">
-                Final Distance:{" "}
-                <span className="text-yellow-400 font-bold">
-                  {Math.round(gameState.distance)}m
-                </span>
-              </div>
-              <div className="text-lg">
-                Mission Status:{" "}
-                <span className="text-green-400 font-bold">COMPLETE</span>
-              </div>
-            </div>
-            <div className="text-lg text-green-200">
-              The space station power systems can now be repaired!
-            </div>
-            <div className="mt-4 text-purple-300 font-mono text-lg animate-pulse">
-              +100 XP EARNED
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Victory Peter message */}
       {gameState.distance > 6000 && !gameState.running && (
         <>
           {!hidePeter2 && (
-            <div className="fixed top-1/2 right-8 transform -translate-y-1/2 z-50">
+            <div className="fixed top-1/2 right-40    transform -translate-y-1/2 z-50 backdrop-blur-sm">
               <Peter
                 slides={peterSlides}
                 imageSrc="/AIHappy.png"
-                className="relative"
+                className="relative "
               />
               <button
                 onClick={() => setHidePeter2(true)}

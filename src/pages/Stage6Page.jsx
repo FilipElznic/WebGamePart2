@@ -36,7 +36,7 @@ const Stage4Page = React.memo(() => {
     "Great job, we are almost there! Now you need to insert the code to the the lock. That Peter had surely written down and remembered it for you.";
 
   const peterText =
-    "Ummmmm, well we have a big problem! I lost the code and I don't remember it. But they were just 4 digit. But I think you can guess it.";
+    "Ummmmm, well we have a big problem! I lost the code and I don't remember it. But there  were just 4 digit. But I think you can guess it.";
 
   // AI typing effect - optimized version
   useEffect(() => {
