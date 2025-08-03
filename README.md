@@ -259,18 +259,6 @@ The project is configured for deployment on:
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-### **Development Workflow**
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ### **Bug Reports**
 
 Please create an issue with detailed information about the bug, including steps to reproduce.
@@ -311,6 +299,16 @@ This project is for educational and personal use. Contact the author for commerc
 
 </div>
 
-## License
+## 🌐 Deployment
 
-This project is for educational and personal use. Contact the author for other uses.
+This project is ready for deployment on [Vercel](https://web-game-part2-jervtr3ti-filips-projects-202dcf37.vercel.app/). The included `vercel.json` ensures correct single-page application routing for all client-side routes.
+
+<div align="center">
+  <a href="https://shipwrecked.hackclub.com/?t=ghrm" target="_blank">
+    <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/739361f1d440b17fc9e2f74e49fc185d86cbec14_badge.png" 
+         alt="This project is part of Shipwrecked, the world's first hackathon on an island!" 
+         style="width: 35%;">
+  </a>
+</div>
+
+Made with ❤️ by Filip Elznic.
