@@ -41,7 +41,7 @@ function PrivacyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-purple-950 relative overflow-hidden">
       <Navbar />
       {showDialogue && (
         <div className="">
@@ -127,7 +127,7 @@ function PrivacyPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-1/2">
             {/* Team Info */}
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -135,7 +135,7 @@ function PrivacyPage() {
                 [HOW_HANDLE_DATA]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h2>How do we handle your data?</h2>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> We
@@ -144,23 +144,21 @@ function PrivacyPage() {
                 </p>
 
                 {/* Team stats */}
-                <div className="bg-white border border-purple-300 p-3 mt-4">
+                <div className="bg-purple-300 border border-purple-300 p-3 mt-4">
                   <p className="text-sm mb-1">
-                    <span className="text-purple-600">&gt;</span> DATA:
-                    ENCRYPTED
+                    <span className="text-black">&gt; DATA: ENCRYPTED</span>
                   </p>
                   <p className="text-sm mb-1">
-                    <span className="text-purple-600">&gt;</span> COOKIES: NOPE
+                    <span className="text-black">&gt; COOKIES: NOPE</span>
                   </p>
                   <p className="text-sm">
-                    <span className="text-purple-600">&gt;</span> 3RD SITES: NOT
-                    USED
+                    <span className="text-black">&gt; 3RD SITES: NOT USED</span>
                   </p>
                 </div>
               </div>
             </div>
             {/* Mission Info */}
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -168,7 +166,7 @@ function PrivacyPage() {
                 [COOKIES]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h1>Does this web game use cookies?</h1>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> No !
@@ -183,7 +181,7 @@ function PrivacyPage() {
                 {/* Mission objectives */}
               </div>
             </div>
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -191,7 +189,7 @@ function PrivacyPage() {
                 [3RD_PARTY]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h1>What data is shared with 3rd parties?</h1>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> None,
@@ -201,7 +199,7 @@ function PrivacyPage() {
                 {/* Mission objectives */}
               </div>
             </div>
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -209,7 +207,7 @@ function PrivacyPage() {
                 [ENCRYPTION]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h1>How is my data protecteds?</h1>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> Your

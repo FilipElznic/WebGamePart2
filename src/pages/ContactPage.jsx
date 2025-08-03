@@ -71,7 +71,7 @@ function ContactPage() {
               </div>
               <h2 className="text-5xl font-mono font-bold text-gray-800 relative">
                 <span className="relative z-10">
-                  <span className="text-purple-600 bg-purple-100 px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
+                  <span className="text-purple-600 bg-black px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
                     &gt; CONTACT_ME.EXE
                   </span>
                 </span>
@@ -82,7 +82,7 @@ function ContactPage() {
             {/* Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Team Info */}
-              <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+              <div className="bg-black border-2 border-purple-400 p-6 relative">
                 <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -90,7 +90,7 @@ function ContactPage() {
                   [CONTACT_DATA]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> The
                     best way to reach me is via feedback form on this page, that
@@ -98,24 +98,26 @@ function ContactPage() {
                   </p>
 
                   {/* Team stats */}
-                  <div className="bg-white border border-purple-300 p-3 mt-4">
+                  <div className="bg-purple-200 border border-purple-300 p-3 mt-4">
                     <p className="text-sm mb-1">
-                      <span className="text-purple-600">&gt;</span> FEEDBACK
-                      FORM: ACTIVE
+                      <span className="text-purple-600">
+                        &gt;FEEDBACK FORM: ACTIVE
+                      </span>
                     </p>
                     <p className="text-sm mb-1">
-                      <span className="text-purple-600">&gt;</span> SOCIALS: 3
+                      <span className="text-purple-600">&gt;SOCIALS: 3</span>
                     </p>
                     <p className="text-sm">
-                      <span className="text-purple-600">&gt;</span> STATUS:
-                      UNKNOWN
+                      <span className="text-purple-600">
+                        &gt;STATUS: UNKNOWN
+                      </span>
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Mission Info */}
-              <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+              <div className="bg-black border-2 border-purple-400 p-6 relative">
                 <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
                 <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
@@ -123,7 +125,7 @@ function ContactPage() {
                   [SOCIALS]
                 </h3>
 
-                <div className="font-mono text-gray-800 space-y-3">
+                <div className="font-mono text-gray-200 space-y-3">
                   <p className="leading-relaxed">
                     <span className="text-purple-600 font-bold">&gt;</span> If
                     you still wanna reach me, by a different way. You can use my
@@ -132,18 +134,18 @@ function ContactPage() {
                   </p>
 
                   {/* Mission objectives */}
-                  <div className="bg-white border border-purple-300 p-3 mt-4">
+                  <div className="bg-purple-200 border border-purple-300 p-3 mt-4">
                     <p className="text-sm mb-1">
-                      <span className="text-green-600">✓</span> LinkedIn
+                      <span className="text-green-600">✓ LinkedIn</span>
                     </p>
                     <p className="text-sm mb-1">
-                      <span className="text-green-600">✓</span> Instagram
+                      <span className="text-green-600">✓ Instagram</span>
                     </p>
                     <p className="text-sm mb-1">
-                      <span className="text-green-600">✓</span> Github
+                      <span className="text-green-600">✓ Github</span>
                     </p>
                     <p className="text-sm">
-                      <span className="text-purple-600">⧗</span> Twitter
+                      <span className="text-purple-600">⧗ Twitter</span>
                     </p>
                   </div>
                 </div>

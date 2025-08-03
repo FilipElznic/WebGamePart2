@@ -146,7 +146,7 @@ function HelpPage() {
             </div>
             <h2 className="text-5xl font-mono font-bold text-gray-800 relative">
               <span className="relative z-10">
-                <span className="text-purple-600 bg-purple-100 px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
+                <span className="text-purple-600 bg-black px-4 py-2 border-2 border-purple-400 inline-block transform rotate-1 shadow-lg">
                   &gt; HELP_HELP.EXE
                 </span>
               </span>
@@ -157,15 +157,15 @@ function HelpPage() {
           {/* Content Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Team Info */}
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
-              <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
+              <h3 className="text-xl font-mono font-bold text-gray-600  mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
                 [HELP_DATA]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h2>How do I play this game?</h2>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> To
@@ -175,17 +175,17 @@ function HelpPage() {
                 </p>
 
                 {/* Team stats */}
-                <div className="bg-white border border-purple-300 p-3 mt-4">
+                <div className="bg-purple-400 border border-purple-300 p-3 mt-4">
                   <p className="text-sm mb-1">
-                    <span className="text-purple-600">&gt;</span> SIGN UP:
+                    <span className="text-purple-200">&gt;</span> SIGN UP:
                     CREATE ACCOUNT
                   </p>
                   <p className="text-sm mb-1">
-                    <span className="text-purple-600">&gt;</span> BUTTONS TO
+                    <span className="text-purple-200">&gt;</span> BUTTONS TO
                     CLICK: START GAME
                   </p>
                   <p className="text-sm">
-                    <span className="text-purple-600">&gt;</span> GAME STATUS:
+                    <span className="text-purple-200">&gt;</span> GAME STATUS:
                     DEVELOPING
                   </p>
                 </div>
@@ -193,15 +193,15 @@ function HelpPage() {
             </div>
 
             {/* Mission Info */}
-            <div className="bg-purple-50 border-2 border-purple-400 p-6 relative">
+            <div className="bg-black border-2 border-purple-400 p-6 relative">
               <div className="absolute top-2 left-2 w-3 h-3 bg-purple-400 rotate-45"></div>
               <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rotate-45"></div>
 
-              <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
+              <h3 className="text-xl font-mono font-bold text-gray-600 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block">
                 [HELP_DATA]
               </h3>
 
-              <div className="font-mono text-gray-800 space-y-3">
+              <div className="font-mono text-gray-200 space-y-3">
                 <h1>What is my mission?</h1>
                 <p className="leading-relaxed">
                   <span className="text-purple-600 font-bold">&gt;</span> Your
@@ -221,7 +221,7 @@ function HelpPage() {
           </div>
 
           {/* Technologies Section */}
-          <div className="mt-8 bg-purple-50 border-2 border-purple-400 p-6">
+          <div className="mt-8 bg-black border-2 border-purple-400 p-6">
             <h3 className="text-xl font-mono font-bold text-gray-800 mb-4 bg-purple-200 px-3 py-1 border border-purple-500 inline-block  ">
               [REQUIRED_STACK]
             </h3>

@@ -52,7 +52,14 @@ function LandingPage() {
                 Your mission today is simple: Help Peter with his little
                 problem! To continue this epic adventure, you'll need to sign up
                 to make your progress saveable. Please create an account or
-                login to your existing one.
+                login to your existing one. This is part 2 of the game, so if
+                you haven't played part 1, you can find it{" "}
+                <a
+                  href="https://web-game-ruby.vercel.app/"
+                  className="text-purple-400"
+                >
+                  here
+                </a>
               </p>
 
               {/* System status */}
