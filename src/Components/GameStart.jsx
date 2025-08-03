@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import PeterIdea from "/peterIdea.png";
+import PeterHi from "/peterHi.png";
 
 function GameStart() {
   const [showImage, setShowImage] = useState(false);
@@ -201,8 +201,8 @@ function GameStart() {
             {/* Image section */}
             <div className="flex-1 flex justify-center mb-8 md:mb-0">
               <img
-                src={PeterIdea}
-                alt="Peter's Idea"
+                src={PeterHi}
+                alt="Peter's Hi"
                 className={`max-w-md w-full h-auto transition-all duration-1000 ease-out transform ${
                   showImage
                     ? "opacity-100 translate-y-0 scale-100"

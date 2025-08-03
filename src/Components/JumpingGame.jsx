@@ -3,7 +3,6 @@ import { useUserData } from "./UserDataProvider";
 import Peter from "./Peter.jsx";
 
 function SpaceJumpingGame() {
-  //lets do xp
   const [playerPos, setPlayerPos] = useState({ x: 10, y: 400 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isGrounded, setIsGrounded] = useState(false);
@@ -28,7 +27,7 @@ function SpaceJumpingGame() {
 
   const handleXP = async () => {
     try {
-      if (userXP === 200) {
+      if (userXP === 100) {
         const result = await addXPForTask(100); // Add 100 XP
         console.log("here");
         if (result.success) {
@@ -41,7 +40,7 @@ function SpaceJumpingGame() {
             console.log("Chest opened! (XP update failed)");
           }
         }
-      } else if (userXP == 300) {
+      } else if (userXP == 200) {
         console.log("Game finished! (XP already earned)");
       }
     } catch (error) {
@@ -53,7 +52,7 @@ function SpaceJumpingGame() {
   const platforms = useMemo(
     () => [
       // Starting area - low platforms
-      { x: 0, y: 650, width: 150, height: 20, type: "hull" },
+      { x: 0, y: 650, width: 5150, height: 20, type: "hull" },
       { x: 200, y: 580, width: 120, height: 20, type: "wing" },
 
       // First challenge - must go up to continue
@@ -465,15 +464,6 @@ function SpaceJumpingGame() {
     };
   }, []);
 
-  const resetGame = () => {
-    setPlayerPos({ x: 50, y: 400 });
-    setVelocity({ x: 0, y: 0 });
-    setGameFinished(false);
-    setIsGrounded(false);
-    setWrenchCollected(false);
-    keysRef.current = {};
-  };
-
   // Progress calculation based on horizontal distance
   const progress = Math.max(
     0,
@@ -484,7 +474,7 @@ function SpaceJumpingGame() {
     {
       title: "Awesome job!",
       description:
-        "You collected the space wrench! But we need more tools. Continue to the next stage to get more tools for the engine. Continue at number stage 3.",
+        "You collected the space wrench! But we need more tools. Continue to the next stage to get more tools for the engine. Continue at stage number 3.",
     },
   ];
 
@@ -497,11 +487,11 @@ function SpaceJumpingGame() {
           <Peter
             slides={peterSlides}
             imageSrc="/AIHappy.png"
-            className="absolute top-50 right-1/4"
+            className="absolute top-0 right-0"
           />
           <button
             onClick={() => setHidePeter(true)}
-            className="absolute top-1/2 left-1/2 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
+            className="absolute top-1/3 right-1/5 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
           >
             X
           </button>
@@ -517,14 +507,6 @@ function SpaceJumpingGame() {
           {Math.round(playerPos.x)}m
         </p>
       </div>
-
-      {/* Reset Button */}
-      <button
-        onClick={resetGame}
-        className="mb-4 px-6 py-2 bg-red-600 hover:bg-red-700 border-2 border-red-800 text-white font-bold rounded transition-all duration-200 transform hover:scale-105 z-50"
-      >
-        🔄 RESTART MISSION
-      </button>
 
       {/* Game Canvas */}
       <div

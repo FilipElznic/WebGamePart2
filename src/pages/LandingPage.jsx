@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PeterImg from "/peter.png"; // Adjust the path as necessary
+import PeterSalut from "/peterSalut.png"; // Adjust the path as necessary
 
 function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col items-start justify-center w-full h-full p-4 relative ">
       <div className="absolute h-[70vh] bg-zinc-900 top-1/3 right-12  border-2 border-purple-900">
         <img
-          src={PeterImg}
+          src={PeterSalut}
           alt="Peter"
           className="h-[70vh] right-12 top-1/3 mb-8 drop-shadow-2xl border-4 border-purple-900 "
           style={{

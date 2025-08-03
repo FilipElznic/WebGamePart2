@@ -4,6 +4,7 @@ import peterIdea from "/peterIdea.png";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import PeterLike from "/peterLike.png";
 
 function FeedbackPage() {
   const [displayText, setDisplayText] = useState("");
@@ -104,8 +105,8 @@ function FeedbackPage() {
       {showDialogue && (
         <div className="">
           <img
-            src={peterIdea}
-            alt="Peter's Idea"
+            src={PeterLike}
+            alt="Peter's Like"
             className="absolute max-w-2xl bottom-2/5 z-40 border-b-2"
           />
 

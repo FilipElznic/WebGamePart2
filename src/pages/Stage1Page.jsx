@@ -23,7 +23,21 @@ function Stage1Page() {
 
   // File system simulation
   const fileSystem = {
-    "~": ["files.txt", "passwords.txt", "system.log"],
+    "~": [
+      "files.txt",
+      "passwords.txt",
+      "system.log",
+      "notes.txt",
+      "config.ini",
+      "todo.md",
+      "readme.txt",
+      "hidden_backup.bak",
+      "dev_chat.log",
+      "env_vars.env",
+      "errors.log",
+      "usb_contents.txt",
+      "vault.key",
+    ],
     files: {
       "files.txt":
         "This is just a regular file with some data.\nNothing interesting here.\nTry looking for passwords...",
@@ -256,7 +270,7 @@ function Stage1Page() {
         </div>
       )}
 
-      <div className="z-50 relative">
+      <div className="z-50 relative" onClick={() => navigate("/main-menu")}>
         <span className="bg-purple-500 hover:bg-purple-500 border-2 border-purple-600 text-black font-bold py-2 px-6 font-mono text-sm transition-all duration-200 transform hover:scale-105 relative group cursor-pointer">
           HOME ▶
         </span>

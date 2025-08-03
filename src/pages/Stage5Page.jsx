@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AIAngry from "/AIAngry.png";
-import peterThink from "/peterThink.png";
+import peterLike from "/peterLike.png";
 import { Link } from "react-router-dom";
 import Game from "../Components/Game";
 import Peter from "../Components/Peter";
@@ -209,7 +209,7 @@ function Stage4Page() {
           {showPeter && (
             <div className=" z-40">
               <img
-                src={peterThink}
+                src={peterLike}
                 alt="Peter Thinking"
                 className="absolute max-w-2xl bottom-0 right-0 z-40 "
               />
@@ -339,7 +339,7 @@ function Stage4Page() {
             <div className="absolute -bottom-1/4 left-1/12 w-full h-full z-50">
               <Peter
                 slides={peterSlides}
-                imageSrc="/peterIdea.png"
+                imageSrc="/peterSalut.png"
                 className=" absolute  z-50"
               />
               <button

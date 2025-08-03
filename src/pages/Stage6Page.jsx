@@ -364,7 +364,7 @@ const Stage4Page = React.memo(() => {
             <div className="absolute -bottom-1/4 left-1/12 w-full h-full z-50">
               <Peter
                 slides={peterSlides}
-                imageSrc="/peterNote.png"
+                imageSrc="/peterHi.png"
                 className=" absolute  z-50"
               />
               <button

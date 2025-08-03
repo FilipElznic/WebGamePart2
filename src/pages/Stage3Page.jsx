@@ -44,7 +44,7 @@ function Stage3Page() {
         <div className="">
           <img
             src={AIStraight}
-            alt="Peter's Idea"
+            alt="AI"
             className="absolute   max-w-2xl bottom-0 z-40"
           />
 
@@ -135,7 +135,7 @@ function Stage3Page() {
         </div>
       </div>
       <div className="container mx-auto px-4 py-8 relative w-full h-full z-10 ">
-        <div className="backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl bg-gradient-to-tr from-zinc-800  via-white/30 to-zinc-500  relative overflow-hidden flex h-screen flex-col items-center justify-center">
+        <div className="backdrop-blur-sm p-8 border-4 border-purple-400 shadow-2xl bg-black/20 relative overflow-hidden flex h-screen flex-col items-center justify-center">
           <GeoClone />
         </div>
       </div>

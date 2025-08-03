@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import peterIdea from "/peterIdea.png";
+import peterThink from "/peterThink.png";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -46,8 +46,8 @@ function PrivacyPage() {
       {showDialogue && (
         <div className="">
           <img
-            src={peterIdea}
-            alt="Peter's Idea"
+            src={peterThink}
+            alt="Peter's Think"
             className="absolute max-w-2xl bottom-1/3 z-40"
           />
 

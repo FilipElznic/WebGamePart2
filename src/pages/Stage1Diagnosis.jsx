@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useUserData } from "./UserDataProvider";
+import { useUserData } from "../Components/UserDataProvider";
 
 function SpaceshipDiagnosis() {
   const [diagnosticProgress, setDiagnosticProgress] = useState(0);
@@ -17,7 +17,7 @@ function SpaceshipDiagnosis() {
   const handleXP = async () => {
     try {
       if (userXP === 0) {
-        const result = await addXPForTask(100); // Add 100 XP
+        const result = await addXPForTask(200); // Add 100 XP
         console.log("here");
         if (result.success) {
           console.log("XP added successfully:", result.newXP);
@@ -454,7 +454,7 @@ function SpaceshipDiagnosis() {
                 <div className="pt-4">
                   <h2 className="font-mono text-xl text-purple-300 mb-4 flex items-center">
                     <span className="w-3 h-3 bg-purple-500 rounded-full animate-pulse mr-3"></span>
-                    PETER - AI ASSISTANT
+                    AI ASSISTANT
                   </h2>
 
                   <div className="bg-purple-900/30 border-2 border-purple-400 p-4 mb-6">

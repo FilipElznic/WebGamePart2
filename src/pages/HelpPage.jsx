@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import peterIdea from "/peterIdea.png";
+import peterHi from "/peterHi.png";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 
@@ -63,8 +63,8 @@ function HelpPage() {
       {showDialogue && (
         <div className="">
           <img
-            src={peterIdea}
-            alt="Peter's Idea"
+            src={peterHi}
+            alt="Peter's Hi"
             className="absolute max-w-2xl bottom-1/3 z-40"
           />
 

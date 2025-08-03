@@ -33,9 +33,9 @@ function SpaceGeometryDash() {
         } else {
           console.error("Failed to add XP:", result.error);
           if (result.error.includes("already has XP")) {
-            console.log("Chest opened! (XP already earned)");
+            console.log("Game finished! (XP already earned)");
           } else {
-            console.log("Chest opened! (XP update failed)");
+            console.log("Game finished! (XP update failed)");
           }
         }
       } else if (userXP == 400) {
@@ -485,61 +485,294 @@ function SpaceGeometryDash() {
       const container = canvas.parentElement;
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
-      renderGame();
+
+      // Always render the initial state when canvas is resized
+      if (!gameState.running) {
+        // Render static scene with player at starting position
+        const ctx = canvas.getContext("2d");
+
+        // Clear canvas
+        ctx.fillStyle = "#1e1b4b";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Simple star background
+        ctx.fillStyle = "#ffffff";
+        for (let i = 0; i < 20; i++) {
+          const x = (((i * 137.508) % 100) * canvas.width) / 100;
+          const y = (((i * 73.205) % 100) * canvas.height) / 100;
+          ctx.fillRect(x, y, 2, 2);
+        }
+
+        // Render obstacles (starting area)
+        for (const obstacle of levelGeometry) {
+          if (obstacle.x > 1500) break; // Only render starting area
+
+          if (obstacle.type === "spike") {
+            ctx.fillStyle = "#7c3aed";
+            ctx.beginPath();
+            ctx.moveTo(obstacle.x + obstacle.width / 2, obstacle.y);
+            ctx.lineTo(obstacle.x, obstacle.y + obstacle.height);
+            ctx.lineTo(
+              obstacle.x + obstacle.width,
+              obstacle.y + obstacle.height
+            );
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            ctx.fillStyle = obstacle.type === "ground" ? "#581c87" : "#7c2d92";
+            ctx.fillRect(
+              obstacle.x,
+              obstacle.y,
+              obstacle.width,
+              obstacle.height
+            );
+
+            ctx.strokeStyle = "#a855f7";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(
+              obstacle.x,
+              obstacle.y,
+              obstacle.width,
+              obstacle.height
+            );
+          }
+        }
+
+        // Render player at starting position
+        ctx.fillStyle = "#06b6d4";
+        ctx.fillRect(100, 300, PLAYER_SIZE, PLAYER_SIZE);
+
+        ctx.strokeStyle = "#67e8f9";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(100, 300, PLAYER_SIZE, PLAYER_SIZE);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(
+          100 + PLAYER_SIZE / 2 - 2,
+          300 + PLAYER_SIZE / 2 - 2,
+          4,
+          4
+        );
+      } else {
+        renderGame();
+      }
     };
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     return () => window.removeEventListener("resize", resizeCanvas);
-  }, [renderGame]);
+  }, [renderGame, gameState.running, levelGeometry]);
 
   return (
-    <div className="flex flex-col items-center p-4 bg-gray-900 min-h-screen font-mono">
-      {/* Title */}
-      <div className="mb-4 text-center">
-        <h1 className="text-4xl font-bold text-blue-300 mb-2">
-          🚀 SPACE GEOMETRY DASH 🚀
-        </h1>
-        <p className="text-blue-200">
-          Navigate through the cosmic debris field!
-        </p>
+    <div className="flex flex-col items-center p-4 bg-gradient-to-br from-black via-purple-950 to-indigo-950 min-h-screen font-mono relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Floating geometric shapes */}
+        <div className="absolute top-10 left-10 text-4xl text-purple-400 opacity-20 animate-pulse font-mono">
+          ◆
+        </div>
+        <div className="absolute top-20 right-20 text-3xl text-blue-500 opacity-30 animate-bounce font-mono">
+          ★
+        </div>
+        <div className="absolute bottom-32 left-20 text-4xl text-purple-400 opacity-25 animate-pulse font-mono">
+          ◇
+        </div>
+        <div className="absolute bottom-20 right-32 text-3xl text-indigo-500 opacity-20 animate-bounce font-mono">
+          ♦
+        </div>
+        <div className="absolute top-1/3 left-1/4 text-2xl text-purple-400 opacity-20 animate-bounce font-mono">
+          ▲
+        </div>
+        <div className="absolute top-2/3 right-1/4 text-3xl text-blue-500 opacity-30 animate-pulse font-mono">
+          ●
+        </div>
+
+        {/* Grid background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="grid grid-cols-16 h-full">
+            {Array.from({ length: 16 }).map((_, i) => (
+              <div key={i} className="border-r border-purple-300"></div>
+            ))}
+          </div>
+          <div className="absolute inset-0 grid grid-rows-12">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="border-b border-purple-300 w-full"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scan lines effect */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="h-full w-full opacity-5"
+            style={{
+              background:
+                "repeating-linear-gradient(0deg, transparent, transparent 3px, #a855f7 3px, #a855f7 6px)",
+            }}
+          ></div>
+        </div>
       </div>
 
-      {/* Stats */}
-      <div className="mb-4 flex gap-6 text-blue-200 bg-black/50 p-3 border-2 border-blue-400 rounded">
-        <div>📊 Distance: {Math.round(gameState.distance)}m</div>
-        <div>🎯 Attempts: {gameState.attempts}</div>
-      </div>
+      {/* Title with enhanced styling */}
+      <div className="mb-6 text-center relative z-10">
+        <div className="bg-gradient-to-r from-purple-900 via-blue-900 to-purple-900 backdrop-blur-sm p-6 border-4 border-purple-400 shadow-2xl relative">
+          {/* Corner decorations */}
+          <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-purple-500"></div>
+          <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-purple-500"></div>
 
-      {/* Instructions */}
-      {!gameState.running && !gameState.over && (
-        <div className="mb-4 text-center text-blue-200 bg-black/50 p-4 border-2 border-blue-400 rounded">
-          <p className="font-bold text-blue-300">🎮 HOW TO PLAY:</p>
-          <p>Press SPACEBAR, W, UP ARROW, or CLICK to jump</p>
-          <p>Avoid the purple spikes! Land on platforms safely!</p>
-          <p className="mt-2 text-yellow-300">
-            Press any key or click to start!
+          <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 mb-2 animate-pulse">
+            🚀 SPACE GEOMETRY DASH 🚀
+          </h1>
+          <p className="text-blue-200 text-lg font-mono">
+            Navigate through the cosmic debris field!
           </p>
+
+          {/* Glowing underline */}
+          <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto mt-3 rounded-full animate-pulse"></div>
+        </div>
+      </div>
+
+      {/* Enhanced Stats Panel */}
+      <div className="mb-6 flex gap-6 text-blue-200 bg-black/60 backdrop-blur-sm p-4 border-2 border-purple-400 rounded-lg shadow-2xl relative z-10">
+        {/* Corner accents */}
+        <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-400"></div>
+        <div className="absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-cyan-400"></div>
+        <div className="absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-cyan-400"></div>
+        <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-cyan-400"></div>
+
+        <div className="flex items-center space-x-2">
+          <span className="text-2xl">📊</span>
+          <div>
+            <div className="text-cyan-300 font-bold">Distance</div>
+            <div className="text-yellow-300 text-xl">
+              {Math.round(gameState.distance)}m
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-2xl">🎯</span>
+          <div>
+            <div className="text-cyan-300 font-bold">Attempts</div>
+            <div className="text-yellow-300 text-xl">{gameState.attempts}</div>
+          </div>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-2xl">⚡</span>
+          <div>
+            <div className="text-cyan-300 font-bold">Status</div>
+            <div
+              className={`text-xl font-bold ${
+                gameState.running
+                  ? "text-green-400"
+                  : gameState.over
+                  ? "text-red-400"
+                  : "text-yellow-400"
+              }`}
+            >
+              {gameState.running
+                ? "FLYING"
+                : gameState.over
+                ? "CRASHED"
+                : "READY"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Enhanced Instructions */}
+      {!gameState.running && !gameState.over && (
+        <div className="mb-6 text-center text-blue-200 bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-indigo-900/80 backdrop-blur-sm p-6 border-2 border-cyan-400 rounded-lg shadow-2xl relative z-10 max-w-2xl">
+          {/* Animated border effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 rounded-lg opacity-30 animate-pulse"></div>
+          <div className="relative bg-gradient-to-br from-purple-900/90 via-blue-900/90 to-indigo-900/90 rounded-lg p-6 m-1">
+            <div className="text-2xl mb-4 animate-bounce">🎮</div>
+            <p className="font-bold text-cyan-300 text-xl mb-3">
+              HOW TO NAVIGATE THE VOID:
+            </p>
+            <div className="space-y-2 text-sm">
+              <p className="flex items-center justify-center space-x-2">
+                <span className="text-yellow-400">⌨️</span>
+                <span>
+                  Press{" "}
+                  <kbd className="bg-purple-700 px-2 py-1 rounded">
+                    SPACEBAR
+                  </kbd>
+                  , <kbd className="bg-purple-700 px-2 py-1 rounded">W</kbd>,{" "}
+                  <kbd className="bg-purple-700 px-2 py-1 rounded">↑</kbd>, or{" "}
+                  <kbd className="bg-purple-700 px-2 py-1 rounded">CLICK</kbd>{" "}
+                  to jump
+                </span>
+              </p>
+              <p className="flex items-center justify-center space-x-2">
+                <span className="text-red-400">⚠️</span>
+                <span>
+                  Avoid the{" "}
+                  <span className="text-purple-400 font-bold">
+                    purple spikes
+                  </span>
+                  ! Land on platforms safely!
+                </span>
+              </p>
+              <p className="flex items-center justify-center space-x-2">
+                <span className="text-green-400">🎯</span>
+                <span>
+                  Reach <span className="text-yellow-400 font-bold">6000m</span>{" "}
+                  to complete the mission!
+                </span>
+              </p>
+            </div>
+            <div className="mt-4 p-3 bg-yellow-900/50 border border-yellow-400 rounded">
+              <p className="text-yellow-300 font-bold animate-pulse">
+                🚀 Press any key or click to launch!
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Game Over Screen */}
+      {/* Enhanced Game Over Screen */}
       {gameState.over && (
-        <div className="mb-4 text-center text-red-200 bg-red-900/80 p-4 border-2 border-red-400 rounded">
-          <p className="font-bold text-red-300 text-2xl">💥 CRASHED! 💥</p>
-          <p>Distance reached: {Math.round(gameState.distance)}m</p>
-          <button
-            onClick={resetGame}
-            className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded"
-          >
-            🔄 Try Again
-          </button>
+        <div className="mb-6 text-center bg-gradient-to-br from-red-900/90 via-orange-900/90 to-red-900/90 backdrop-blur-sm p-6 border-2 border-red-400 rounded-lg shadow-2xl relative z-10 max-w-md">
+          {/* Glitch effect border */}
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 rounded-lg opacity-50 animate-pulse"></div>
+          <div className="relative bg-gradient-to-br from-red-900/95 via-orange-900/95 to-red-900/95 rounded-lg p-6 m-1">
+            {/* Animated explosion icon */}
+            <div className="text-6xl mb-4 animate-bounce">💥</div>
+            <p className="font-bold text-red-300 text-3xl mb-3 animate-pulse">
+              SYSTEM FAILURE!
+            </p>
+            <div className="bg-black/50 border border-red-400 p-3 rounded mb-4">
+              <p className="text-orange-300">
+                Distance traveled:{" "}
+                <span className="text-yellow-400 font-bold">
+                  {Math.round(gameState.distance)}m
+                </span>
+              </p>
+              <p className="text-red-200">
+                Mission status:{" "}
+                <span className="text-red-400 font-bold">TERMINATED</span>
+              </p>
+            </div>
+            <button
+              onClick={resetGame}
+              className="px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105 border-2 border-red-400 shadow-lg relative"
+            >
+              {/* Button corner decorations */}
+              <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-red-300"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-red-300"></div>
+              <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-red-300"></div>
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-red-300"></div>
+              🔄 RESTART MISSION
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Game Canvas */}
+      {/* Enhanced Game Canvas */}
       <div
-        className="relative border-4 border-gray-600 bg-black overflow-hidden shadow-2xl rounded cursor-pointer"
+        className="relative border-4 border-purple-600 bg-black overflow-hidden shadow-2xl rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/50"
         style={{
           width: "80vw",
           height: "60vh",
@@ -550,43 +783,112 @@ function SpaceGeometryDash() {
           if (!gameState.running && !gameState.over) startGame();
         }}
       >
+        {/* Glowing border effect */}
+        <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-cyan-600 to-purple-600 rounded-lg opacity-30 animate-pulse pointer-events-none"></div>
+
+        {/* Corner decorations for canvas */}
+        <div className="absolute -top-3 -left-3 w-6 h-6 border-t-4 border-l-4 border-cyan-400 z-10"></div>
+        <div className="absolute -top-3 -right-3 w-6 h-6 border-t-4 border-r-4 border-cyan-400 z-10"></div>
+        <div className="absolute -bottom-3 -left-3 w-6 h-6 border-b-4 border-l-4 border-cyan-400 z-10"></div>
+        <div className="absolute -bottom-3 -right-3 w-6 h-6 border-b-4 border-r-4 border-cyan-400 z-10"></div>
+
         <canvas
           ref={canvasRef}
-          className="w-full h-full"
+          className="w-full h-full relative z-0"
           style={{ imageRendering: "pixelated" }}
         />
 
-        {/* Progress bar overlay */}
-        <div className="absolute bottom-4 left-4 right-4 bg-black/70 border border-blue-400 rounded p-2">
-          <div className="w-full bg-gray-700 rounded-full h-2">
+        {/* Enhanced progress bar overlay */}
+        <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm border-2 border-purple-400 rounded-lg p-3 shadow-lg">
+          {/* Progress bar with gradient */}
+          <div className="w-full bg-gray-700 rounded-full h-3 mb-2 border border-gray-600">
             <div
-              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300 relative overflow-hidden"
               style={{
                 width: `${Math.min(100, (gameState.distance / 6000) * 100)}%`,
               }}
-            />
+            >
+              {/* Animated shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-pulse"></div>
+            </div>
           </div>
-          <div className="text-blue-300 text-sm text-center mt-1">
-            Progress: {Math.round((gameState.distance / 6000) * 100)}%
+          <div className="flex justify-between items-center text-sm">
+            <div className="text-cyan-300 font-bold">
+              Progress: {Math.round((gameState.distance / 6000) * 100)}%
+            </div>
+            <div className="text-purple-300">
+              {Math.round(gameState.distance)}/6000m
+            </div>
           </div>
         </div>
+
+        {/* Speed indicator */}
+        {gameState.running && (
+          <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm border border-green-400 rounded px-3 py-2">
+            <div className="text-green-400 text-sm font-bold flex items-center space-x-2">
+              <span className="animate-pulse">⚡</span>
+              <span>ACTIVE</span>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Victory message */}
+      {/* Enhanced Victory message */}
+      {gameState.distance > 6000 && !gameState.running && !gameState.over && (
+        <div className="mt-6 p-6 bg-gradient-to-br from-green-800 via-emerald-800 to-green-900 backdrop-blur-sm border-4 border-green-400 text-white rounded-lg font-bold text-center shadow-2xl relative z-10 max-w-2xl">
+          {/* Success border effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 rounded-lg opacity-30 animate-pulse"></div>
+          <div className="relative bg-gradient-to-br from-green-800/95 via-emerald-800/95 to-green-900/95 rounded-lg p-6 m-1">
+            {/* Corner decorations */}
+            <div className="absolute -top-2 -left-2 w-6 h-6 border-t-4 border-l-4 border-green-300"></div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-green-300"></div>
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-green-300"></div>
+            <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-green-300"></div>
+
+            <div className="text-6xl mb-4 animate-bounce">🎉</div>
+            <div className="text-4xl mb-4 text-green-300 animate-pulse">
+              MISSION ACCOMPLISHED!
+            </div>
+            <div className="text-2xl mb-4 text-yellow-300">
+              🔌 Electric Wires Collected! 🔌
+            </div>
+            <div className="bg-black/50 border-2 border-green-400 p-4 rounded mb-4">
+              <div className="text-lg mb-2">
+                Final Distance:{" "}
+                <span className="text-yellow-400 font-bold">
+                  {Math.round(gameState.distance)}m
+                </span>
+              </div>
+              <div className="text-lg">
+                Mission Status:{" "}
+                <span className="text-green-400 font-bold">COMPLETE</span>
+              </div>
+            </div>
+            <div className="text-lg text-green-200">
+              The space station power systems can now be repaired!
+            </div>
+            <div className="mt-4 text-purple-300 font-mono text-lg animate-pulse">
+              +100 XP EARNED
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Victory Peter message */}
       {gameState.distance > 6000 && !gameState.running && (
         <>
           {!hidePeter2 && (
-            <div className="">
+            <div className="fixed top-1/2 right-8 transform -translate-y-1/2 z-50">
               <Peter
                 slides={peterSlides}
                 imageSrc="/AIHappy.png"
-                className="absolute top-50 right-0"
+                className="relative"
               />
               <button
                 onClick={() => setHidePeter2(true)}
-                className="absolute top-1/2 right-1/6 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow-lg z-50"
+                className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-full shadow-lg transition-all duration-200 transform hover:scale-110 border-2 border-red-300"
               >
-                X
+                ✕
               </button>
             </div>
           )}
